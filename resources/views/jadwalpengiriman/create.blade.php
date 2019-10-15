@@ -1,0 +1,423 @@
+@extends('layouts.app-admin')
+
+@section('content')
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Input Data Jadwal Pengiriman
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{ url('jadwalpengiriman/create') }}" class="active"><i class="fa fa-dashboard"></i> Input Data Jadwal Pengiriman</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Form Input Data Jadwal Pengiriman</h3>
+              <h3 style="color: green" id="hari" ></h3>
+             
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @if(session('status'))
+                <div style="background-color:green; color:white;font-weight: bold">
+                  {{session('status')}}
+                </div>
+            @endif
+            @foreach ($errors ->all() as $error)
+              <h4 style="color: red">{{ $error }}</h4>
+            @endforeach
+            <form role="form" action="{{ url('jadwalpengiriman') }}" method="POST" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                      <div class="col-md-6">
+
+                          <table class="table">
+                            <tr>
+                              <div class="form-group">
+                                <label>Kendaraan</label>
+                                <select class="form-control" name="kendaraan" id="kendaraan" required="">
+                                <option value=""></option>
+                                @foreach($kendaraan as $key => $k)
+                                <option value="{{$k->id}}">{{$k->no_polisi}}</option>
+                                @endforeach
+                                </select>
+                                <p class="help-block"></p>
+                              </div>
+
+                               <div class="form-group">
+                                <label>Sopir </label>
+                                <select class="form-control" name="sopir" id="sopir" required="">
+                                <option value=""></option>
+                                @foreach($karyawan as $key => $k)
+                                <option value="{{$k->id}}">{{$k->nama}}</option>
+                                @endforeach
+                                </select>
+                                <p class="help-block"></p>
+                              </div>   
+
+                              <div class="form-group">
+                                <label>Hari </label>
+                                <select class="form-control" name="sopir" id="sopir" required="">
+                                <option value=""></option>
+                                @foreach($sopir as $key => $s)
+                                <option value="{{$s->id}}">{{$s->nama}}</option>
+                                @endforeach
+                                </select>
+                                <p class="help-block"></p>
+                              </div> 
+                                                              
+                            </tr>
+                          </table>
+                    </div>
+
+                      <div class="col-md-6">
+                        <table class="table">
+                          <tr>
+                            <div class="form-group">
+                                <label>No. Polisi</label>
+                                <select class="form-control" name="nopolisi" id="nopolisi" required="">
+                                  <option value="">--Pilih No.Polisi--</option>
+                                  @foreach($kendaraans as $key => $k)
+                                  <option value="{{$k->id}}">{{$k->no_polisi}}</option>
+                                  @endforeach
+                                </select>
+                                <p class="help-block"></p>
+                            </div>
+                            <div class="form-group">
+                                <label>Kapasitas Kendaraan</label>
+                                <input type="kapasitas" name="kapasitas" id="kapasitas" class="form-control" readonly="">
+                                <p class="help-block"></p>
+                            </div>
+                          </tr>
+                        </table>
+                      </div>
+
+                      <div class="box-body">
+                        <table class="table table-bordered table-striped" id="tb">
+                          <thead class="btn-success">
+                          <tr class="tr-header" >
+                            <th>No. </th>
+                            <th>No. Resi</th>
+                            <th>Dari</th>
+                            <th>Tujuan</th>
+                            <th>Sub. Colly</th>
+                            <th>Sub. Berat</th>
+                            <th>Total Harga</th>
+                            <th>Pembayaran</th>
+                            <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
+                          </tr>
+                          </thead>
+                          <tr>
+
+                            <td width="50px">
+                              <input type="text" name="no[]" value="1" style="border: none;" class="form-control no" readonly="">
+                            </td>
+
+                            <td width="150px">
+                              <input list="noresi" class="form-control noresi" name="no_resi[]" autocomplete="off" required>
+                              <datalist id="noresi">
+                                @foreach($detailtabel as $key => $dt)
+                                <option value="{{ $dt->id_resi.' ['.$dt->noresi.']' }}" dari="{{ $dt->dari }}" tujuan="{{ $dt->tujuan }}" subcol="{{ $dt->subcol }}" subberat="{{ $dt->subberat }}" alltotharga="{{ $dt->alltotharga }}"jenispembayaran="{{ $dt->jenispembayaran }}">{{ $dt->noresi }}</option>
+                                @endforeach
+                              </datalist>
+                            </td>
+
+                            <td> 
+                              <input type="text" name="dari[]" class="form-control dari" required readonly="">
+                            </td>
+
+                            <td>
+                              <input type="text" name="tujuan[]" class="form-control tujuan" required readonly="">
+                            </td>
+
+                            <td>
+                              <input type="subcol" name="subcol[]" class="form-control subcol" required readonly="">
+                            </td>
+
+                            <td>
+                              <input type="subberat" name="subberat[]" class="form-control subberat" required readonly="">
+                            </td>
+
+                            <td>
+                              <input type="alltotharga" name="alltotharga[]" class="form-control alltotharga" required readonly="">
+                            </td>
+
+                            <td>
+                              <input type="jenispembayaran" name="jenispembayaran[]" class="form-control jenispembayaran" required readonly="">
+                            </td>
+
+                            <td>
+                              <a href='javascript:void(0);'  class='remove'><i style="font-size: 18px;" class='glyphicon glyphicon-remove'></i></a>
+                            </td>
+
+                          </tr>
+                    
+                    </table>
+                  </div>
+
+                        <div class="form-group">
+                          <td><label name="sisakapasitas[]" class="descSisaKps"></label></td>
+                        </div>
+                        <div class="form-group">
+                          <td><label name="totalresi[]" class="descTotResi"></label></td>
+                        </div>
+                        <div class="form-group">
+                         <td><label name="totalcolly[]" class="descTotColly"></label></td>
+                        </div>
+                        <div class="form-group">
+                         <td><label name="totalberat[]" class="descTotBerat"></label></td>
+                        </div>
+                        <div class="form-group">
+                          <td><label name="thk[]" class="descTotharga"><label></td>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              <!-- /.box-body -->
+
+                <div class="form-group">
+                  <input class="btn btn-primary" type="submit" name="submit" value="TAMBAH">
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+
+        </div>
+
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="{{ url('/') }}">CV. Karya Anugerah Ekspedisi</a>.</strong> All rights
+    reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+@section('script')
+<script type="text/javascript">
+    $('#hapus').click(function(){
+        return confirm("Anda yakin untuk menghapus data ini?");
+    });
+</script>
+
+<script>
+  $(function () {
+    $('#example1').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+    
+  })
+</script>
+
+
+
+
+<script type="text/javascript">
+
+    // JS GET TANGGAL
+    var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+    var date = new Date();
+    
+    var thistgl;
+    var thisbln = date.getMonth();
+    var year = date.getYear();
+    var thisthn = (year < 1000) ? year + 1900 : year;
+
+    var thisDay = date.getDay();
+
+    if(thisDay >= 7)
+    {
+        thisDay = myDays[1];
+        thistgl = date.getDate();
+    }
+    else
+    {
+        thisDay = myDays[thisDay];
+        thistgl = date.getDate();
+    }
+
+    var tglnow = thisDay+', '+thistgl+' '+months[thisbln]+' '+thisthn;
+
+    $('#hari').text(tglnow);
+
+    // JS GET PENGIRIM
+    $('#nopolisi').change(function(){
+      var nopolisi = $('#nopolisi option:selected').val();
+
+       // untuk menghapus jika cuma milih pilih no_polisi
+       $('#kapasitas').val("");
+
+      $.ajax({ type: 'GET',
+      url: "{{ url('m/getnopolisi') }}"+"/"+nopolisi, 
+      success: function (data){
+        console.log(data);
+
+            $('#kapasitas').val(data['kapasitas']);
+      }
+    });
+      updateDesc();
+  });
+
+  var selected = [];
+
+
+  var global_statusTambahBaris = 0; //0: bisa nambah || 1: gak bisa nambah(penuh)
+
+  // JS UNTUK DI MENAMPILKAN DATA DI TABEL
+  $(document).on('input','.noresi',function(){
+    var inputval= $(this).val();
+
+    if(selected.includes(inputval) == true)
+    {
+      $(this).val("");
+      alert('Resi Tersebut Telah Dipilih Sebelumnya !');
+    }
+    else
+    {
+      selected.push(inputval);
+      var id= $("datalist option[value='"+inputval+"']").attr('id');
+      var dari= $("datalist option[value='"+inputval+"']").attr('dari');
+      var tujuan= $("datalist option[value='"+inputval+"']").attr('tujuan');
+      var subcol= $("datalist option[value='"+inputval+"']").attr('subcol');
+      var subberat= $("datalist option[value='"+inputval+"']").attr('subberat');
+      var alltotharga= $("datalist option[value='"+inputval+"']").attr('alltotharga');
+      var jenispembayaran= $("datalist option[value='"+inputval+"']").attr('jenispembayaran');
+      var keterangan_pembayaran = '';
+
+      if(jenispembayaran == '1')
+      {
+          keterangan_pembayaran = 'Lunas';
+      }
+      else if(jenispembayaran == '2')
+      {
+          keterangan_pembayaran = 'Franco';
+      }
+      else
+      {
+          keterangan_pembayaran = 'Loco';
+      }
+
+      $(this).closest('tr').find('td:nth-child(3)').find('input').val(dari);
+      $(this).closest('tr').find('td:nth-child(4)').find('input').val(tujuan);
+      $(this).closest('tr').find('td:nth-child(5)').find('input').val(subcol);
+      $(this).closest('tr').find('td:nth-child(6)').find('input').val(subberat);
+      $(this).closest('tr').find('td:nth-child(7)').find('input').val(alltotharga);
+      $(this).closest('tr').find('td:nth-child(8)').find('input').val(keterangan_pembayaran);  
+
+      updateDesc();
+    }
+  });
+
+  function updateDesc()
+  {
+      var totalResi = 0;
+      var totalColly = 0;
+      var totalBerat = 0;
+      var totalHarga = 0;
+      var kapasitas_awal = parseInt($('#kapasitas').val());
+      var kapsAngkutan = kapasitas_awal;
+
+
+      totalResi = $('.noresi').length;
+
+
+      $(".subberat").each(function () {
+        if (!isNaN(this.value) && this.value.length != 0) {
+          totalBerat += parseFloat(this.value); 
+        }
+      });//SUM semua field dengan class 'subberat' -> bisa dicari diatas ya ;)
+
+      $(".subcol").each(function () {
+        if (!isNaN(this.value) && this.value.length != 0) {
+          totalColly += parseFloat(this.value); 
+        }
+      });//SUM semua field dengan class 'subcol'
+
+      $(".alltotharga").each(function () {
+        if (!isNaN(this.value) && this.value.length != 0) {
+          totalHarga += parseFloat(this.value); 
+        }
+      });//SUM semua field dengan class 'alltotharga'
+
+      kapsAngkutan -= totalBerat;
+
+      if(kapsAngkutan == 0)
+      {
+          global_statusTambahBaris = 1;
+      }
+
+      $('.descSisaKps').text('Sisa Kapasitas Angkutan : '+kapsAngkutan);
+      $('.descTotResi').text('Total Resi Pengiriman : '+totalResi);
+      $('.descTotBerat').text('Total Berat Angkutan: '+totalBerat);
+      $('.descTotColly').text('Total Colly : '+totalColly);
+      $('.descTotharga').text('Total Harga Keseluruhan : '+totalHarga);
+  }
+
+
+  // JS PERHITUNGAN DIBAWAH TABEL
+  function updateNomor()
+  {
+  $(".no").each(function () { //untuk semua elemen HTML yang class="no"
+        var trIndex = parseInt($(this).closest("tr").index()+1); //ngambil urutan baris dari tabel
+        $(this).val(trIndex); //ngeupdate kolom urutan sesuai index baris
+      });
+}  
+
+
+  // JS ADD MORE DAN REMOVE
+      $('#addMore').on('click', function() {
+        updateDesc();
+        if(global_statusTambahBaris == 0)
+        {
+            var data = $("#tb tr:eq(1)").clone(true).appendTo("#tb");
+            data.find("input").val('');
+
+            // data.find(".no").val(data.closest("tr").index());
+            updateNomor();
+        }
+        else
+        {
+            alert('Maaf, Kapasitas Angkutan Sudah Penuh !');
+        }
+      });
+      $(document).on('click', '.remove', function() {
+       var trIndex = $(this).closest("tr").index();
+       var noresi = $(this).closest('tr').find('td:nth-child(1)').find('input').val();
+       if(trIndex>0) {
+         $(this).closest("tr").remove();
+
+       } else {
+         
+       }
+        var item = selected.indexOf(noresi);
+        selected.splice(item,1);
+        updateNomor();
+        updateDesc(); // reset keterangan real time
+     });
+</script>
+
+@endsection
+@endsection

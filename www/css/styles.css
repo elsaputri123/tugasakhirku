@@ -1,0 +1,88 @@
+/*
+   statusbar-overlay sets the background color for the overlay. Black text is the default when the statusbar plugin is not added. When the
+   statusbar plugin is added, it also adds default setting to make the content white via:
+
+       <preference name="StatusBarStyle" value="lightcontent"/>
+
+   Setting the background color to black will allow the default light content (white text/icons) to show on it. The statusbar plugin is included
+   in the config.xml file and will be added by the CLI when you build locally.
+
+   See https://github.com/apache/cordova-plugin-statusbar
+*/
+
+@font-face {
+  font-family: 'myshink';
+  src: url(../fonts/shink.otf);
+}
+
+body {
+}
+
+/* .bodyall {
+	background-color: red; 
+	background-image: url('img/background.jpg'); 	
+} */
+
+.statusbar-overlay {
+    background: #000000;
+}
+
+.mytitle {
+	font-family: myshink; 
+	font-size: 50px; 
+	text-align: center; 
+}
+.mylogo {
+	width: 25%; 
+	height: 25%; 
+}
+.menu1 {
+	font-size: 25px; 
+	float: left; 
+}
+.submenu1 {
+	font-size: 12px; 
+	font-weight: bold; 	
+	color: red; 
+	float: left; 
+}
+.judulpaket {
+	font-size: 16px; 
+}
+.tanggalpaketdiet {
+	color: black; 
+	font-size: 14px;
+}
+
+.username {
+	color: black; 
+	font-size: 20px; 
+}
+.myicon {
+	width: 30%; 
+	height: 30%; 
+}
+
+.mybutton {
+	font-size: 12px; 
+}
+
+.infodetailpaket {
+	font-size: 16px; 
+}
+
+.daftar {
+	text-align: center;
+}
+.textinput {
+	font-size: 20px;
+}
+.harike {
+	font-weight: bold;
+}
+.label-cell {
+	font-size: 15px;
+}
+.numeric-cell {
+	font-size: 15px;
+}
