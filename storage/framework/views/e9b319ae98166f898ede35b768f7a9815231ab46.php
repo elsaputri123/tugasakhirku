@@ -1,6 +1,4 @@
-@extends('layouts.app-admin')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -9,7 +7,7 @@
       Input Data Jadwal Pengiriman
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{ url('jadwalpengiriman/create') }}" class="active"><i class="fa fa-dashboard"></i> Input Data Jadwal Pengiriman</a></li>
+      <li><a href="<?php echo e(url('jadwalpengiriman/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Input Data Jadwal Pengiriman</a></li>
     </ol>
   </section>
 
@@ -23,30 +21,33 @@
               <h3 class="box-title">Form Input Data Jadwal Pengiriman</h3>
               <h3 style="color: green" id="hari" ></h3>
 
-              @if (session('error'))
+              <?php if(session('error')): ?>
                   <div class="alert alert-danger">
-                      {{ session('error') }}
+                      <?php echo e(session('error')); ?>
+
                   </div>
-              @endif
-              @if (session('success'))
+              <?php endif; ?>
+              <?php if(session('success')): ?>
                   <div class="alert alert-success">
-                      {{ session('success') }}
+                      <?php echo e(session('success')); ?>
+
                   </div>
-              @endif
+              <?php endif; ?>
 
             </div>
-            {{-- Container --}}
+            
             <div class="container-fluid">
-              <form method="POST" action="{{ url("jadwalpengiriman") }}">
-                {!! csrf_field() !!}
+              <form method="POST" action="<?php echo e(url("jadwalpengiriman")); ?>">
+                <?php echo csrf_field(); ?>
+
                 <div class="row">
                   <div class="col-md-12">
                       <div class="form-group">
                          <label>Hari : </label>
                          <select class="form-control" name="hari" id="hari">
-                            @foreach($hari as $key => $value)
-                              <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $hari; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              <option value="<?php echo e($key); ?>"><?php echo e($value); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                          </select>
                       </div>
                   </div>
@@ -57,9 +58,9 @@
                       <div class="form-group">
                          <label>Nama Karyawan : </label>
                          <select class="form-control" name="id_karyawan" id="id_karyawan">
-                            @foreach($karyawan as $key => $value)
-                            <option value="{{ $value->id }}">{{ $value->nama }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                          </select>
                       </div>
                   </div>
@@ -70,9 +71,9 @@
                       <div class="form-group">
                          <label>Kendaraan : </label>
                          <select class="form-control" name="kendaraan" id="kendaraan">
-                            @foreach($kendaraan as $key => $value)
-                            <option value="{{ $value->id }}">{{ $value->nama." - ".$value->no_polisi }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $kendaraan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama." - ".$value->no_polisi); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                          </select>
                       </div>
                   </div>
@@ -87,7 +88,7 @@
                 </div>
                 </form>
             </div>
-            {{-- Container --}}
+            
           </div>
         </div>
       </div>
@@ -95,8 +96,9 @@
   </div>
 
   <footer class="main-footer">
-    <strong>Copyright &copy; 2019 <a href="{{ url('/') }}">CV. Karya Anugerah Ekspedisi</a>.</strong> All rights
+    <strong>Copyright &copy; 2019 <a href="<?php echo e(url('/')); ?>">CV. Karya Anugerah Ekspedisi</a>.</strong> All rights
     reserved.
   </footer>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app-admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

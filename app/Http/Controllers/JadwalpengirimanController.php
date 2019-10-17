@@ -17,7 +17,7 @@ class JadwalpengirimanController extends Controller
     public function index()
     {
         $jadwalpengiriman = Jadwalpengiriman::all();
-     
+        
         return view('jadwalpengiriman.index',['jadwalpengiriman' => $jadwalpengiriman]);
     }
 
@@ -34,7 +34,7 @@ class JadwalpengirimanController extends Controller
          }])->get();
 
          $data['karyawan'] = $domy->where('jabatans', '!=', null);
-         
+
          $data['kendaraan'] = Kendaraan::all();
          $data['hari'] = array('1' => 'senin',
                        '2' => 'selasa',
@@ -54,7 +54,28 @@ class JadwalpengirimanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        try {
+
+            $jadwal = new Jadwalpengiriman();
+            $jadwal->hari = $request->hari;
+            $jadwal->karyawan_id_kurir = $request->id_karyawan;
+            $jadwal->kendaraan_id = $request->kendaraan;
+            $jadwal->save();
+
+        } catch (Exception $e) {
+           $msg = [
+                'error' => 'Error: Order Guru Gagal',
+            ];
+            
+            return redirect()->back()->with($msg);
+        }
+
+        $msg = [
+                'success' => 'Order Guru Sukses',
+            ];
+
+        return redirect()->back()->with($msg);
     }
 
     /**
