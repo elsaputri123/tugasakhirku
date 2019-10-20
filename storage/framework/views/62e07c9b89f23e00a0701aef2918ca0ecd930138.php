@@ -75,6 +75,7 @@
                    <select class="form-control" name="kecamatan" id="kecamatan">
                     <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if(isset($edit) and $value->id==$edit->id): ?>
+                    
                     <option value="<?php echo e($value->id); ?>"><?php echo e($edit->kecamatan->nama); ?></option>
                     <?php else: ?>
                     <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>

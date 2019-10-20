@@ -133,7 +133,7 @@ class JadwalpengirimanController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $jadwal = Jadwalpengiriman::find($id)->firstOrFail();
+            $jadwal = Jadwalpengiriman::find($id);
             $jadwal->hari = $request->hari;
             $jadwal->karyawan_id_kurir = $request->id_karyawan;
             $jadwal->kendaraan_id = $request->kendaraan;

@@ -73,6 +73,7 @@
                    <select class="form-control" name="kecamatan" id="kecamatan">
                     @foreach($kecamatan as $key => $value)
                     @if(isset($edit) and $value->id==$edit->id)
+                    
                     <option value="{{ $value->id }}">{{ $edit->kecamatan->nama }}</option>
                     @else
                     <option value="{{ $value->id }}">{{ $value->nama }}</option>

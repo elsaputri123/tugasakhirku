@@ -135,7 +135,7 @@ class RuteController extends Controller
 
         try {
 
-            $rute               = Rute::find($id)->firstOrFail();
+            $rute               = Rute::find($id);
             $rute->kecamatan_id = $request->kecamatan;
             $rute->nama         = $request->nama;
             $rute->koordinat_x  = $request->koordinat_x;
@@ -165,6 +165,13 @@ class RuteController extends Controller
      */
     public function destroy(Rute $rute)
     {
-        //
+
+        Rute::where("id", $rute->id)->delete();
+
+        $msg = [
+                'success' => 'Delete Rute Pengiriman Sukses',
+            ];
+
+        return redirect()->back()->with($msg);
     }
 }
