@@ -49,7 +49,7 @@ class JadwalpengirimanController extends Controller
                         '4' => 'Kamis',
                         '5' => 'Jumat',
                         '6' => 'Sabtu');
-
+         
          return view('jadwalpengiriman.create', $data);
     }
 
@@ -133,7 +133,7 @@ class JadwalpengirimanController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $jadwal = Barang::Jadwalpengiriman($id)->firstOrFail();
+            $jadwal = Jadwalpengiriman::find($id)->firstOrFail();
             $jadwal->hari = $request->hari;
             $jadwal->karyawan_id_kurir = $request->id_karyawan;
             $jadwal->kendaraan_id = $request->kendaraan;
