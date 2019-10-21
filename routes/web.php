@@ -28,7 +28,7 @@ Route::resource('pelanggan', 'PelangganController');
 Route::resource('jenis', 'JenisController');
 Route::resource('manifest', 'ManifestController');
 Route::resource('jadwalpengiriman', 'JadwalpengirimanController');
-
+Route::resource('rute', 'RuteController');
 
 // NOTA KIRIM
 Route::get('nk/detail/{id}','NotakirimController@detail');

@@ -6,10 +6,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Jadwal Pengiriman
+      Rute Pengiriman
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{ url('jadwalpengiriman') }}" class="active"><i class="fa fa-dashboard"></i> Jadwal Pengiriman</a></li>
+      <li><a href="{{ url('Rute') }}" class="active"><i class="fa fa-dashboard"></i> Rute Pengiriman</a></li>
     </ol>
   </section>
 
@@ -19,7 +19,7 @@
       <div class="col-xs-12">
         <div class="box" style="overflow-y: scroll;"> <!-- penting untuk scroll -->
           <div class="box-header">
-            <h3 class="box-title text-center">Data Jadwal Pengiriman</h3>
+            <h3 class="box-title">Rute Pengiriman</h3>
             @if (session('error'))
             <div class="alert alert-danger">
               {{ session('error') }}
@@ -30,41 +30,33 @@
               {{ session('success') }}
             </div>
             @endif
-            
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th class="text-center">No</th>
-                  <th class="text-center">Kendaraan </th>
-                  <th class="text-center">Sopir </th>
-                  <th class="text-center">Hari </th>
-                  <th class="text-center">Detail</th>
+                  <th>No</th>
+                  <th>Kecamatan</th>
+                  <th>Nama Rute</th>
+                  <td>X (longitude)</td>
+                  <td>Y (latitude)</td>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                <!--  -->
-                @foreach($jadwal as $key => $value)
+                @foreach($data as $key => $value)
                 <tr>
-                  <td class="text-center">
-                    {{ $key+1 }}
-                  </td>
-                  <td class="text-center"> 
-                    {{ $value->kendaraans->nama }}
-                  </td>
-                  <td class="text-center">
-                    {{ $value->karyawans->nama }}
-                  </td>
-                  <td class="text-center">
-                    {{ $hari[$value->hari] }}
-                  </td>
-                  <td class="text-center">
-                    <a href="{!! action('JadwalpengirimanController@edit',$value->id) !!}" class="btn btn-warning">
+                  <td>{{ $key+1 }}</td>
+                  <td>{{ $value->kecamatan->nama }}</td>
+                  <td>{{ $value->nama }}</td>
+                  <td>{{ $value->koordinat_x }}</td>
+                  <td>{{ $value->koordinat_y }}</td>
+                  <td>
+                    <a href="{!! action('RuteController@edit', $value->id) !!}" class="btn btn-warning">
                       <i class="fa fa-pencil"></i>
                     </a>
-                    <form action ="{{ route('jadwalpengiriman.destroy', $value->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }} 
+                    <form action ="{{ route('rute.destroy', $value->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }}
                       <button class="btn btn-danger">
                         <i class="fa fa-times"></i>
                       </button>

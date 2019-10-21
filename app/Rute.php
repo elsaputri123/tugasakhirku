@@ -15,4 +15,9 @@ class Rute extends Model
     {
     	return $this->hasMany('App\Notakirim');
 	}
+
+	public function kecamatan()
+	{
+		return $this->belongsTo('App\Kecamatan', 'kecamatan_id');
+	}
 }

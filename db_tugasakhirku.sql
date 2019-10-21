@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 16, 2019 at 03:43 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Host: localhost
+-- Generation Time: Oct 20, 2019 at 08:38 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -71,13 +71,20 @@ CREATE TABLE `detailhistorys` (
 CREATE TABLE `historypengirimans` (
   `id` int(11) NOT NULL,
   `tanggal` date DEFAULT NULL,
-  `lokasi_awal` varchar(45) DEFAULT NULL,
-  `lokasi_akhir` varchar(45) DEFAULT NULL,
-  `jarak` double DEFAULT NULL,
+  `lokasi_awal` int(45) NOT NULL,
+  `lokasi_akhir` int(45) NOT NULL,
+  `jarak` double NOT NULL,
   `jadwalpengiriman_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `historypengirimans`
+--
+
+INSERT INTO `historypengirimans` (`id`, `tanggal`, `lokasi_awal`, `lokasi_akhir`, `jarak`, `jadwalpengiriman_id`, `created_at`, `updated_at`) VALUES
+(1, '2019-10-20', 6, 1, 20, 2, '2019-10-20 18:35:58', '2019-10-20 18:35:58');
 
 -- --------------------------------------------------------
 
@@ -117,6 +124,14 @@ CREATE TABLE `jadwalpengirimans` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jadwalpengirimans`
+--
+
+INSERT INTO `jadwalpengirimans` (`id`, `hari`, `karyawan_id_kurir`, `kendaraan_id`, `created_at`, `updated_at`) VALUES
+(2, '1', 5, 1, '2019-10-20 15:06:25', '2019-10-20 15:06:25'),
+(4, '3', 5, 1, '2019-10-20 15:18:13', '2019-10-20 15:18:13');
 
 -- --------------------------------------------------------
 
@@ -508,13 +523,22 @@ INSERT INTO `pelanggans` (`id`, `nama`, `alamat`, `no_tlp`, `created_at`, `updat
 
 CREATE TABLE `rutes` (
   `id` int(11) NOT NULL,
-  `nama` varchar(45) NOT NULL,
+  `kecamatan_id` int(10) NOT NULL,
+  `nama` varchar(45) DEFAULT NULL,
   `koordinat_x` double NOT NULL,
   `koordinat_y` double NOT NULL,
   `status` tinyint(6) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `rutes`
+--
+
+INSERT INTO `rutes` (`id`, `kecamatan_id`, `nama`, `koordinat_x`, `koordinat_y`, `status`, `created_at`, `updated_at`) VALUES
+(2, 1, 'Tujuan', 115.171579, -8.543465, 1, '2019-10-20 17:08:46', '2019-10-20 18:12:52'),
+(3, 6, 'Kantor', 115.17234, -8.72332, 1, '2019-10-20 18:08:42', '2019-10-20 18:13:06');
 
 -- --------------------------------------------------------
 
@@ -582,7 +606,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (3, 'adielah', 'adielah@gmail.com', '$2y$10$yyN5AiEm3kVV3ghjkXPIbe6yAPaPKerrCxIyA6QmQ4gFIb5LvJgDW', 1, NULL, '2019-10-05 07:58:03', '2019-10-05 07:58:03'),
-(5, 'elsaputri', 'elsaputri@gmail.com', '$2y$10$34nRjfs5HVYQx53fijWoiea4PhcSDeMrTsLUv8/4pA4Q.bBtV1FVG', 1, 'edIWExcLM4biKQlCnB9kJsfo5EFg2NdQNAXFx5wTiN7M4KgvQxMQNMuQQcBx', '2019-10-05 08:03:54', '2019-10-05 08:03:54'),
+(5, 'elsaputri', 'elsaputri@gmail.com', '$2y$10$34nRjfs5HVYQx53fijWoiea4PhcSDeMrTsLUv8/4pA4Q.bBtV1FVG', 1, 'Z0JNszMo3wVAhL7qKIvm6J9KCTk8ouj6cIjI3WLUoabrLppkByxzVR1txx2K', '2019-10-05 08:03:54', '2019-10-05 08:03:54'),
 (6, 'alfi', 'alfi@gmail.com', '$2y$10$9Pzn7ZhOh6mysbfVXPHRVeIevj8OiR2G0gLfVFlEqhJ0jOmn5Vu5a', 2, 'Yps4vQHAjthZLfKoUBOJR2EMpcGxfUuXHsMdhT7pMVXKsYfn8sGDID025Dnu', '2019-10-05 08:08:29', '2019-10-05 08:08:29'),
 (7, 'ziyad', 'ziyad@gmail.com', '$2y$10$CitnaGuRx08ppOBuC/q19useWpodDtDFErczX4SghZEXGbWHe8hwy', 1, NULL, '2019-10-05 08:31:02', '2019-10-05 08:31:02'),
 (8, 'hamid', 'hamid@gmail.com', '$2y$10$8tE7RGLOn7J1nlEbh.LwVuz5yghgDdn9O1Gxc03pnhtE/YHHNSn6u', 1, NULL, '2019-10-05 08:32:15', '2019-10-05 08:32:15'),
@@ -747,7 +771,7 @@ ALTER TABLE `detailhistorys`
 -- AUTO_INCREMENT for table `historypengirimans`
 --
 ALTER TABLE `historypengirimans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jabatans`
@@ -759,7 +783,7 @@ ALTER TABLE `jabatans`
 -- AUTO_INCREMENT for table `jadwalpengirimans`
 --
 ALTER TABLE `jadwalpengirimans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jenis`
@@ -819,7 +843,7 @@ ALTER TABLE `pelanggans`
 -- AUTO_INCREMENT for table `rutes`
 --
 ALTER TABLE `rutes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
