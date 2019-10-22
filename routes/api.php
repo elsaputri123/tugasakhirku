@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // untuk hystori
 Route::get('hystori', 'Api\HystoriController@index');
 Route::post('hystori/store', 'Api\HystoriController@store');
+
+Route::get('tarif', 'Api\TarifController@index');

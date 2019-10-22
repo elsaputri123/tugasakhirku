@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Tarifkm;
 use Illuminate\Http\Request;
-use DB;
+use App\Http\Controllers\Controller;
+use App\Tarifkm;
 
-class TarifkmController extends Controller
+class TarifController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,19 @@ class TarifkmController extends Controller
      */
     public function index()
     {
-        $tarif = Tarifkm::all();
+        $data = Tarifkm::select("id", "tujuan", "harga")->get();
 
-        return view('tarif.index',['tarif' => $tarif]);
+        if(count($data) > 0){ //mengecek apakah data kosong atau tidak
+            $res['message'] = "success";
+            $res['data'] = $data;
+
+            return response($res);
+        }
+        else{
+            $res['message'] = "error";
+            
+            return response($res);
+        }
     }
 
     /**
@@ -27,7 +37,7 @@ class TarifkmController extends Controller
      */
     public function create()
     {
-         return view ('tarif.create');
+        //
     }
 
     /**
@@ -38,22 +48,16 @@ class TarifkmController extends Controller
      */
     public function store(Request $request)
     {
-        $tarifs = new Tarifkm();
-    
-        $tarifs->tujuan=$request->get('tujuan');
-        $tarifs->harga=$request->get('harga');
-        $tarifs->save();
-
-        return redirect('tarif')->with('status', 'Data tarif berhasil ditambah!');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tarifkm  $tarifkm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tarifkm $tarifkm)
+    public function show($id)
     {
         //
     }
@@ -61,43 +65,34 @@ class TarifkmController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tarifkm  $tarifkm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $tarifs = Tarifkm::whereId($id)->firstOrFail();
-        return view('tarif.edit',['tarifs' => $tarifs]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tarifkm  $tarifkm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $tarifs = Tarifkm::whereId($id)->firstOrFail();
-
-        $tarifs->tujuan=$request->get('tujuan');
-        $tarifs->harga=$request->get('harga');
-
-        $tarifs->save();
-        return redirect('tarif')->with('status', 'Data tarif berhasil diubah!');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tarifkm  $tarifkm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $tarifs = Tarifkm::whereId($id)->firstOrFail();
-        $tarifs->delete();
-        return redirect('tarif')->with('status','Data tarif berhasil dihapus!');
+        //
     }
 }
