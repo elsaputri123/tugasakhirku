@@ -4,10 +4,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tambah Data Barang
+        Tambah Data Pelanggan
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo e(url('barang/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Tambah Data Barang</a></li>
+        <li><a href="<?php echo e(url('pelanggan/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Tambah Data Pelanggan</a></li>
       </ol>
     </section>
 
@@ -19,7 +19,7 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Form Tambah Barang</h3>
+              <h3 class="box-title">Form Tambah Pelanggan</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -32,32 +32,25 @@
             <?php $__currentLoopData = $errors ->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <h4 style="color: red"><?php echo e($error); ?></h4>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <form role="form" action="<?php echo e(url('barang')); ?>" method="POST" enctype="multipart/form-data">
+            <form role="form" action="<?php echo e(url('pelanggan')); ?>" method="POST" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
 
               <div class="box-body">
-                 <div class="form-group">
-                  <label>Jenis</label>
-                  <select style="width: 30%;" name="jenis" id="jenis" class="form-control" required>
-                    <option value="" selected="">Pilih Jenis </option>
-                    <?php $__currentLoopData = $jenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $j): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <option value="<?php echo e($j->id); ?>"><?php echo e($j->nama); ?></option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  </select>
-                </div>
                 <div class="form-group">
-                  <label>Nama Barang</label>
+                  <label>Nama Pelanggan</label>
                   <input style="width: 30%;" type="text" name="nama" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
+
                 <div class="form-group">
-                  <label>Berat (kg)</label>
-                  <input style="width: 30%;" type="number" name="berat" class="form-control">
+                  <label>Alamat</label>
+                  <input style="width: 30%;" type="text" name="alamat" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
+
                 <div class="form-group">
-                  <label>Satuan</label>
-                  <input style="width: 30%;" type="text" name="satuan" class="form-control">
+                  <label>No. Telpon</label>
+                  <input style="width: 30%;" type="text" name="notlp" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
               <!-- /.box-body -->

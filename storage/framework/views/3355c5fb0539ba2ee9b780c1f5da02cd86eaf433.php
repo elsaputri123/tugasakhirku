@@ -4,10 +4,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Jadwal Pengiriman
+        Pelanggan
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo e(url('jadwalpengiriman')); ?>" class="active"><i class="fa fa-dashboard"></i> Jadwal Pengiriman</a></li>
+        <li><a href="<?php echo e(url('pelanggan')); ?>" class="active"><i class="fa fa-dashboard"></i> Pelanggan</a></li>
       </ol>
     </section>
 
@@ -17,7 +17,7 @@
         <div class="col-xs-12">
           <div class="box" style="overflow-y: scroll;"> <!-- penting untuk scroll -->
             <div class="box-header">
-              <h3 class="box-title">Data Jadwal Pengiriman</h3>
+              <h3 class="box-title">Pelanggan</h3>
               <?php if(session('status')): ?>
                 <div style="background-color:green; color:white;font-weight: bold">
                   <?php echo e(session('status')); ?>
@@ -27,17 +27,33 @@
             </div>
             <!-- /.box-header -->
           <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th class="text-center">Kendaraan </th>
-                <th class="text-center">Sopir </th>
-                <th class="text-center">Hari </th>
-                <th class="text-center">Detail</th>
-              </tr>
-              </thead>
-             <tbody>
-              <!--  -->
+      <table id="example1" class="table table-bordered table-striped" style="overflow-x:auto;">
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Pelanggan</th>
+          <th>Alamat</th>
+          <th>No. Telpon</th>
+          <th>Ubah</th>
+          <th>Hapus</th>
+        </tr>
+        </thead>
+       <tbody>
+       <?php $__currentLoopData = $pelanggans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <tr>
+          <td><?php echo e($key+1); ?></td>
+          <td><?php echo e($p->nama); ?></td>
+          <td><?php echo e($p->alamat); ?></td>
+          <td><?php echo e($p->no_tlp); ?></td>
+           <td>
+            <a class="btn btn-success" href="<?php echo action('PelangganController@edit',$p->id); ?>">Ubah</a>
+          </td>
+          <td>
+            <form action ="<?php echo e(route('pelanggan.destroy',$p->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?> <input type="submit" value="hapus" name="submit" class="btn btn-success"> </form>
+          </td>  
+
+        </tr>
+       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
               </table>
             </div>
