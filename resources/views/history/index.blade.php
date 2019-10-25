@@ -56,7 +56,7 @@
                   <td>{{ $kecamatan[$value->lokasi_akhir] }}</td>
                   <td>{{ $value->jarak }}</td>
                   <td>{{ $value->karyawan }}</td>
-                  <td>{{ $value->kendaraan }}</td>
+                  <td>{{ $value->kendaraan." - ".$value->no_polisi }}</td>
                   <td>
                     <a href="{!! action('HistoryController@show',$value->id) !!}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
                     {{-- <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </button>

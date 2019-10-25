@@ -56,7 +56,7 @@
                   <td><?php echo e($kecamatan[$value->lokasi_akhir]); ?></td>
                   <td><?php echo e($value->jarak); ?></td>
                   <td><?php echo e($value->karyawan); ?></td>
-                  <td><?php echo e($value->kendaraan); ?></td>
+                  <td><?php echo e($value->kendaraan." - ".$value->no_polisi); ?></td>
                   <td>
                     <a href="<?php echo action('HistoryController@show',$value->id); ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
                     
