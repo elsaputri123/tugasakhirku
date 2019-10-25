@@ -16,7 +16,7 @@ class TarifController extends Controller
     public function index()
     {
         $data = Tarifkm::select("id", "tujuan", "harga")->get();
-
+        
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
             $res['data'] = $data;

@@ -144,7 +144,7 @@ class ManifestController extends Controller
         return redirect('manifest')->with('status', 'Data manifest berhasil ditambah!');
         
     }
-
+    
     /**
      * Display the specified resource.
      *

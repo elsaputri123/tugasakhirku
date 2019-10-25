@@ -165,6 +165,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php echo e(url('history')); ?>"><i class="fa fa-list"></i>Daftar History</a></li>
+                <li><a href="<?php echo e(url('history/create')); ?>"><i class="fa fa-list"></i>Tambah History</a></li>
               </ul>
             </li>
 

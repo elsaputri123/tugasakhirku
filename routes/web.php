@@ -29,6 +29,10 @@ Route::resource('jenis', 'JenisController');
 Route::resource('manifest', 'ManifestController');
 Route::resource('jadwalpengiriman', 'JadwalpengirimanController');
 Route::resource('rute', 'RuteController');
+Route::resource('history', 'HistoryController');
+Route::post('history/detail', 'HistoryController@detail');
+Route::get('/autocomplete','HistoryController@autocomplete')->name('autocomplete');
+Route::get('history/destroydetail/{id}', 'HistoryController@destroydetail');
 
 // NOTA KIRIM
 Route::get('nk/detail/{id}','NotakirimController@detail');

@@ -1,5 +1,4 @@
-    <?php
-
+<?php
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -50,8 +49,10 @@ class HystoriController extends Controller
      */
     public function store(Request $request)
     {    
-        try {
+        $jadwal = $this->getIdJadwal($request->id_user);
 
+        if ($jadwal > 0) {
+           try {
             $histori                        = new HystoriPengirimans();
             $histori->tanggal               = date("Y-m-d");
             $histori->lokasi_awal           = $request->awal;
@@ -68,13 +69,20 @@ class HystoriController extends Controller
             
             return response($data);
         }
+            $data = [
+                    'success'   => 'Rute Pengiriman Berhasil Disimpan',
+                    'data'      => $histori
+                ];
 
-        $data = [
-                'success'   => 'Rute Pengiriman Berhasil Disimpan',
-                'data'      => $histori
+            return response($data);
+        }else{
+            $data = [
+                'error' => 'Jadwal Kurir Belum ada, silahkan buat jadwal dulu ',
+                'data'  => []
             ];
-
-        return response($data);
+            
+            return response($data);
+        }
     }
 
     /**
@@ -124,7 +132,7 @@ class HystoriController extends Controller
 
     public function getJarak($awal, $akhir)
     {   
-
+        dd($akhir);
         // set koordinat titik awal
         $awal       = Rute::where("kecamatan_id", $awal)->get()->first();
         //die($dataawal);
@@ -136,8 +144,9 @@ class HystoriController extends Controller
         $data[0]    = $akhir->koordinat_y;
         $data[1]    = $akhir->koordinat_x;
 
+        dd($awal);
         $jarak      = $this->HitungJarak($data1, $data);
-
+        dd($jarak);
         return $jarak;
     }
 
@@ -178,8 +187,13 @@ class HystoriController extends Controller
             }
         }
 
-        $jadwal = Jadwalpengiriman::where("hari", $datahari)->where("karyawan_id_kurir", $iduser)->get()->first();
+        $jadwal = Jadwalpengiriman::where("hari", $datahari)->where("karyawan_id_kurir", $iduser)->get()->toArray();
+        
+        $ret = 0;
+        if (count($jadwal)>0) {
+            $ret = $jadwal[0]["id"];
+        }
 
-        return $jadwal->id;
+        return $ret;
     }
 }

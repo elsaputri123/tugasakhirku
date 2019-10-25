@@ -163,6 +163,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ url('history') }}"><i class="fa fa-list"></i>Daftar History</a></li>
+                <li><a href="{{ url('history/create') }}"><i class="fa fa-list"></i>Tambah History</a></li>
               </ul>
             </li>
 

@@ -23,7 +23,7 @@ class JadwalpengirimanController extends Controller
                         '4' => 'Kamis',
                         '5' => 'Jumat',
                         '6' => 'Sabtu');
-
+        
         //dd($data);
         return view('jadwalpengiriman.index', $data);
     }
