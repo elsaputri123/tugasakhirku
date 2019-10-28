@@ -27,7 +27,8 @@ class HistoryController extends Controller
             "s.nama as kendaraan", "s.no_polisi","j.hari")
         ->join("jadwalpengirimans as j","historypengirimans.jadwalpengiriman_id", "j.id")
         ->join("karyawans as k", "k.id", "j.karyawan_id_kurir")
-        ->join("kendaraans as s", "s.id", "j.kendaraan_id")->get();
+        ->join("kendaraans as s", "s.id", "j.kendaraan_id")
+        ->orderBy("historypengirimans.tanggal", "desc")->get();
 
         $kecamatan = Kecamatan::select("id", "nama")->get();
         $data1 =[];
@@ -69,38 +70,39 @@ class HistoryController extends Controller
         $jarak          = $this->getJarak($request->awal, $request->akhir);
 
         if ($jadwal > 0 and $jarak > 0) {
-           try {
-            $histori                        = new HystoriPengirimans();
-            $histori->tanggal               = date("Y-m-d");
-            $histori->lokasi_awal           = $request->awal;
-            $histori->lokasi_akhir          = $request->akhir;
-            $histori->jarak                 = $this->getJarak($request->awal, $request->akhir);
-            $histori->jadwalpengiriman_id   = $this->getIdJadwal($request->user_id);
-            $histori->save();
+            try {
+                    $histori                        = new HystoriPengirimans();
+                    $histori->tanggal               = date("Y-m-d");
+                    $histori->lokasi_awal           = $request->awal;
+                    $histori->lokasi_akhir          = $request->akhir;
+                    $histori->jarak                 = $this->getJarak($request->awal, $request->akhir);
+                    $histori->jadwalpengiriman_id   = $this->getIdJadwal($request->user_id);
+                    $histori->save();
 
-        } catch (Exception $e) {
-           $data = [
-            'error' => 'Gagal Simpan History Pengiriman',
-            'data'  => []
-        ];
+                } catch (Exception $e) {
+                 $data = [
+                    'error' => 'Gagal Simpan History Pengiriman',
+                    'data'  => []
+                ];
 
-        return redirect()->back()->with($data);
+                return redirect()->back()->with($data);
+            }
+            $data = [
+                'success'   => 'Rute History Berhasil Disimpan',
+                'data'      => $histori
+            ];
+
+            return redirect("history/".$histori->id)->with($data);
+        }else{
+
+            $data = [
+                'error' => 'Jadwal atau Rute Kurir Belum ada, silahkan buat jadwal dulu ',
+                'data'  => []
+            ];
+
+            return redirect()->back()->with($data);
+        }
     }
-    $data = [
-        'success'   => 'Rute History Berhasil Disimpan',
-        'data'      => $histori
-    ];
-
-    return redirect()->back()->with($data);
-}else{
-    $data = [
-        'error' => 'Jadwal atau Rute Kurir Belum ada, silahkan buat jadwal dulu ',
-        'data'  => []
-    ];
-
-    return redirect()->back()->with($data);
-}
-}
 
     /**
      * Display the specified resource.
@@ -124,7 +126,7 @@ class HistoryController extends Controller
         $term = $request->term;
         
         $query = "select id, no_manifest from manifests where no_manifest like '%".$term."%' 
-                and id not in(select manifest_id from detailhistorys)";
+        and id not in(select manifest_id from detailhistorys)";
         
         $data = DB::select($query);
         $results = []; 
@@ -154,8 +156,8 @@ class HistoryController extends Controller
         }
 
         $data = [
-                'success'   => 'Manifests Sukses Ditambahkan'
-            ];
+            'success'   => 'Manifests Sukses Ditambahkan'
+        ];
 
         return redirect()->back()->with($data);
 
@@ -191,7 +193,7 @@ class HistoryController extends Controller
      */
     public function destroy($id)
     {
-        
+
     }
 
     public function destroydetail($id)
@@ -199,8 +201,8 @@ class HistoryController extends Controller
         DetailHistory::where("id", $id)->delete();
 
         $data = [
-                'success'   => 'Hapus Manifests Sukses'
-            ];
+            'success'   => 'Hapus Manifests Sukses'
+        ];
 
         return redirect()->back()->with($data);
     }
@@ -249,12 +251,12 @@ class HistoryController extends Controller
 
     public function getIdJadwal($iduser)
     {
-        $data = array('1' => 'Sun',
-           '2' => 'Tue',
-           '3' => 'Wed',
-           '4' => 'Thu',
-           '5' => 'Fri',
-           '6' => 'Sat');
+        $data = array('1' => 'Mon',
+         '2' => 'Tue',
+         '3' => 'Wed',
+         '4' => 'Thu',
+         '5' => 'Fri',
+         '6' => 'Sat');
         $hari = date('D');
 
         $datahari = 0;
@@ -265,7 +267,7 @@ class HistoryController extends Controller
         }
 
         $jadwal = Jadwalpengiriman::where("hari", $datahari)->where("karyawan_id_kurir", $iduser)->get()->toArray();
-        
+        //dd($hari);
         $ret = 0;
         if (count($jadwal)>0) {
             $ret = $jadwal[0]["id"];
