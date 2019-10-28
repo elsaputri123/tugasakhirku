@@ -44,6 +44,7 @@
                   <th class="text-center">Jarak </th>
                   <th class="text-center">Kurir </th>
                   <th class="text-center">Kendaraan </th>
+                  <th class="text-center">Status </th>
                   <th class="text-center">Action </th>
                 </tr>
               </thead>
@@ -58,7 +59,20 @@
                   <td><?php echo e($value->karyawan); ?></td>
                   <td><?php echo e($value->kendaraan." - ".$value->no_polisi); ?></td>
                   <td>
+                    <?php if($value->status==0): ?>
+                         Belum Dikirim
+                    <?php elseif($value->status==1): ?>
+                          Proses Pengiriman Ke Kantor Bali
+                    <?php else: ?>
+                          Sampai Di Kantor Bali
+                    <?php endif; ?>
+                  </td>
+                  <td>
                     <a href="<?php echo action('HistoryController@show',$value->id); ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+
+                    <?php if($value->status==0): ?>
+                    <a href="<?php echo action('HistoryController@kirim',$value->id); ?>" class="btn btn-sm btn-success"><i class="fa fa-check"></i></a>
+                    <?php endif; ?>
                     
                   </td> 
                 </tr>

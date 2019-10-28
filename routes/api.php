@@ -22,3 +22,6 @@ Route::get('hystori', 'Api\HystoriController@index');
 Route::post('hystori/store', 'Api\HystoriController@store');
 
 Route::get('tarif', 'Api\TarifController@index');
+
+Route::get('hystori/kirim/{id}', 'Api\HystoriController@kirim');
+Route::get('hystori/sampai/{id}', 'Api\HystoriController@sampai');

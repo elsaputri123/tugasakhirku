@@ -47,7 +47,7 @@ Route::get('m/getnopolisi/{id}','ManifestController@nopolisi');
 Route::get('manifest/detail/{id}','ManifestController@detail');
 Route::get('m/print/{id}','ManifestController@print');
 
-
-
-
+// activity kirim
+Route::get('history/kirim/{id}', 'HistoryController@kirim');
+Route::get('history/sampai/{id}', 'HistoryController@sampai');
 

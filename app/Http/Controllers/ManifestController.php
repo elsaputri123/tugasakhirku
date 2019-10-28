@@ -114,7 +114,7 @@ class ManifestController extends Controller
         $tgl = date('Y-m-d');
         $id = $request->get('id_resi');
         $getnoresi = $request->get('no_resi');
-
+        
         //==NGAMBIL ID KARYAWAN==//
         $user_id = Auth::user()->id;//ini buat ngambil id user yg login sekarang
         $karyawan = DB::table('users as u')->join('karyawans as k','u.id','=','k.user_id')

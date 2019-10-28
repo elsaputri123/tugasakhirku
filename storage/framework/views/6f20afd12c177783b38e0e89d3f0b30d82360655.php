@@ -1,6 +1,4 @@
-@extends('layouts.app-admin')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,7 +7,7 @@
         Nota Kirim
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url('notakirim') }}" class="active"><i class="fa fa-dashboard"></i> Nota Kirim</a></li>
+        <li><a href="<?php echo e(url('notakirim')); ?>" class="active"><i class="fa fa-dashboard"></i> Nota Kirim</a></li>
       </ol>
     </section>
 
@@ -20,11 +18,12 @@
           <div class="box" style="overflow-y: scroll;"> <!-- penting untuk scroll -->
             <div class="box-header">
               <h3 class="box-title">Nota Kirim</h3>
-              @if(session('status'))
+              <?php if(session('status')): ?>
                 <div style="background-color:green; color:white;font-weight: bold">
-                  {{session('status')}}
+                  <?php echo e(session('status')); ?>
+
                 </div>
-              @endif
+              <?php endif; ?>
             </div>
             <!-- /.box-header -->
           <div class="box-body">
@@ -42,34 +41,34 @@
               </tr>
               </thead>
              <tbody>
-             @foreach ($notakirim as $key => $n)
+             <?php $__currentLoopData = $notakirim; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $n): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <tr>
-                <td class="text-center">{{ $key+1 }}</td>
-                <td class="text-center">{{ $n->tanggal }}</td>
-                <td class="text-center">{{ $n->no_resi}}</td>
-                <td>{{ $n->pelanggans->nama }}</td>
-                <td>{{ $n->alamatpenerima }}</td>
-                <td>Rp. {{ number_format($n->biaya_kirim, 2, ',', '.') }}</td>
+                <td class="text-center"><?php echo e($key+1); ?></td>
+                <td class="text-center"><?php echo e($n->tanggal); ?></td>
+                <td class="text-center"><?php echo e($n->no_resi); ?></td>
+                <td><?php echo e($n->pelanggans->nama); ?></td>
+                <td><?php echo e($n->alamatpenerima); ?></td>
+                <td>Rp. <?php echo e(number_format($n->biaya_kirim, 2, ',', '.')); ?></td>
                 <td>
-                  @if($n->status==0)
+                  <?php if($n->status==0): ?>
                       Barang Masuk
-                  @elseif($n->status==1)
+                  <?php elseif($n->status==1): ?>
                       Barang Dikemas
-                  @elseif($n->status==2)
+                  <?php elseif($n->status==2): ?>
                       Barang Dikirim Ke Kantor Bali
-                  @elseif($n->status==3)
+                  <?php elseif($n->status==3): ?>
                       Barang Sampai Di Kantor Bali
-                  @elseif($n->status==4)
+                  <?php elseif($n->status==4): ?>
                       Barang Dibawa Kurir
-                  @elseif($n->status==5)
+                  <?php elseif($n->status==5): ?>
                       Barang Menuju Ke Alamat Penerima
-                  @else
+                  <?php else: ?>
                       Barang Diterima
-                  @endif
+                  <?php endif; ?>
                 </td>
-                <td><a class="btn btn-success" href="{!! action('NotakirimController@detail',$n->id) !!}">Lihat Detail</a></td> 
+                <td><a class="btn btn-success" href="<?php echo action('NotakirimController@detail',$n->id); ?>">Lihat Detail</a></td> 
               </tr>
-             @endforeach
+             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
               </table>
             </div>
@@ -86,12 +85,12 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2019 <a href="{{ url('/') }}">CV. Karya Anugerah Ekspedisi</a>.</strong> All rights
+    <strong>Copyright &copy; 2019 <a href="<?php echo e(url('/')); ?>">CV. Karya Anugerah Ekspedisi</a>.</strong> All rights
     reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
-@section('script')
+<?php $__env->startSection('script'); ?>
 <script type="text/javascript">
     $('#hapus').click(function(){
         return confirm("Anda yakin untuk menghapus data ini?");
@@ -111,5 +110,6 @@
     
   })
 </script>
-@endsection
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app-admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

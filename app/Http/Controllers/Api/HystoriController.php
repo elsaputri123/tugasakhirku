@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\HystoriPengirimans;
 use App\Rute;
 use App\Jadwalpengiriman;
+use App\Notakirim;
+use App\Manifest;
+use App\DetailHistory;
+use DB;
 
 class HystoriController extends Controller
 {
@@ -21,6 +25,11 @@ class HystoriController extends Controller
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
             $res['data'] = $data;
+            $res["filter"] = array('0' => "Dikirim",
+                                    "1" => "Sampai Kantor Bali",
+                                    "2" => "Dibawa Kurir",
+                                    "3"=> "Menuju Alamat Penerima",
+                                    "4" => "Barang Diterima" );
 
             return response($res);
         }
@@ -104,7 +113,7 @@ class HystoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -116,9 +125,108 @@ class HystoriController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        
     }
 
+
+    public function kirim($id)
+    {
+        $histori = HystoriPengirimans::where("id", $id)->first();
+        //dd($histori->status);
+        try {
+            DB::beginTransaction();
+
+            $update = array('status' => "1");
+            HystoriPengirimans::where("id", $id)->update($update);
+
+            $data = DetailHistory::select("manifest_id")->where("historypengiriman_id", $id)->get();
+            $manifests = Manifest::select("id", "no_manifest")->get();
+            $notakirims = Notakirim::select("id", "no_resi", "manifest_id", "status")->get();
+
+            // update status di nota kirims
+            $a_data= [];
+            foreach ($data as $key => $value) {
+                foreach ($manifests as $key1 => $value1) {
+                    if ($value->manifest_id==$value1->id) {
+                        $a_data[$value1->id] = $value1;
+                    }
+                }
+            }
+
+            // do update
+            foreach ($a_data as $key => $value) {
+                $status = array('status' => "2");
+                Notakirim::where("manifest_id", $value->id)->update($status);
+            }
+
+            DB::commit();
+            
+        } catch (Exception $e) {
+            $data = [
+                'error'   => 'Manifests Sukses Ditambahkan',
+                'data'    => []
+            ];
+
+            return response($data);
+        }
+
+        $data = [
+                'success'   => 'Manifests Sukses Ditambahkan',
+                'data'    => $histori
+            ];
+
+        return response($data);
+    }
+
+    public function sampai($id)
+    {
+        $histori = HystoriPengirimans::where("id", $id)->first();
+        //dd($histori->status);
+        try {
+            DB::beginTransaction();
+
+            $update = array('status' => "2");
+            HystoriPengirimans::where("id", $id)->update($update);
+
+            $data = DetailHistory::select("manifest_id")->where("historypengiriman_id", $id)->get();
+            $manifests = Manifest::select("id", "no_manifest")->get();
+            $notakirims = Notakirim::select("id", "no_resi", "manifest_id", "status")->get();
+
+            // update status di nota kirims
+            $a_data= [];
+            foreach ($data as $key => $value) {
+                foreach ($manifests as $key1 => $value1) {
+                    if ($value->manifest_id==$value1->id) {
+                        $a_data[$value1->id] = $value1;
+                    }
+                }
+            }
+
+            // do update
+            foreach ($a_data as $key => $value) {
+                $status = array('status' => "3");
+                Notakirim::where("manifest_id", $value->id)->update($status);
+            }
+
+            DB::commit();
+
+        } catch (Exception $e) {
+            $data = [
+                'error'   => 'Manifests Sukses Ditambahkan',
+                'data'    => []
+            ];
+
+            return response($data);
+        }
+
+        $data = [
+                'success'   => 'Manifests Sukses Ditambahkan',
+                'data'    => $histori
+            ];
+
+        return response($data);
+    }
+    
     /**
      * Remove the specified resource from storage.
      *

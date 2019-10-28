@@ -44,6 +44,7 @@
                   <th class="text-center">Jarak </th>
                   <th class="text-center">Kurir </th>
                   <th class="text-center">Kendaraan </th>
+                  <th class="text-center">Status </th>
                   <th class="text-center">Action </th>
                 </tr>
               </thead>
@@ -58,7 +59,20 @@
                   <td>{{ $value->karyawan }}</td>
                   <td>{{ $value->kendaraan." - ".$value->no_polisi }}</td>
                   <td>
+                    @if($value->status==0)
+                         Belum Dikirim
+                    @elseif($value->status==1)
+                          Proses Pengiriman Ke Kantor Bali
+                    @else
+                          Sampai Di Kantor Bali
+                    @endif
+                  </td>
+                  <td>
                     <a href="{!! action('HistoryController@show',$value->id) !!}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+
+                    @if($value->status==0)
+                    <a href="{!! action('HistoryController@kirim',$value->id) !!}" class="btn btn-sm btn-success"><i class="fa fa-check"></i></a>
+                    @endif
                     {{-- <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </button>
                     <button class="btn btn-sm btn-danger"><i class="fa fa-pencil"></i> </button> --}}
                   </td> 

@@ -11,6 +11,8 @@ use App\Kecamatan;
 use App\Jadwalpengiriman;
 use App\DetailHistory;
 use DB;
+use App\Manifest;
+use App\Notakirim;
 
 class HistoryController extends Controller
 {
@@ -24,7 +26,7 @@ class HistoryController extends Controller
         $data["data"] = HystoriPengirimans::select("historypengirimans.id", "historypengirimans.tanggal", 
             "historypengirimans.lokasi_awal", "historypengirimans.lokasi_akhir",
             "historypengirimans.lokasi_akhir", "historypengirimans.jarak", "k.nama as karyawan", 
-            "s.nama as kendaraan", "s.no_polisi","j.hari")
+            "s.nama as kendaraan", "s.no_polisi","j.hari", "historypengirimans.status")
         ->join("jadwalpengirimans as j","historypengirimans.jadwalpengiriman_id", "j.id")
         ->join("karyawans as k", "k.id", "j.karyawan_id_kurir")
         ->join("kendaraans as s", "s.id", "j.kendaraan_id")
@@ -71,38 +73,38 @@ class HistoryController extends Controller
 
         if ($jadwal > 0 and $jarak > 0) {
             try {
-                    $histori                        = new HystoriPengirimans();
-                    $histori->tanggal               = date("Y-m-d");
-                    $histori->lokasi_awal           = $request->awal;
-                    $histori->lokasi_akhir          = $request->akhir;
-                    $histori->jarak                 = $this->getJarak($request->awal, $request->akhir);
-                    $histori->jadwalpengiriman_id   = $this->getIdJadwal($request->user_id);
-                    $histori->save();
+                $histori                        = new HystoriPengirimans();
+                $histori->tanggal               = date("Y-m-d");
+                $histori->lokasi_awal           = $request->awal;
+                $histori->lokasi_akhir          = $request->akhir;
+                $histori->jarak                 = $this->getJarak($request->awal, $request->akhir);
+                $histori->jadwalpengiriman_id   = $this->getIdJadwal($request->user_id);
+                $histori->save();
 
-                } catch (Exception $e) {
-                 $data = [
-                    'error' => 'Gagal Simpan History Pengiriman',
-                    'data'  => []
-                ];
-
-                return redirect()->back()->with($data);
-            }
-            $data = [
-                'success'   => 'Rute History Berhasil Disimpan',
-                'data'      => $histori
-            ];
-
-            return redirect("history/".$histori->id)->with($data);
-        }else{
-
-            $data = [
-                'error' => 'Jadwal atau Rute Kurir Belum ada, silahkan buat jadwal dulu ',
+            } catch (Exception $e) {
+               $data = [
+                'error' => 'Gagal Simpan History Pengiriman',
                 'data'  => []
             ];
 
             return redirect()->back()->with($data);
         }
+        $data = [
+            'success'   => 'Rute History Berhasil Disimpan',
+            'data'      => $histori
+        ];
+
+        return redirect("history/".$histori->id)->with($data);
+    }else{
+
+        $data = [
+            'error' => 'Jadwal atau Rute Kurir Belum ada, silahkan buat jadwal dulu ',
+            'data'  => []
+        ];
+
+        return redirect()->back()->with($data);
     }
+}
 
     /**
      * Display the specified resource.
@@ -185,6 +187,100 @@ class HistoryController extends Controller
         //
     }
 
+    public function kirim($id)
+    {
+        $histori = HystoriPengirimans::where("id", $id)->first();
+        //dd($histori->status);
+        try {
+            DB::beginTransaction();
+
+            $update = array('status' => "1");
+            HystoriPengirimans::where("id", $id)->update($update);
+
+            $data = DetailHistory::select("manifest_id")->where("historypengiriman_id", $id)->get();
+            $manifests = Manifest::select("id", "no_manifest")->get();
+            $notakirims = Notakirim::select("id", "no_resi", "manifest_id", "status")->get();
+
+            // update status di nota kirims
+            $a_data= [];
+            foreach ($data as $key => $value) {
+                foreach ($manifests as $key1 => $value1) {
+                    if ($value->manifest_id==$value1->id) {
+                        $a_data[$value1->id] = $value1;
+                    }
+                }
+            }
+
+            // do update
+            foreach ($a_data as $key => $value) {
+                $status = array('status' => "2");
+                Notakirim::where("manifest_id", $value->id)->update($status);
+            }
+
+            DB::commit();
+
+        } catch (Exception $e) {
+            $data = [
+                'error'   => 'Manifests Sukses Ditambahkan'
+            ];
+
+            return redirect("history/".$id)->with($data);
+        }
+
+        $data = [
+                'success' => 'Sukses Simpan Update Pengiriman'
+            ];
+
+        return redirect("history/".$id)->with($data);
+    }
+
+    public function sampai($id)
+    {
+        $histori = HystoriPengirimans::where("id", $id)->first();
+        //dd($histori->status);
+        try {
+            DB::beginTransaction();
+
+            $update = array('status' => "2");
+            HystoriPengirimans::where("id", $id)->update($update);
+
+            $data = DetailHistory::select("manifest_id")->where("historypengiriman_id", $id)->get();
+            $manifests = Manifest::select("id", "no_manifest")->get();
+            $notakirims = Notakirim::select("id", "no_resi", "manifest_id", "status")->get();
+
+            // update status di nota kirims
+            $a_data= [];
+            foreach ($data as $key => $value) {
+                foreach ($manifests as $key1 => $value1) {
+                    if ($value->manifest_id==$value1->id) {
+                        $a_data[$value1->id] = $value1;
+                    }
+                }
+            }
+
+            // do update
+            foreach ($a_data as $key => $value) {
+                $status = array('status' => "3");
+                Notakirim::where("manifest_id", $value->id)->update($status);
+            }
+
+            DB::commit();
+
+        } catch (Exception $e) {
+            $data = [
+                'error'   => 'Manifests Sukses Ditambahkan'
+            ];
+
+            return redirect("history/".$id)->with($data);
+        }
+
+        $data = [
+                'success' => 'Sukses Simpan Update Pengiriman'
+            ];
+
+        return redirect("history/".$id)->with($data);
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -252,11 +348,11 @@ class HistoryController extends Controller
     public function getIdJadwal($iduser)
     {
         $data = array('1' => 'Mon',
-         '2' => 'Tue',
-         '3' => 'Wed',
-         '4' => 'Thu',
-         '5' => 'Fri',
-         '6' => 'Sat');
+           '2' => 'Tue',
+           '3' => 'Wed',
+           '4' => 'Thu',
+           '5' => 'Fri',
+           '6' => 'Sat');
         $hari = date('D');
 
         $datahari = 0;
