@@ -62,16 +62,25 @@
                     @if($value->status==0)
                          Belum Dikirim
                     @elseif($value->status==1)
-                          Proses Pengiriman Ke Kantor Bali
+                          Pengiriman Ke Kantor Cabang Tujuan
                     @else
-                          Sampai Di Kantor Bali
+                          Sampai Di Kantor Cabang Tujuan
                     @endif
                   </td>
                   <td>
                     <a href="{!! action('HistoryController@show',$value->id) !!}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
 
                     @if($value->status==0)
-                    <a href="{!! action('HistoryController@kirim',$value->id) !!}" class="btn btn-sm btn-success"><i class="fa fa-check"></i></a>
+                    <a href="{!! action('HistoryController@kirim',$value->id) !!}" class="btn btn-sm btn-success">
+                      <i class="fa fa-check"></i>
+                      Kirim
+                    </a>
+                    @endif
+                    @if($value->status==1)
+                    <a href="{!! action('HistoryController@sampai',$value->id) !!}" class="btn btn-sm btn-success">
+                      <i class="fa fa-check"></i>
+                      Sampai
+                    </a> 
                     @endif
                     {{-- <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </button>
                     <button class="btn btn-sm btn-danger"><i class="fa fa-pencil"></i> </button> --}}

@@ -56,8 +56,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </td>
                   <td class="text-center">
-                      <a href="<?php echo e(url("history/destroydetail/".$value->id)); ?>" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i> </a>
-                    </button>
+                      
                   </td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -56,6 +56,7 @@ class HystoriController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {    
         $jadwal = $this->getIdJadwal($request->id_user);
@@ -102,7 +103,7 @@ class HystoriController extends Controller
      */
     public function show($id)
     {
-
+        
     }
 
     /**
@@ -163,7 +164,7 @@ class HystoriController extends Controller
             
         } catch (Exception $e) {
             $data = [
-                'error'   => 'Manifests Sukses Ditambahkan',
+                'error'   => 'Manifests Gagal Ditambahkan',
                 'data'    => []
             ];
 
