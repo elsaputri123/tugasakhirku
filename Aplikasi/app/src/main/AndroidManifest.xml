@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ico"
@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".History"></activity>
         <activity android:name=".Maps2" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MapsActivity" />
         <activity android:name=".Tarif" />
         <activity android:name=".Login" />
         <!--
@@ -33,10 +33,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".List"
             android:label="@string/title_activity_maps" />
         <activity android:name=".kalkulator" />
-        <activity android:name=".List">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

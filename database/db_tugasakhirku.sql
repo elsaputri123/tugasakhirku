@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 30, 2019 at 05:23 AM
+-- Generation Time: Oct 30, 2019 at 05:39 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -79,7 +79,7 @@ CREATE TABLE `historykurir` (
   `id` int(11) NOT NULL,
   `id_kurir` int(11) NOT NULL,
   `id_nota` int(11) NOT NULL,
-  `tanggal` date NOT NULL DEFAULT current_timestamp(),
+  `tanggal` date DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
