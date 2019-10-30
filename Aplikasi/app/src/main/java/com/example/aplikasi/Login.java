@@ -23,7 +23,8 @@ import org.json.JSONObject;
 public class Login extends AppCompatActivity {
     Button btlogin, btbatal;
     EditText uname, pass;
-
+    ServerRequest server;
+    String hosts = "http://192.168.43.148/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class Login extends AppCompatActivity {
         String name = String.valueOf(uname.getText());
         String passw = String.valueOf(pass.getText());
 
-        String url = "http://192.168.43.148/tugasakhirku/public/api/login/"+name+"/"+passw;;
+        String url = hosts+"tugasakhirku/public/api/login/"+name+"/"+passw;;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

@@ -1,7 +1,5 @@
 package com.example.aplikasi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,14 +10,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -28,11 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.json.JSONArray;
 
 public class kalkulator extends AppCompatActivity {
     EditText berat, panjang, lebar, tinggi, jumlah, hasil;
@@ -42,6 +33,7 @@ public class kalkulator extends AppCompatActivity {
     private ArrayList<String> lokasi;
     //JSON Array
     private JSONArray result;
+    String hosts = "http://192.168.43.148";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +109,7 @@ public class kalkulator extends AppCompatActivity {
 
     private void getData(){
         //Creating a string request
-        String url = "http://192.168.43.148/tugasakhirku/public/api/tarif";
+        String url = hosts+"/tugasakhirku/public/api/tarif";
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
         new Response.Listener<String>() {
             @Override

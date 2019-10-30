@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class History extends AppCompatActivity {
+    ServerRequest server;
     Button cari, btnmaps;
     TextView tvresi, tvnama, tvalamat, tvtelp, tvtanggal;
     ListView listView;
@@ -35,6 +36,7 @@ public class History extends AppCompatActivity {
     SimpleAdapter adapter;
     HashMap<String, String> map;
     ArrayList<HashMap<String, String>> mylist;
+    String hosts = "http://192.168.43.148";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class History extends AppCompatActivity {
 
     private void getMaps() {
         String nores = String.valueOf(resi.getText());
-        String url = "http://192.168.43.148/tugasakhirku/public/api/login/"+nores;;
+        String url = hosts+"/tugasakhirku/public/api/login/"+nores;;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -109,7 +111,7 @@ public class History extends AppCompatActivity {
 
     private void loadData() {
         String nores = String.valueOf(resi.getText());
-        String url = "http://192.168.43.148/tugasakhirku/public/api/tracking/"+nores;;
+        String url = hosts+"/tugasakhirku/public/api/tracking/"+nores;;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

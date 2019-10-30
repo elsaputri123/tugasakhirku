@@ -40,6 +40,8 @@ public class List extends AppCompatActivity {
     private Spinner spNamen;
     private String[] germanFeminine = { "-- Pilih Filter --", "Sampai Kantor Cabang", "Di Bawa", "Di Kirim", "Sampai Penerima", "Diterima"};
     String url;
+    String hosts = "http://192.168.43.148";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class List extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, germanFeminine);
         spNamen.setAdapter(adapter);
-        url = "http://192.168.43.148/tugasakhirku/public/api/notakirim";
+        url = hosts+"/tugasakhirku/public/api/notakirim";
 
         load();
 
@@ -121,7 +123,7 @@ public class List extends AppCompatActivity {
                     baru = 7;
                 }
 
-                url = "http://192.168.43.148/tugasakhirku/public/api/notakirim/"+baru;
+                url = hosts+"/tugasakhirku/public/api/notakirim/"+baru;
             }
 
             @Override
@@ -140,7 +142,7 @@ public class List extends AppCompatActivity {
     }
 
     private void Bawa(int which){
-        String url = "http://192.168.43.148/tugasakhirku/public/api/bawa/"+which+"/"+4;
+        String url = hosts+"/tugasakhirku/public/api/bawa/"+which+"/"+4;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -170,7 +172,7 @@ public class List extends AppCompatActivity {
     }
 
     private void Kirim(int which){
-        String url = "http://192.168.43.148/tugasakhirku/public/api/kirim/"+which;
+        String url = hosts+"/tugasakhirku/public/api/kirim/"+which;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -200,7 +202,7 @@ public class List extends AppCompatActivity {
     }
 
     private void Sampai(int which){
-        String url = "http://192.168.43.148/tugasakhirku/public/api/sampai/"+which;
+        String url = hosts+"/tugasakhirku/public/api/sampai/"+which;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -230,7 +232,7 @@ public class List extends AppCompatActivity {
     }
 
     private void Konfirmasi(int which){
-        String url = "http://192.168.43.148/tugasakhirku/public/api/konfirmasi/"+which;
+        String url = hosts+"/tugasakhirku/public/api/konfirmasi/"+which;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -347,7 +349,7 @@ public class List extends AppCompatActivity {
 
     private void getMaps(String resi) {
         Log.e("error", String.valueOf(resi));
-        String url = "http://192.168.43.148/tugasakhirku/public/api/getmaps/"+resi;;
+        String url = hosts+"/tugasakhirku/public/api/getmaps/"+resi;;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
