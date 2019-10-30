@@ -5,16 +5,16 @@
   <section class="content-header">
     <h1>
       <?php if(isset($edit)): ?>
-      Edit Data Jadwal Pengiriman
+      Edit Data History Pengiriman
       <?php else: ?>
-      Input Data Jadwal Pengiriman
+      Input Data History Pengiriman
       <?php endif; ?>
     </h1>
     <ol class="breadcrumb">
       <?php if(isset($edit)): ?>
-      <li><a href="<?php echo e(url('jadwalpengiriman/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Edit Data Jadwal Pengiriman</a></li>
+      <li><a href="<?php echo e(url('HistoryController/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Edit Data History Pengiriman</a></li>
       <?php else: ?>
-      <li><a href="<?php echo e(url('jadwalpengiriman/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Input Data Jadwal Pengiriman</a></li>
+      <li><a href="<?php echo e(url('HistoryController/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Input Data History Pengiriman</a></li>
       <?php endif; ?>
     </ol>
   </section>
@@ -27,9 +27,9 @@
         <div class="box box-primary">
           <div class="box-header with-border">
             <?php if(isset($edit)): ?>
-            <h3 class="box-title">Form Edit Data Jadwal Pengiriman</h3>
+            <h3 class="box-title">Form Edit Data History Pengiriman</h3>
             <?php else: ?>
-            <h3 class="box-title">Form Input Data Jadwal Pengiriman</h3>
+            <h3 class="box-title">Form Input Data History Pengiriman</h3>
             <?php endif; ?>
             <h3 style="color: green" id="hari" ></h3>
 
@@ -50,21 +50,21 @@
           
           <div class="container-fluid">
             <?php if(isset($edit)): ?>
-            <form role="form" action="<?php echo e(route('jadwalpengiriman.update', $edit->id)); ?>" method="POST" enctype="multipart/form-data">
+            <form role="form" action="<?php echo e(route('history.update', $edit->id)); ?>" method="POST" enctype="multipart/form-data">
               <?php echo e(method_field("PUT")); ?>
 
               <?php else: ?>
-              <form method="POST" action="<?php echo e(url("jadwalpengiriman")); ?>" method="POST" enctype="multipart/form-data">
+              <form method="POST" action="<?php echo e(url("history")); ?>" method="POST" enctype="multipart/form-data">
                 <?php endif; ?>
                 <?php echo csrf_field(); ?>
 
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                     <label>Hari : </label>
-                     <select class="form-control" name="hari" id="hari">
-                      <?php $__currentLoopData = $hari; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                      <option value="<?php echo e($key); ?>"><?php echo e($value); ?></option>
+                     <label>Titik Awal : </label>
+                     <select class="form-control" name="awal" id="awal">
+                      <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                   </div>
@@ -74,15 +74,11 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                   <label>Nama Karyawan : </label>
-                   <select class="form-control" name="id_karyawan" id="id_karyawan">
-                    <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php if(isset($edit) and $value->id==$edit->id): ?>
-                    <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
-                    <?php else: ?>
-                    <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
-                    <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                   <label>Titik Akhir : </label>
+                   <select class="form-control" name="akhir" id="akhir">
+                    <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </select>
                 </div>
               </div>
@@ -91,10 +87,10 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                 <label>Kendaraan : </label>
-                 <select class="form-control" name="kendaraan" id="kendaraan">
-                  <?php $__currentLoopData = $kendaraan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                  <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama." - ".$value->no_polisi); ?></option>
+                 <label>Nama Kurir : </label>
+                 <select class="form-control" name="user_id" id="user_id">
+                  <?php $__currentLoopData = $karyawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
               </div>
@@ -109,6 +105,7 @@
            </div>
          </div>
        </form>
+
      </div>
      
    </div>
