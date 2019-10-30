@@ -250,7 +250,7 @@ class HistoryController extends Controller
                 $tracking->status       = 2;
                 $tracking->save();
             }
-
+            
             DB::commit();
 
         } catch (Exception $e) {
