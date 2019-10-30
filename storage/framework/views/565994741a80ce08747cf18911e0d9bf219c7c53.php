@@ -62,16 +62,25 @@
                     <?php if($value->status==0): ?>
                          Belum Dikirim
                     <?php elseif($value->status==1): ?>
-                          Proses Pengiriman Ke Kantor Bali
+                          Pengiriman Ke Kantor Cabang Tujuan
                     <?php else: ?>
-                          Sampai Di Kantor Bali
+                          Sampai Di Kantor Cabang Tujuan
                     <?php endif; ?>
                   </td>
                   <td>
                     <a href="<?php echo action('HistoryController@show',$value->id); ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
 
                     <?php if($value->status==0): ?>
-                    <a href="<?php echo action('HistoryController@kirim',$value->id); ?>" class="btn btn-sm btn-success"><i class="fa fa-check"></i></a>
+                    <a href="<?php echo action('HistoryController@kirim',$value->id); ?>" class="btn btn-sm btn-success">
+                      <i class="fa fa-check"></i>
+                      Kirim
+                    </a>
+                    <?php endif; ?>
+                    <?php if($value->status==1): ?>
+                    <a href="<?php echo action('HistoryController@sampai',$value->id); ?>" class="btn btn-sm btn-success">
+                      <i class="fa fa-check"></i>
+                      Sampai
+                    </a> 
                     <?php endif; ?>
                     
                   </td> 

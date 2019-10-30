@@ -13,6 +13,7 @@ use App\DetailHistory;
 use DB;
 use App\Manifest;
 use App\Notakirim;
+use App\Notiftracking;
 
 class HistoryController extends Controller
 {
@@ -141,14 +142,36 @@ class HistoryController extends Controller
     }
 
     public function detail(Request $request)
-    {
+    {   
+        $cek = DetailHistory::where("historypengiriman_id", $request->historypengiriman_id)->count();
+
+        if ($cek > 0) {
+            $data = [
+                'error'   => 'Manifests Sudah Ada'
+            ];
+
+            return redirect()->back()->with($data);
+        }
+
         $detail = new DetailHistory();
         $detail->manifest_id = $request->manifest_id;
         $detail->historypengiriman_id = $request->historypengiriman_id;
         try {
+            DB::beginTransaction();
 
             $detail->save();
 
+            $notakirims = Notakirim::select("id", "no_resi", "manifest_id", "status")
+                            ->where("manifest_id", $request->manifest_id)->get();
+
+            foreach ($notakirims as $key => $value) {
+                $tracking               = new Notiftracking();
+                $tracking->id_nota      = $value->id;
+                $tracking->status       = 1;
+                $tracking->save();
+            }
+
+            DB::commit();
         } catch (Exception $e) {
             $data = [
                 'error'   => 'Manifests Gagal Ditambahkan'
@@ -217,6 +240,17 @@ class HistoryController extends Controller
                 Notakirim::where("manifest_id", $value->id)->update($status);
             }
 
+            // insert into tracking 
+            $detail = DetailHistory::select("manifest_id")->where("historypengiriman_id", $id)->get()->first();
+            $track = Notakirim::select("id", "no_resi", "manifest_id", "status")->where("manifest_id", $detail->manifest_id)->get();
+            // insert into detail history
+            foreach ($track as $key => $value) {
+                $tracking               = new Notiftracking();
+                $tracking->id_nota      = $value->id;
+                $tracking->status       = 2;
+                $tracking->save();
+            }
+
             DB::commit();
 
         } catch (Exception $e) {
@@ -224,14 +258,14 @@ class HistoryController extends Controller
                 'error'   => 'Manifests Sukses Ditambahkan'
             ];
 
-            return redirect("history/".$id)->with($data);
+            return redirect()->back()->with($data);
         }
 
         $data = [
                 'success' => 'Sukses Simpan Update Pengiriman'
             ];
 
-        return redirect("history/".$id)->with($data);
+        return redirect()->back()->with($data);
     }
 
     public function sampai($id)
@@ -264,6 +298,18 @@ class HistoryController extends Controller
                 Notakirim::where("manifest_id", $value->id)->update($status);
             }
 
+            // insert into tracking 
+            $detail = DetailHistory::select("manifest_id")->where("historypengiriman_id", $id)->get()->first();
+            $track = Notakirim::select("id", "no_resi", "manifest_id", "status")->where("manifest_id", $detail->manifest_id)->get();
+            
+            // insert into detail history
+            foreach ($track as $key => $value) {
+                $tracking               = new Notiftracking();
+                $tracking->id_nota      = $value->id;
+                $tracking->status       = 3;
+                $tracking->save();
+            }
+
             DB::commit();
 
         } catch (Exception $e) {
@@ -271,14 +317,14 @@ class HistoryController extends Controller
                 'error'   => 'Manifests Sukses Ditambahkan'
             ];
 
-            return redirect("history/".$id)->with($data);
+            return redirect()->back()->with($data);
         }
 
         $data = [
                 'success' => 'Sukses Simpan Update Pengiriman'
             ];
 
-        return redirect("history/".$id)->with($data);
+        return redirect()->back()->with($data);
     }
     
     /**

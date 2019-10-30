@@ -50,17 +50,17 @@
                 <td><?php echo e($n->alamatpenerima); ?></td>
                 <td>Rp. <?php echo e(number_format($n->biaya_kirim, 2, ',', '.')); ?></td>
                 <td>
-                  <?php if($n->status==0): ?>
+                  <?php if($n->status==1): ?>
                       Barang Masuk
-                  <?php elseif($n->status==1): ?>
-                      Barang Dikemas
                   <?php elseif($n->status==2): ?>
-                      Barang Dikirim Ke Kantor Bali
+                      Barang Dikemas
                   <?php elseif($n->status==3): ?>
-                      Barang Sampai Di Kantor Bali
+                      Barang Dikirim Ke Kantor Bali
                   <?php elseif($n->status==4): ?>
-                      Barang Dibawa Kurir
+                      Barang Sampai Di Kantor Bali
                   <?php elseif($n->status==5): ?>
+                      Barang Dibawa Kurir
+                  <?php elseif($n->status==6): ?>
                       Barang Menuju Ke Alamat Penerima
                   <?php else: ?>
                       Barang Diterima

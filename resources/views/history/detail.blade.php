@@ -56,8 +56,7 @@
                     @endforeach
                   </td>
                   <td class="text-center">
-                      <a href="{{ url("history/destroydetail/".$value->id) }}" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i> </a>
-                    </button>
+                      {{-- <a href="{{ url("history/destroydetail/".$value->id) }}" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i> </a> --}}
                   </td>
                 </tr>
                 @endforeach

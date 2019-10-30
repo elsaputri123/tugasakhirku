@@ -51,17 +51,17 @@
                 <td>{{ $n->alamatpenerima }}</td>
                 <td>Rp. {{ number_format($n->biaya_kirim, 2, ',', '.') }}</td>
                 <td>
-                  @if($n->status==0)
+                  @if($n->status==1)
                       Barang Masuk
-                  @elseif($n->status==1)
-                      Barang Dikemas
                   @elseif($n->status==2)
-                      Barang Dikirim Ke Kantor Bali
+                      Barang Dikemas
                   @elseif($n->status==3)
-                      Barang Sampai Di Kantor Bali
+                      Barang Dikirim Ke Kantor Bali
                   @elseif($n->status==4)
-                      Barang Dibawa Kurir
+                      Barang Sampai Di Kantor Bali
                   @elseif($n->status==5)
+                      Barang Dibawa Kurir
+                  @elseif($n->status==6)
                       Barang Menuju Ke Alamat Penerima
                   @else
                       Barang Diterima

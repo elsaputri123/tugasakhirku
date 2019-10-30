@@ -62,7 +62,9 @@
                      <label>Titik Awal : </label>
                      <select class="form-control" name="awal" id="awal">
                       @foreach($kecamatan as $key => $value)
+                      @if($value->nama=="Surabaya")
                       <option value="{{ $value->id }}">{{ $value->nama }}</option>
+                      @endif
                       @endforeach
                     </select>
                   </div>
