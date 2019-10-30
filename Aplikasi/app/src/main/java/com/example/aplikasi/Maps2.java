@@ -1,14 +1,14 @@
 package com.example.aplikasi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class tracking extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Maps2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tracking);
+        setContentView(R.layout.activity_maps2);
     }
 }

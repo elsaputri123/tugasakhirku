@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#1BBD36"
-    tools:context=".tracking">
+    tools:context=".Maps2">
 
     <TextView
         android:textStyle="bold"
@@ -19,48 +19,22 @@
         android:text="CV. KARYA ANUGERAH" />
 
     <LinearLayout
-        android:padding="10dp"
-        android:layout_margin="15dp"
+        android:layout_margin="20dp"
         android:background="#fff"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Masukan Nomor Resi"
-                android:inputType="textPersonName" />
-
-            <Button
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:background="@color/colorPrimaryDark"
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tracking" />
-
-        </LinearLayout>
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/map"
-            android:layout_margin="10dp"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".MapsActivity" />
+
     </LinearLayout>
 
 </LinearLayout>
