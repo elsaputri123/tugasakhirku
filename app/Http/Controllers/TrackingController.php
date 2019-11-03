@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\request;
 use App\Tracking;
 
 class TrackingController extends Controller
 {
-    public function setPosition(Request $Request)
+    public function setposition(request $request)
     {
     	$tracking 	= new Tracking();
-    	$tracking->id_kurir = $Request->id_kurir;
-    	$tracking->id_nota = $Request->id_nota;
-    	$tracking->y_awal = $Request->y_awal;
-    	$tracking->x_awal = $Request->x_awal;
-    	$tracking->y_akhir = $Request->y_akhir;
-    	$tracking->x_akhir = $Request->x_akhir;
+    	$tracking->id_kurir = $request->id_kurir;
+    	$tracking->id_nota = $request->id_nota;
+    	$tracking->y_awal = $request->y_awal;
+    	$tracking->x_awal = $request->x_awal;
+    	$tracking->y_akhir = $request->y_akhir;
+    	$tracking->x_akhir = $request->x_akhir;
     	$tracking->save();
 
     	$res['message'] = "success";
@@ -24,14 +24,14 @@ class TrackingController extends Controller
         return response($res);
     }
     
-    public function updatePosition(Request $Request)
+    public function updateposition(request $request)
     {   
         $data = [];
-        $data["y_awal"] => $Request->y_awal;
-        $data["x_awal"] => $Request->x_awal;
-        Tracking::where("id_nota", $Request->id_nota)->update($data);
+        $data["y_awal"] = $request->y_awal;
+        $data["x_awal"] = $request->x_awal;
+        Tracking::where("id_nota", $request->id_nota)->update($data);
         
-    	$data 	= Tracking::where("id_nota", $Request->id_nota)->get()->first();
+    	$data 	= Tracking::where("id_nota", $request->id_nota)->get()->first();
     	if(!is_null($data)){
             $res['message'] = "success";
             $res['data'] = $data;
@@ -45,9 +45,9 @@ class TrackingController extends Controller
         }
     }
     
-    public function getPosition($id)
-    {
-    	$data  = Tracking::where("id_nota", $Request->id_nota)->get()->first();
+    public function getposition($id)
+    {   
+    	$data  = Tracking::where("id_nota", $id)->get()->first();
     	if(!is_null($data)){
             $res['message'] = "success";
             $res['data'] = $data;

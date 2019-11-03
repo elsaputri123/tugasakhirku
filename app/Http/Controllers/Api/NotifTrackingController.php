@@ -48,10 +48,10 @@ class NotifTrackingController extends Controller
     	
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
         	$res['message'] = "success";
-
+            
         	$lokasi_awal = Rute::where("kecamatan_id", $data[0]->lokasi_awal)->get()->first();
         	$lokasi_akhir = Rute::where("kecamatan_id", $data[0]->lokasi_akhir)->get()->first();
-
+            
         	$a_data = [];
             $a_data["id_nota"] = $lokasi_akhir->id;
         	$a_data["posisi"] = $lokasi_akhir->nama;
@@ -61,9 +61,9 @@ class NotifTrackingController extends Controller
         	// lok
         	$a_data["y_akhir"] = $lokasi_akhir->koordinat_y;
         	$a_data["x_akhir"] = $lokasi_akhir->koordinat_x;
-
+            
         	$res['data'] = $a_data;
-
+            
         	return response($res);
         }
         else{

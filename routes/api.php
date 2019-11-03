@@ -41,4 +41,6 @@ Route::get('tracking/{id}', 'Api\NotifTrackingController@getTracking');
 Route::get('getmaps/{id}', 'Api\NotifTrackingController@getMaps');
 
 // addtional tracking
-Route::post('tracking', 'TrackingController@setPosition');
+Route::post('setposition', 'TrackingController@setposition');
+Route::post('updateposition', 'TrackingController@updateposition');
+Route::get('getposition/{id}', 'TrackingController@getposition');
