@@ -53,9 +53,12 @@ class NotifTrackingController extends Controller
         	$lokasi_akhir = Rute::where("kecamatan_id", $data[0]->lokasi_akhir)->get()->first();
 
         	$a_data = [];
+            $a_data["id_nota"] = $lokasi_akhir->id;
         	$a_data["posisi"] = $lokasi_akhir->nama;
         	$a_data["y_awal"] = $lokasi_awal->koordinat_y;
         	$a_data["x_awal"] = $lokasi_awal->koordinat_x;
+        	
+        	// lok
         	$a_data["y_akhir"] = $lokasi_akhir->koordinat_y;
         	$a_data["x_akhir"] = $lokasi_akhir->koordinat_x;
 

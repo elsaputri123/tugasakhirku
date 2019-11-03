@@ -15,7 +15,7 @@ class JenisController extends Controller
     public function index()
     {
         $jenis = Jenis::all();
-
+        
         return view('jenis.index',['jenis' => $jenis]);
     }
 

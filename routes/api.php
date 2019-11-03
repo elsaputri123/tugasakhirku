@@ -39,3 +39,6 @@ Route::get('konfirmasi/{id}', 'Api\NotakirimsController@konfirmasi');
 // tracking client
 Route::get('tracking/{id}', 'Api\NotifTrackingController@getTracking');
 Route::get('getmaps/{id}', 'Api\NotifTrackingController@getMaps');
+
+// addtional tracking
+Route::post('tracking', 'TrackingController@setPosition');
