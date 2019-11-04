@@ -40,6 +40,9 @@ Route::get('konfirmasi/{id}', 'Api\NotakirimsController@konfirmasi');
 Route::get('tracking/{id}', 'Api\NotifTrackingController@getTracking');
 Route::get('getmaps/{id}', 'Api\NotifTrackingController@getMaps');
 
+// tracking kurir
+Route::get('getmapsdriver/{id}', 'Api\NotifTrackingController@getMapsDriver');
+
 // addtional tracking
 Route::post('setposition', 'TrackingController@setposition');
 Route::post('updateposition', 'TrackingController@updateposition');

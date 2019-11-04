@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\request;
+use Illuminate\Http\Request;
 use App\Tracking;
 
 class TrackingController extends Controller
 {
-    public function setposition(request $request)
+    public function setposition(Request $request)
     {
     	$tracking 	= new Tracking();
     	$tracking->id_kurir = $request->id_kurir;
@@ -24,7 +24,7 @@ class TrackingController extends Controller
         return response($res);
     }
     
-    public function updateposition(request $request)
+    public function updateposition(Request $request)
     {   
         $data = [];
         $data["y_awal"] = $request->y_awal;
@@ -40,7 +40,8 @@ class TrackingController extends Controller
         }
         else{
             $res['message'] = "error";
-            
+            $res['data'] = [];
+
             return response($res);
         }
     }
@@ -56,7 +57,8 @@ class TrackingController extends Controller
         }
         else{
             $res['message'] = "error";
-            
+            $res['data'] = [];
+
             return response($res);
         }
     }
