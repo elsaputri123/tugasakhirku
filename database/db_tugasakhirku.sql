@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 30, 2019 at 05:39 AM
+-- Generation Time: Nov 05, 2019 at 04:07 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -67,7 +67,7 @@ CREATE TABLE `detailhistorys` (
 --
 
 INSERT INTO `detailhistorys` (`id`, `manifest_id`, `historypengiriman_id`, `created_at`, `updated_at`) VALUES
-(21, 2, 9, '2019-10-30 03:27:39', '2019-10-30 03:27:39');
+(25, 1, 13, '2019-11-04 04:13:43', '2019-11-04 04:13:43');
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,7 @@ CREATE TABLE `historykurir` (
 --
 
 INSERT INTO `historykurir` (`id`, `id_kurir`, `id_nota`, `tanggal`, `created_at`, `updated_at`) VALUES
-(13, 4, 3, '2019-10-30', '2019-10-29 20:28:50', '2019-10-29 20:28:50');
+(18, 6, 1, '2019-11-04', '2019-11-03 21:16:15', '2019-11-03 21:16:15');
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `historypengirimans` (
 --
 
 INSERT INTO `historypengirimans` (`id`, `tanggal`, `lokasi_awal`, `lokasi_akhir`, `jarak`, `jadwalpengiriman_id`, `status`, `created_at`, `updated_at`) VALUES
-(9, '2019-10-30', 10, 9, 7, 4, 2, '2019-10-30 03:27:33', '2019-10-30 03:27:53');
+(13, '2019-11-04', 10, 9, 4, 2, 2, '2019-11-04 04:11:18', '2019-11-04 04:13:53');
 
 -- --------------------------------------------------------
 
@@ -525,12 +525,12 @@ CREATE TABLE `notakirims` (
 --
 
 INSERT INTO `notakirims` (`id`, `no_resi`, `namapenerima`, `alamatpenerima`, `tlppenerima`, `jenispembayaran`, `tanggal`, `biaya_kirim`, `tglbrgkt`, `tgltiba`, `nmpenerimabarang`, `status`, `karyawan_id`, `pelanggan_id`, `manifest_id`, `jadwalpengiriman_id`, `rute_id`, `tarifkm_id`, `kelurahan_id`, `created_at`, `updated_at`) VALUES
-(1, 'KAEP01', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0815642528', 1, '2019-10-09', 87500, '2019-10-02', NULL, NULL, 1, 3, 1, 1, NULL, NULL, 3, NULL, '2019-10-09 07:48:44', '2019-10-28 06:57:35'),
-(2, 'KAEP02', 'Arman', 'Jl. Krian 123', '0815642528', 1, '2019-10-09', 60000000, NULL, NULL, NULL, 3, 3, 3, 2, NULL, NULL, 8, NULL, '2019-10-09 07:49:04', '2019-10-30 03:27:53'),
-(3, 'KAEP03', 'Arman', 'Jl. Demak 654, Kelungkung', '081359851997', 3, '2019-10-09', 612000, NULL, NULL, NULL, 4, 3, 4, 2, NULL, NULL, 5, NULL, '2019-10-09 07:52:16', '2019-10-30 03:28:50'),
-(4, 'KAEP04', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0813579257', 1, '2019-10-09', 459000, NULL, NULL, NULL, 5, 3, 3, 2, NULL, NULL, 5, NULL, '2019-10-09 07:54:07', '2019-10-30 03:30:17'),
-(5, 'KAEP05', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0341562781', 1, '2019-10-09', 291000, NULL, NULL, NULL, 1, 3, 3, 3, NULL, NULL, 2, NULL, '2019-10-09 07:56:39', '2019-10-29 23:50:30'),
-(6, 'KAEP06', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0813579257', 1, '2019-10-09', 312000, NULL, NULL, NULL, 1, 3, 1, 3, NULL, NULL, 4, NULL, '2019-10-09 08:00:05', '2019-10-29 05:29:52'),
+(1, 'KAEP01', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0815642528', 1, '2019-10-09', 87500, '2019-10-02', NULL, NULL, 5, 3, 1, 1, NULL, NULL, 3, NULL, '2019-10-09 07:48:44', '2019-11-04 04:16:35'),
+(2, 'KAEP02', 'Arman', 'Jl. Krian 123', '0815642528', 1, '2019-10-09', 60000000, NULL, NULL, NULL, 1, 3, 3, 2, NULL, NULL, 8, NULL, '2019-10-09 07:49:04', '2019-10-30 03:27:53'),
+(3, 'KAEP03', 'Arman', 'Jl. Demak 654, Kelungkung', '081359851997', 3, '2019-10-09', 612000, NULL, NULL, NULL, 1, 3, 4, 2, NULL, NULL, 5, NULL, '2019-10-09 07:52:16', '2019-11-04 04:06:55'),
+(4, 'KAEP04', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0813579257', 1, '2019-10-09', 459000, NULL, NULL, NULL, 1, 3, 3, 2, NULL, NULL, 5, NULL, '2019-10-09 07:54:07', '2019-11-04 03:49:24'),
+(5, 'KAEP05', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0341562781', 1, '2019-10-09', 291000, NULL, NULL, NULL, 1, 3, 3, 3, NULL, NULL, 2, NULL, '2019-10-09 07:56:39', '2019-11-03 20:13:57'),
+(6, 'KAEP06', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0813579257', 1, '2019-10-09', 312000, NULL, NULL, NULL, 1, 3, 1, 3, NULL, NULL, 4, NULL, '2019-10-09 08:00:05', '2019-11-03 20:23:09'),
 (7, 'KAEP07', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0813579257', 1, '2019-10-09', 210000, NULL, NULL, NULL, 1, 3, 1, 3, NULL, NULL, 2, NULL, '2019-10-09 08:01:31', '2019-10-29 05:29:52'),
 (8, 'KAEP08', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0341562781', 1, '2019-10-09', 62500, NULL, NULL, NULL, 1, 3, 3, 3, NULL, NULL, 1, NULL, '2019-10-09 08:02:10', '2019-10-29 05:29:52'),
 (9, 'KAEP09', 'Tjia Teddy', 'Jl. Jemursari 908 Surabaya', '0341562781', 1, '2019-10-09', 50000, NULL, NULL, NULL, 1, 3, 1, 3, NULL, NULL, 1, NULL, '2019-10-09 08:05:27', '2019-10-29 05:29:52'),
@@ -559,17 +559,11 @@ CREATE TABLE `notiftracking` (
 --
 
 INSERT INTO `notiftracking` (`id`, `id_nota`, `status`, `created_at`, `updated_at`) VALUES
-(22, 2, 1, '2019-10-30 03:27:39', '2019-10-30 03:27:39'),
-(23, 3, 1, '2019-10-30 03:27:39', '2019-10-30 03:27:39'),
-(24, 4, 1, '2019-10-30 03:27:39', '2019-10-30 03:27:39'),
-(25, 2, 2, '2019-10-30 03:27:50', '2019-10-30 03:27:50'),
-(26, 3, 2, '2019-10-30 03:27:50', '2019-10-30 03:27:50'),
-(27, 4, 2, '2019-10-30 03:27:50', '2019-10-30 03:27:50'),
-(28, 2, 3, '2019-10-30 03:27:53', '2019-10-30 03:27:53'),
-(29, 3, 3, '2019-10-30 03:27:53', '2019-10-30 03:27:53'),
-(30, 4, 3, '2019-10-30 03:27:53', '2019-10-30 03:27:53'),
-(31, 3, 4, '2019-10-30 03:28:50', '2019-10-30 03:28:50'),
-(32, 4, 5, '2019-10-30 03:30:17', '2019-10-30 03:30:17');
+(51, 1, 1, '2019-11-04 04:13:43', '2019-11-04 04:13:43'),
+(52, 1, 2, '2019-11-04 04:13:51', '2019-11-04 04:13:51'),
+(53, 1, 3, '2019-11-04 04:13:53', '2019-11-04 04:13:53'),
+(54, 1, 4, '2019-11-04 04:16:15', '2019-11-04 04:16:15'),
+(55, 1, 5, '2019-11-04 04:16:35', '2019-11-04 04:16:35');
 
 -- --------------------------------------------------------
 
@@ -617,11 +611,11 @@ CREATE TABLE `rutes` (
 --
 
 INSERT INTO `rutes` (`id`, `kecamatan_id`, `nama`, `koordinat_x`, `koordinat_y`, `status`, `created_at`, `updated_at`) VALUES
-(2, 1, 'Tujuan', 115.171579, -8.543465, 1, '2019-10-20 17:08:46', '2019-10-20 18:12:52'),
-(3, 6, 'Kantor', 115.17234, -8.72332, 1, '2019-10-20 18:08:42', '2019-10-20 18:13:06'),
-(4, 5, 'Petang', 115.171127, -8.739184, 1, '2019-10-28 01:53:22', '2019-10-28 01:53:22'),
-(5, 9, 'Rungkut', 112.767471, -7.31657, 1, '2019-10-30 02:30:21', '2019-10-30 02:30:21'),
-(6, 10, 'Surabaya', 112.75209, -7.257472, 1, '2019-10-30 02:34:47', '2019-10-30 02:34:47');
+(2, 1, 'Tujuan', 112.76747, -7.31657, 1, '2019-10-20 17:08:46', '2019-10-20 18:12:52'),
+(3, 6, 'Kantor', 112.75132, -7.31762, 1, '2019-10-20 18:08:42', '2019-10-20 18:13:06'),
+(4, 5, 'Petang', 112.69569, -7.28187, 1, '2019-10-28 01:53:22', '2019-10-28 01:53:22'),
+(5, 9, 'Rungkut', 112.74347, -7.274, 1, '2019-10-30 02:30:21', '2019-10-30 02:30:21'),
+(6, 10, 'Surabaya', 112.73134, -7.23904, 1, '2019-10-30 02:34:47', '2019-10-30 02:34:47');
 
 -- --------------------------------------------------------
 
@@ -671,6 +665,31 @@ INSERT INTO `tarifkms` (`id`, `tujuan`, `harga`, `created_at`, `updated_at`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tracking`
+--
+
+CREATE TABLE `tracking` (
+  `id` int(10) NOT NULL,
+  `id_kurir` int(10) NOT NULL,
+  `id_nota` int(10) NOT NULL,
+  `y_awal` varchar(100) DEFAULT NULL,
+  `x_awal` varchar(100) DEFAULT NULL,
+  `y_akhir` varchar(100) NOT NULL,
+  `x_akhir` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tracking`
+--
+
+INSERT INTO `tracking` (`id`, `id_kurir`, `id_nota`, `y_awal`, `x_awal`, `y_akhir`, `x_akhir`, `created_at`, `updated_at`) VALUES
+(6, 6, 5, '112.7756325', '-7.33116252', '-7.274', '112.74347', '2019-11-04 04:21:45', '2019-11-04 04:49:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -691,7 +710,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (3, 'adielah', 'adielah@gmail.com', '$2y$10$yyN5AiEm3kVV3ghjkXPIbe6yAPaPKerrCxIyA6QmQ4gFIb5LvJgDW', 1, NULL, '2019-10-05 07:58:03', '2019-10-05 07:58:03'),
-(5, 'elsaputri', 'elsaputri@gmail.com', '$2y$10$34nRjfs5HVYQx53fijWoiea4PhcSDeMrTsLUv8/4pA4Q.bBtV1FVG', 1, '6CPhshMjVQ4F7PirIYfztZPw9otzmUsOmOwPfBcZCYPhburKYoREpWlXICAZ', '2019-10-05 08:03:54', '2019-10-05 08:03:54'),
+(5, 'elsaputri', 'elsaputri@gmail.com', '$2y$10$34nRjfs5HVYQx53fijWoiea4PhcSDeMrTsLUv8/4pA4Q.bBtV1FVG', 1, 'xykgLErCBeHDxloV5Cro17Kyq52wUmA9ldO5SU1IJg97Bi5LQMS7gVuxCt1G', '2019-10-05 08:03:54', '2019-10-05 08:03:54'),
 (6, 'alfi', 'alfi@gmail.com', '$2y$10$9Pzn7ZhOh6mysbfVXPHRVeIevj8OiR2G0gLfVFlEqhJ0jOmn5Vu5a', 2, 'Yps4vQHAjthZLfKoUBOJR2EMpcGxfUuXHsMdhT7pMVXKsYfn8sGDID025Dnu', '2019-10-05 08:08:29', '2019-10-05 08:08:29'),
 (7, 'ziyad', 'ziyad@gmail.com', '$2y$10$CitnaGuRx08ppOBuC/q19useWpodDtDFErczX4SghZEXGbWHe8hwy', 1, NULL, '2019-10-05 08:31:02', '2019-10-05 08:31:02'),
 (8, 'hamid', 'hamid@gmail.com', '$2y$10$8tE7RGLOn7J1nlEbh.LwVuz5yghgDdn9O1Gxc03pnhtE/YHHNSn6u', 1, NULL, '2019-10-05 08:32:15', '2019-10-05 08:32:15'),
@@ -848,6 +867,13 @@ ALTER TABLE `tarifkms`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tracking`
+--
+ALTER TABLE `tracking`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_nota` (`id_nota`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -868,19 +894,19 @@ ALTER TABLE `barangs`
 -- AUTO_INCREMENT for table `detailhistorys`
 --
 ALTER TABLE `detailhistorys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `historykurir`
 --
 ALTER TABLE `historykurir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `historypengirimans`
 --
 ALTER TABLE `historypengirimans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `jabatans`
@@ -952,7 +978,7 @@ ALTER TABLE `notakirims`
 -- AUTO_INCREMENT for table `notiftracking`
 --
 ALTER TABLE `notiftracking`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `pelanggans`
@@ -965,6 +991,12 @@ ALTER TABLE `pelanggans`
 --
 ALTER TABLE `rutes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tracking`
+--
+ALTER TABLE `tracking`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`

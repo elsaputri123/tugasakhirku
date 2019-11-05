@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1BBD36"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="50dp"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:textColor="#fff"
+        android:layout_height="wrap_content"
+        android:text="CV. KARYA ANUGERAH" />
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:background="#fff"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:hint="longitude"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/longitueku">
+
+        </EditText>
+
+        <EditText
+            android:hint="Latitude"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/latitudeku">
+
+        </EditText>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView2"
+            android:apiKey="YourMapsAPIKey"
+            android:layout_width="match_parent"
+            android:layout_height="473dp" />
+
+    </LinearLayout>
+</LinearLayout>
