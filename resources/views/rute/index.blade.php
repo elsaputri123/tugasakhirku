@@ -49,6 +49,7 @@
                 <tr>
                   <td>{{ $key+1 }}</td>
                   <td>@if(isset($value->kecamatan->nama)) {{ $value->kecamatan->nama }} @endif</td>
+                  <td>{{ $value->nama }}</td>
                   <td>{{ $value->koordinat_x }}</td>
                   <td>{{ $value->koordinat_y }}</td>
                   <td>
