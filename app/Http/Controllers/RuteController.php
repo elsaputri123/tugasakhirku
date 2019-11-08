@@ -15,14 +15,8 @@ class RuteController extends Controller
      */
     public function index()
     {   
-        $data["data"] = Rute::all();
-        //dd($data);
-        $kecamatan = Kecamatan::select("id", "nama")->get();
-        $a_data = [];
-        foreach ($kecamatan as $key => $value) {
-            $a_data[$value->id] = $value;
-        }
-        $data["kecamatan"] = $a_data;
+        $data["data"] = Rute::with("kecamatan")->get();
+
         return view("rute.index", $data);
     }
 
