@@ -84,9 +84,9 @@
                             <tr>
                               <th></th>
                               <td>: {{ $notakirims->alamatpenerima }}
-                                <br>{{'Kelurahan '.$detailalamat->kelurahan }}
-                                <br>{{'Kecamatan '.$detailalamat->kecamatan }}
-                                <br>{{'Kota '.$detailalamat->kota }}</td>
+                                <br>{{'Kelurahan '.$detailalamat->kelurahans->nama }}
+                                <br>{{'Kecamatan '.$detailalamat->kelurahans->kecamatans->nama }}
+                                <br>{{'Kota '.$detailalamat->tujuan }}</td>
                             </tr>
                             <tr>
                               <th></th>

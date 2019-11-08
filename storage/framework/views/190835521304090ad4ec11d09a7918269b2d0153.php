@@ -38,7 +38,7 @@
               <div class="navbar-collapse collapse">
                 <div class="menu">
                   <ul class="nav nav-tabs" role="tablist">
-                     <li role="presentation"><a href="<?php echo e(url('home')); ?>">Home</a></li> 
+                     
                     
                     <?php if(Route::has('login')): ?>
                         <?php if(Auth::check()): ?>

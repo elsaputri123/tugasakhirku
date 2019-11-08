@@ -84,11 +84,11 @@
                               <th></th>
                               <td>: <?php echo e($notakirims->alamatpenerima); ?>
 
-                                <br><?php echo e('Kelurahan '.$detailalamat->kelurahan); ?>
+                                <br><?php echo e('Kelurahan '.$detailalamat->kelurahans->nama); ?>
 
-                                <br><?php echo e('Kecamatan '.$detailalamat->kecamatan); ?>
+                                <br><?php echo e('Kecamatan '.$detailalamat->kelurahans->kecamatans->nama); ?>
 
-                                <br><?php echo e('Kota '.$detailalamat->kota); ?></td>
+                                <br><?php echo e('Kota '.$detailalamat->tujuan); ?></td>
                             </tr>
                             <tr>
                               <th></th>

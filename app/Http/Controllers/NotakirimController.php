@@ -38,7 +38,11 @@ class NotakirimController extends Controller
         $detailnota=DB::select(DB::raw("SELECT j.nama as jenis, b.nama as barang, nkb.jumlah as jumlah, b.satuan as satuan, nkb.berat as berat, nkb.dimensi as dimensi, nkb.totdimensi as totdimensi FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id='$id'"));
         
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
-        
+
+        $detailalamat = Notakirim::join('tarifkms as t', 'notakirims.tarifkm_id', '=', 't.id')
+                        ->where('notakirims.id', '=', $id)
+                        ->first();
+
         return view('notakirim.detail',['notakirims' => $notakirim, 'detailnota' => $detailnota, 'totberat' => $totberat, 'detailalamat' => $detailalamat]);
     }
 

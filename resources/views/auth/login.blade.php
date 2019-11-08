@@ -38,7 +38,7 @@
               <div class="navbar-collapse collapse">
                 <div class="menu">
                   <ul class="nav nav-tabs" role="tablist">
-                     <li role="presentation"><a href="{{ url('home') }}">Home</a></li> 
+                     
                     
                     @if (Route::has('login'))
                         @if (Auth::check())
