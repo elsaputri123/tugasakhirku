@@ -53,8 +53,8 @@
                 <tr>
                   <td>{{ $key+1 }}</td>
                   <td>{{ $value->tanggal }}</td>
-                  <td>{{ $kecamatan[$value->lokasi_awal] }}</td>
-                  <td>{{ $kecamatan[$value->lokasi_akhir] }}</td>
+                  <td>@if(isset($kecamatan[$value->lokasi_awal])) {{ $kecamatan[$value->lokasi_awal] }} @endif</td>
+                  <td>@if(isset($kecamatan[$value->lokasi_akhir])) {{ $kecamatan[$value->lokasi_akhir] }} @endif</td>
                   <td>{{ $value->jarak }}</td>
                   <td>{{ $value->karyawan }}</td>
                   <td>{{ $value->kendaraan." - ".$value->no_polisi }}</td>
