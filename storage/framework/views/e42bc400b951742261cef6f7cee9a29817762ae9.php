@@ -37,7 +37,7 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th class="text-center">No</th>
+                  <th class="text-center" width="10px">No</th>
                   <th class="text-center">Kendaraan </th>
                   <th class="text-center">Sopir </th>
                   <th class="text-center">Hari </th>
@@ -65,7 +65,7 @@
 
                   </td>
                   <td class="text-center">
-                    <a href="<?php echo action('JadwalpengirimanController@edit',$value->id); ?>" class="btn btn-warning">
+                    <a href="<?php echo action('JadwalpengirimanController@edit',$value->id); ?>" class="btn btn-success">
                       <i class="fa fa-pencil"></i>
                     </a>
                     <form action ="<?php echo e(route('jadwalpengiriman.destroy', $value->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?> 

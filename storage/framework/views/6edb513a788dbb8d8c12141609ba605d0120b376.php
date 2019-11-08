@@ -4,10 +4,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Manifest
+        Jenis
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo e(url('manifest')); ?>" class="active"><i class="fa fa-dashboard"></i> Manifest</a></li>
+        <li><a href="<?php echo e(url('jenis')); ?>" class="active"><i class="fa fa-dashboard"></i> Jenis</a></li>
       </ol>
     </section>
 
@@ -17,7 +17,7 @@
         <div class="col-xs-12">
           <div class="box" style="overflow-y: scroll;"> <!-- penting untuk scroll -->
             <div class="box-header">
-              <h3 class="box-title">Data Manifest</h3>
+              <h3 class="box-title">Jenis</h3>
               <?php if(session('status')): ?>
                 <div style="background-color:green; color:white;font-weight: bold">
                   <?php echo e(session('status')); ?>
@@ -27,30 +27,31 @@
             </div>
             <!-- /.box-header -->
           <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th class="text-center">No. </th>
-                <th class="text-center">Tanggal Manifest</th>
-                <th class="text-center">No. Manifest</th>
-                <th class="text-center">Sopir</th>
-                <th class="text-center">Tanggal berangkat</th>
-                <th class="text-center">Tanggal tiba</th>
-                <th class="text-center">Detail</th>
-              </tr>
-              </thead>
-             <tbody>
-              <?php $__currentLoopData = $detail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <tr>
-                <td class="text-center"><?php echo e($key+1); ?></td>
-                <td class="text-center"><?php echo e($d->tglmanifest); ?></td>
-                <td class="text-center"><?php echo e($d->nomanifest); ?></td>
-                <td class="text-center"><?php echo e($d->sopir); ?></td>
-                <td class="text-center"><?php echo e($d->tglbrgkt); ?></td>
-                <td class="text-center"><?php echo e($d->tgltiba); ?></td>
-                <td><a class="btn btn-success" href="<?php echo action('ManifestController@detail',$d->id); ?>"><i class="fa fa-eye"></i></a></td> 
-              </tr>
-             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th class="text-center" width="10px">No</th>
+          <th class="text-center">Nama Jenis</th>
+          <th class="text-center">Aksi</th>
+        </tr>
+        </thead>
+       <tbody>
+       <?php $__currentLoopData = $jenis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $j): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <tr>
+          <td><?php echo e($key+1); ?></td>
+          <td><?php echo e($j->nama); ?></td>
+          <td>
+            <a class="btn btn-sm btn-success" href="<?php echo action('JenisController@edit',$j->id); ?>">
+               <i class="fa fa-pencil"></i>
+            </a>
+            <form action ="<?php echo e(route('jenis.destroy',$j->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?> 
+            <button class="btn btn-sm btn-danger">
+                 <i class="fa fa-times"></i>
+              </button>
+               </form>
+          </td>  
+        </tr>
+       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
               </table>
             </div>

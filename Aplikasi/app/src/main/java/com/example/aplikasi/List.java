@@ -41,7 +41,7 @@ public class List extends AppCompatActivity {
     private Spinner spNamen;
     private String[] germanFeminine = { "-- Pilih Filter --", "Sampai Kantor Cabang", "Di Bawa", "Di Kirim", "Sampai Penerima", "Diterima"};
     String url;
-    String hosts = "http://gabsijawatimur.com";
+    String hosts = "http://192.168.43.148";
     SharedPreferences pref;
 
     @Override
@@ -300,6 +300,7 @@ public class List extends AppCompatActivity {
                                 String tanggal = c.getString("tanggal");
                                 String tlppenerima = c.getString("tlppenerima");
                                 String alamatpenerima = c.getString("alamatpenerima");
+                                String waktu = c.getString("waktu");
                                 int status = Integer.parseInt(c.getString("status"));
 
                                 HashMap<String, String> event = new HashMap<>();
@@ -310,6 +311,7 @@ public class List extends AppCompatActivity {
                                 event.put("namapenerima", "Penerima : "+namapenerima);
                                 event.put("tlppenerima", "Telp : "+tlppenerima);
                                 event.put("status", String.valueOf(status));
+                                event.put("waktu", String.valueOf(waktu));
                                 event.put("alamatpenerima", "Alamat Penerima : "+alamatpenerima);
 
                                 if (status==1){
@@ -359,8 +361,8 @@ public class List extends AppCompatActivity {
 
     private void  setList(){
         adapter = new SimpleAdapter(this, mylist, R.layout.listlayout,
-                new String[]{"no_resi","namapenerima", "tanggal","tlppenerima", "alamatpenerima", "statusku"},
-                new int[]{R.id.resi, R.id.nama, R.id.tgl, R.id.telp, R.id.alamat, R.id.status});
+                new String[]{"no_resi","namapenerima", "tanggal", "waktu","tlppenerima", "alamatpenerima", "statusku"},
+                new int[]{R.id.resi, R.id.nama, R.id.tgl, R.id.estimasi, R.id.telp, R.id.alamat, R.id.status});
 
         listView.setAdapter(adapter);
     }

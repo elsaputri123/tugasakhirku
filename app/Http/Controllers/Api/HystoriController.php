@@ -24,12 +24,23 @@ class HystoriController extends Controller
 
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
-            $res['data'] = $data;
+
+            $data1 = [];
+            foreach ($data as $key => $value) {
+                $tgl = date('Y-m-d', strtotime((String)$value->created_at));
+                $time = date("h:i:s", strtotime((String)$value->created_at));
+                $time1 = date('h:i:s', strtotime($time . "+1 hour"));
+                $tgl1 = date('Y-m-d', strtotime($tgl . "+1 day"));
+                $value->waktu = $tgl1." ".$time1;
+                $data1[$key]    = $value;
+            }
+            
+            $res['data'] = $data1;
             $res["filter"] = array('0' => "Dikirim",
-                                    "1" => "Sampai Kantor Bali",
-                                    "2" => "Dibawa Kurir",
-                                    "3"=> "Menuju Alamat Penerima",
-                                    "4" => "Barang Diterima" );
+                "1" => "Sampai Kantor Bali",
+                "2" => "Dibawa Kurir",
+                "3"=> "Menuju Alamat Penerima",
+                "4" => "Barang Diterima" );
 
             return response($res);
         }
@@ -47,7 +58,7 @@ class HystoriController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -62,7 +73,7 @@ class HystoriController extends Controller
         $jadwal = $this->getIdJadwal($request->id_user);
 
         if ($jadwal > 0) {
-           try {
+         try {
             $histori                        = new HystoriPengirimans();
             $histori->tanggal               = date("Y-m-d");
             $histori->lokasi_awal           = $request->awal;
@@ -72,28 +83,28 @@ class HystoriController extends Controller
             $histori->save();
 
         } catch (Exception $e) {
-           $data = [
-                'error' => 'Gagal Simpan Rute Pengiriman',
-                'data'  => []
-            ];
-            
-            return response($data);
-        }
-            $data = [
-                    'success'   => 'Rute Pengiriman Berhasil Disimpan',
-                    'data'      => $histori
-                ];
+         $data = [
+            'error' => 'Gagal Simpan Rute Pengiriman',
+            'data'  => []
+        ];
 
-            return response($data);
-        }else{
-            $data = [
-                'error' => 'Jadwal Kurir Belum ada, silahkan buat jadwal dulu ',
-                'data'  => []
-            ];
-            
-            return response($data);
-        }
+        return response($data);
     }
+    $data = [
+        'success'   => 'Rute Pengiriman Berhasil Disimpan',
+        'data'      => $histori
+    ];
+
+    return response($data);
+}else{
+    $data = [
+        'error' => 'Jadwal Kurir Belum ada, silahkan buat jadwal dulu ',
+        'data'  => []
+    ];
+
+    return response($data);
+}
+}
 
     /**
      * Display the specified resource.
@@ -103,7 +114,7 @@ class HystoriController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
@@ -114,7 +125,7 @@ class HystoriController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -126,7 +137,7 @@ class HystoriController extends Controller
      */
     public function update(Request $request)
     {
-        
+
     }
 
 
@@ -172,9 +183,9 @@ class HystoriController extends Controller
         }
 
         $data = [
-                'success'   => 'Manifests Sukses Ditambahkan',
-                'data'    => $histori
-            ];
+            'success'   => 'Manifests Sukses Ditambahkan',
+            'data'    => $histori
+        ];
 
         return response($data);
     }
@@ -221,9 +232,9 @@ class HystoriController extends Controller
         }
 
         $data = [
-                'success'   => 'Manifests Sukses Ditambahkan',
-                'data'    => $histori
-            ];
+            'success'   => 'Manifests Sukses Ditambahkan',
+            'data'    => $histori
+        ];
 
         return response($data);
     }
@@ -282,11 +293,11 @@ class HystoriController extends Controller
     public function getIdJadwal($iduser)
     {
         $data = array('1' => 'Sun',
-                       '2' => 'Tue',
-                        '3' => 'Wed',
-                        '4' => 'Thu',
-                        '5' => 'Fri',
-                        '6' => 'Sat');
+         '2' => 'Tue',
+         '3' => 'Wed',
+         '4' => 'Thu',
+         '5' => 'Fri',
+         '6' => 'Sat');
         $hari = date('D');
 
         $datahari = 0;

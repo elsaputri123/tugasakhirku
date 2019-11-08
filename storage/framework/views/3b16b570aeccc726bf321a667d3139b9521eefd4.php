@@ -30,12 +30,11 @@
       <table id="example1" class="table table-bordered table-striped">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Kendaraan</th>
-          <th>No. Polisi</th>
-          <th>Kapasitas (kg)</th>
-          <th>Ubah</th>
-          <th>Hapus</th>
+          <th class="text-center" width="10px">No</th>
+          <th class="text-center">Kendaraan</th>
+          <th class="text-center">No. Polisi</th>
+          <th class="text-center">Kapasitas (kg)</th>
+          <th class="text-center">Aksi</th>
         </tr>
         </thead>
        <tbody>
@@ -46,10 +45,14 @@
           <td><?php echo e($k->no_polisi); ?></td>
           <td><?php echo e(number_format($k->kapasitas, 0, ',', '.')); ?></td>
           <td>
-            <a class="btn btn-success" href="<?php echo action('KendaraanController@edit',$k->id); ?>">Ubah</a>
-          </td>
-          <td>
-            <form action ="<?php echo e(route('kendaraan.destroy',$k->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?> <input type="submit" value="hapus" name="submit" class="btn btn-success"> </form>
+            <a class="btn btn-sm btn-success" href="<?php echo action('KendaraanController@edit',$k->id); ?>">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <form action ="<?php echo e(route('kendaraan.destroy',$k->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?> 
+            <button class="btn btn-sm btn-danger">
+                 <i class="fa fa-times"></i>
+              </button>
+            </form>
           </td>  
         </tr>
        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -36,11 +36,11 @@ class NotakirimController extends Controller
             ->firstOrFail();
 
         $detailnota=DB::select(DB::raw("SELECT j.nama as jenis, b.nama as barang, nkb.jumlah as jumlah, b.satuan as satuan, nkb.berat as berat, nkb.dimensi as dimensi, nkb.totdimensi as totdimensi FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id='$id'"));
-
+        
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
             
         $detailalamat = DB::select(DB::raw("SELECT t.tujuan as tujuan, k.nama as kecamatan, kl.nama as kelurahan FROM tarifkms as t inner join kecamatans as k on t.id=k.tarifkm_id inner join kelurahans as kl on kl.kecamatan_id=k.id where t.id=$id"));
-      
+        
         return view('notakirim.detail',['notakirims' => $notakirim, 'detailnota' => $detailnota, 'totberat' => $totberat, 'detailalamat' => $detailalamat]);
     }
 

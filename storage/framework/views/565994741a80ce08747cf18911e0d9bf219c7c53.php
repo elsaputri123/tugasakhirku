@@ -37,7 +37,7 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th class="text-center">No</th>
+                  <th class="text-center" width="10px">No</th>
                   <th class="text-center">Tanggal </th>
                   <th class="text-center">Lokasi Awal </th>
                   <th class="text-center">Lokasi Akhir </th>
@@ -45,7 +45,7 @@
                   <th class="text-center">Kurir </th>
                   <th class="text-center">Kendaraan </th>
                   <th class="text-center">Status </th>
-                  <th class="text-center">Action </th>
+                  <th class="text-center">Aksi </th>
                 </tr>
               </thead>
               <tbody>
@@ -68,7 +68,7 @@
                     <?php endif; ?>
                   </td>
                   <td>
-                    <a href="<?php echo action('HistoryController@show',$value->id); ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="<?php echo action('HistoryController@show',$value->id); ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
 
                     <?php if($value->status==0): ?>
                     <a href="<?php echo action('HistoryController@kirim',$value->id); ?>" class="btn btn-sm btn-success">

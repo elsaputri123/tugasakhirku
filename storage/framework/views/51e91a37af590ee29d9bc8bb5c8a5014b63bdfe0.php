@@ -36,12 +36,12 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Kecamatan</th>
-                  <th>Nama Rute</th>
-                  <td>X (longitude)</td>
-                  <td>Y (latitude)</td>
-                  <th>Aksi</th>
+                  <th class="text-center" width="10px">No</th>
+                  <th class="text-center">Kecamatan</th>
+                  <th class="text-center">Nama Rute</th>
+                  <td class="text-center">X (longitude)</td>
+                  <td class="text-center">Y (latitude)</td>
+                  <th class="text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,12 +53,12 @@
                   <td><?php echo e($value->koordinat_x); ?></td>
                   <td><?php echo e($value->koordinat_y); ?></td>
                   <td>
-                    <a href="<?php echo action('RuteController@edit', $value->id); ?>" class="btn btn-warning">
+                    <a class="btn btn-sm btn-success" href="<?php echo action('RuteController@edit', $value->id); ?>">
                       <i class="fa fa-pencil"></i>
                     </a>
                     <form action ="<?php echo e(route('rute.destroy', $value->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?>
 
-                      <button class="btn btn-danger">
+                      <button class="btn btn-sm btn-danger">
                         <i class="fa fa-times"></i>
                       </button>
                     </form>

@@ -24,15 +24,27 @@ class HistoryController extends Controller
      */
     public function index()
     {   
-        $data["data"] = HystoriPengirimans::select("historypengirimans.id", "historypengirimans.tanggal", 
-            "historypengirimans.lokasi_awal", "historypengirimans.lokasi_akhir",
-            "historypengirimans.lokasi_akhir", "historypengirimans.jarak", "k.nama as karyawan", 
-            "s.nama as kendaraan", "s.no_polisi","j.hari", "historypengirimans.status")
+        $logic = HystoriPengirimans::select("historypengirimans.id", "historypengirimans.tanggal", 
+            "historypengirimans.lokasi_awal", "historypengirimans.lokasi_akhir", "historypengirimans.jarak", 
+            "k.nama as karyawan", 
+            "s.nama as kendaraan", "s.no_polisi","j.hari", "historypengirimans.status", 
+            "historypengirimans.created_at", DB::raw("historypengirimans.jarak/20*60 as waktu"))
         ->join("jadwalpengirimans as j","historypengirimans.jadwalpengiriman_id", "j.id")
         ->join("karyawans as k", "k.id", "j.karyawan_id_kurir")
         ->join("kendaraans as s", "s.id", "j.kendaraan_id")
         ->orderBy("historypengirimans.tanggal", "desc")->get();
 
+        $data1 = [];
+        foreach ($logic as $key => $value) {
+            $tgl = date('Y-m-d', strtotime((String)$value->created_at));
+            $time = date("h:i:s", strtotime((String)$value->created_at));
+            $time1 = date('h:i:s', strtotime($time . "+1 hour"));
+            $tgl1 = date('Y-m-d', strtotime($tgl . "+1 day"));
+            $value->waktu = $tgl1." ".$time1;
+            $data1[$key]    = $value;
+        }
+        
+        $data["data"] = $data1;
         $kecamatan = Kecamatan::select("id", "nama")->get();
         $data1 =[];
         foreach ($kecamatan as $key => $value) {

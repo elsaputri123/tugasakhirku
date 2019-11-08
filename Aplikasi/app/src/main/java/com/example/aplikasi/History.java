@@ -30,13 +30,13 @@ import java.util.HashMap;
 public class History extends AppCompatActivity {
 
     Button cari, btnmaps;
-    TextView tvresi, tvnama, tvalamat, tvtelp, tvtanggal;
+    TextView tvresi, tvnama, tvalamat, tvtelp, tvtanggal,estimasi;
     ListView listView;
     EditText resi;
     SimpleAdapter adapter;
     HashMap<String, String> map;
     ArrayList<HashMap<String, String>> mylist;
-    String hosts = "http://gabsijawatimur.com";
+    String hosts = "http://192.168.43.148";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class History extends AppCompatActivity {
         tvtanggal = (TextView) findViewById(R.id.tgl);
         tvtelp = (TextView) findViewById(R.id.telp);
         tvalamat = (TextView) findViewById(R.id.alamat);
-
+        estimasi = (TextView) findViewById(R.id.estimasi);
         listView = (ListView)findViewById(R.id.listku);
 
         btnmaps.setOnClickListener(new View.OnClickListener() {
@@ -138,8 +138,8 @@ public class History extends AppCompatActivity {
                             tvnama.setText(String.valueOf(jo.getString("namapenerima")));
                             tvalamat.setText(String.valueOf(jo.getString("alamatpenerima")));
                             tvtelp.setText(String.valueOf(jo.getString("tlppenerima")));
-                            tvtanggal.setText(String.valueOf("Tanggal Kirim: "+jo.getString("tanggal")));
-
+                            tvtanggal.setText(String.valueOf("Tanggal Kirim : "+jo.getString("tanggal")));
+                            estimasi.setText(String.valueOf("Estimasi sampai : "+jo.getString("waktu")));
                             int stts = Integer.parseInt(jo.getString("status"));
 
                             if (stts>3){
