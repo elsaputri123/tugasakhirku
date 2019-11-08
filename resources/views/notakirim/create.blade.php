@@ -165,7 +165,7 @@
                         <input  type="text" list="barang" class="form-control barang" name="barang[]" autocomplete="on" required>
                           <datalist id="barang">
                             @foreach($barang as $key => $b)
-                              <option value="{{ $b->nama }}" satuan="{{ $b->satuan }}" berat="{{ $b->berat }}">{{ $b->nama }}</option>
+                              <option value="{{ $b->id .' - '.$b->nama }}" satuan="{{ $b->satuan }}" berat="{{ $b->berat }}">{{ $b->nama }}</option>
                             @endforeach
                           </datalist>
                       </td>
@@ -321,7 +321,7 @@
         } 
     }); 
     
-    $(".gtotal").val(sum); 
+    $(".gtotal").val(sum.toLocaleString()); 
     }
 
   var selected = [];
