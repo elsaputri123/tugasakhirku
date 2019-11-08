@@ -66,7 +66,7 @@
                       Barang Diterima
                   <?php endif; ?>
                 </td>
-                <td><a class="btn btn-success" href="<?php echo action('NotakirimController@detail',$n->id); ?>">Lihat Detail</a></td> 
+                <td><a class="btn btn-success" href="<?php echo action('NotakirimController@detail',$n->id); ?>"><i class="fa fa-eye"></i></a></td> 
               </tr>
              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

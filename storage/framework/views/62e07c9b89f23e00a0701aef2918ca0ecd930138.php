@@ -71,7 +71,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                   <label>Kecamatan : </label>
+                   <label>Kecamatan </label>
                    <select class="form-control" name="kecamatan" id="kecamatan">
                     <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if(isset($edit) and $value->id==$edit->id): ?>
@@ -89,7 +89,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Nama Rute (Opotional) : </label>
+                  <label>Nama Rute (Opotional)  </label>
                   <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama Rute (Opotional)" 
                   value="<?php if(isset($edit)): ?> <?php echo e($edit->nama); ?>  <?php endif; ?>">
                 </div>
@@ -99,7 +99,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                 <label>Koordinat X (longitude) : </label>
+                 <label>Koordinat X (longitude) </label>
                  <input type="text" name="koordinat_x" id="koordinat_x" class="form-control" required="required" placeholder="Masukan Longitude" value="<?php if(isset($edit)): ?> <?php echo e($edit->koordinat_x); ?>  <?php endif; ?>" >
                </div>
              </div>
@@ -108,7 +108,7 @@
            <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-               <label>Koordinat Y (latitude) : </label>
+               <label>Koordinat Y (latitude) </label>
                <input type="text" name="koordinat_y" id="koordinat_y" class="form-control" required="required" placeholder="Masukan Latitude" value="<?php if(isset($edit)): ?> <?php echo e($edit->koordinat_y); ?>  <?php endif; ?>">
              </div>
            </div>
