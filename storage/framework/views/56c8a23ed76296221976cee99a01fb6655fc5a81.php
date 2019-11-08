@@ -165,7 +165,7 @@
                         <input  type="text" list="barang" class="form-control barang" name="barang[]" autocomplete="on" required>
                           <datalist id="barang">
                             <?php $__currentLoopData = $barang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                              <option value="<?php echo e($b->nama); ?>" satuan="<?php echo e($b->satuan); ?>" berat="<?php echo e($b->berat); ?>"><?php echo e($b->nama); ?></option>
+                              <option value="<?php echo e($b->id .' - '.$b->nama); ?>" satuan="<?php echo e($b->satuan); ?>" berat="<?php echo e($b->berat); ?>"><?php echo e($b->nama); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                           </datalist>
                       </td>
@@ -321,7 +321,7 @@
         } 
     }); 
     
-    $(".gtotal").val(sum); 
+    $(".gtotal").val(sum.toLocaleString()); 
     }
 
   var selected = [];

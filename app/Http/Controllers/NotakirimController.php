@@ -39,7 +39,7 @@ class NotakirimController extends Controller
 
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
             
-        $detailalamat = DB::select(DB::raw("SELECT t.tujuan as tujuan, k.nama as kecamatan, kl.nama as kelurahan FROM tarifkms as t inner join kecamatans as k on t.id=k.tarifkm_id inner join kelurahans as kl on kl.kecamatan_id=k.id where t.id=$id"));
+        $detailalamat = collect(\DB::select("SELECT kl.nama as kelurahan,kc.nama as kecamatan,t.tujuan as kota FROM notakirims n INNER JOIN kelurahans kl ON n.kelurahan_id = kl.id INNER JOIN kecamatans kc ON kl.kecamatan_id = kc.id INNER JOIN tarifkms t ON kc.tarifkm_id = t.id WHERE n.id = '$id'"))->first();
       
         return view('notakirim.detail',['notakirims' => $notakirim, 'detailnota' => $detailnota, 'totberat' => $totberat, 'detailalamat' => $detailalamat]);
     }
@@ -141,7 +141,7 @@ class NotakirimController extends Controller
         $id_tarifkm = $request->get('tujuan');
         $kelurahan = $request->get('kelurahan');
         $pembayaran = $request->get('rd');
-        $grandtotal = $request->get('grandtotal');
+        $grandtotal = str_replace(",", "", $request->get('grandtotal'));
         $barang = $request->get('barang');
         $qty = $request->get('jumlah');
         $subtotberat = $request->get('subtotberat');

@@ -83,7 +83,10 @@
                             </tr>
                             <tr>
                               <th></th>
-                              <td>: {{ $notakirims->alamatpenerima }}</td>
+                              <td>: {{ $notakirims->alamatpenerima }}
+                                <br>{{'Kelurahan '.$detailalamat->kelurahan }}
+                                <br>{{'Kecamatan '.$detailalamat->kecamatan }}
+                                <br>{{'Kota '.$detailalamat->kota }}</td>
                             </tr>
                             <tr>
                               <th></th>

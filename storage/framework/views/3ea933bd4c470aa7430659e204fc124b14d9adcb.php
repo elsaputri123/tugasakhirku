@@ -82,7 +82,13 @@
                             </tr>
                             <tr>
                               <th></th>
-                              <td>: <?php echo e($notakirims->alamatpenerima); ?></td>
+                              <td>: <?php echo e($notakirims->alamatpenerima); ?>
+
+                                <br><?php echo e('Kelurahan '.$detailalamat->kelurahan); ?>
+
+                                <br><?php echo e('Kecamatan '.$detailalamat->kecamatan); ?>
+
+                                <br><?php echo e('Kota '.$detailalamat->kota); ?></td>
                             </tr>
                             <tr>
                               <th></th>
