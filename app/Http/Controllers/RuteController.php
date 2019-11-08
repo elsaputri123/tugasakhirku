@@ -17,6 +17,7 @@ class RuteController extends Controller
     {   
         $data["data"] = Rute::with("kecamatan")->get();
 
+        // dd ($data);
         return view("rute.index", $data);
     }
 
