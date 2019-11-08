@@ -48,8 +48,8 @@
                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                   <td><?php echo e($key+1); ?></td>
-                  <td><?php echo $value->kecamatan->nama; ?></td>
-                  <td><?php echo $value->nama; ?></td>
+                  <td><?php if(isset($kecamatan[$value->kecamatan_id]["nama"])): ?> <?php echo e($kecamatan[$value->kecamatan_id]["nama"]); ?> <?php endif; ?></td>
+                  <td><?php echo e($value->nama); ?></td>
                   <td><?php echo e($value->koordinat_x); ?></td>
                   <td><?php echo e($value->koordinat_y); ?></td>
                   <td>

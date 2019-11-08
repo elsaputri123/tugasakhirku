@@ -48,8 +48,13 @@
                 @foreach($data as $key => $value)
                 <tr>
                   <td>{{ $key+1 }}</td>
+<<<<<<< HEAD
                   <td><?php echo $value->kecamatan->nama; ?></td>
                   <td><?php echo $value->nama; ?></td>
+=======
+                  <td>{{ $kecamatan[$value->kecamatan_id]["nama"] }}</td>
+                  <td>{{ $value->nama }}</td>
+>>>>>>> 2ad697dd0008aaec44177fd0f6200326c1f67008
                   <td>{{ $value->koordinat_x }}</td>
                   <td>{{ $value->koordinat_y }}</td>
                   <td>
