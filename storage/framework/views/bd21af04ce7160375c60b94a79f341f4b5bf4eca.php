@@ -30,13 +30,11 @@
       <table id="example1" class="table table-bordered table-striped">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Jenis</th>
-          <th>Barang</th>
-          <th>Berat (kg)</th>
-          <th>Satuan</th>
-          <th>Ubah</th>
-          <th>Hapus</th>
+          <th class="text-center" width="10px">No</th>
+          <th class="text-center">Jenis</th>
+          <th class="text-center">Barang</th>
+          <th class="text-center">Satuan</th>
+          <th class="text-center">Aksi</th>
         </tr>
         </thead>
        <tbody>
@@ -45,16 +43,21 @@
           <td><?php echo e($key+1); ?></td>
           <td><?php echo e($b->jenis->nama); ?></td>
           <td><?php echo e($b->nama); ?></td>
-          <td><?php echo e($b->berat); ?></td>
           <td><?php echo e($b->satuan); ?></td>
           <td>
-            <a class="btn btn-success" href="<?php echo action('BarangController@edit',$b->id); ?>">Ubah</a>
-          </td>
-          <td>
-            <form action ="<?php echo e(route('barang.destroy',$b->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?> <input type="submit" value="hapus" name="submit" class="btn btn-success"> </form>
+            <a class="btn btn-sm btn-success" href="<?php echo action('BarangController@edit',$b->id); ?>">
+            <i class="fa fa-pencil"></i>
+            </a>
+            <form action ="<?php echo e(route('barang.destroy',$b->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?>  
+            <button class="btn btn-sm btn-danger">
+                <i class="fa fa-times"></i>
+            </button>
+            </form>
           </td>  
         </tr>
        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
                 </tbody>
               </table>
             </div>

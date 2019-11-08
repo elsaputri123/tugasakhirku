@@ -49,7 +49,7 @@
                 <td class="text-center">{{ $d->sopir }}</td>
                 <td class="text-center">{{ $d->tglbrgkt }}</td>
                 <td class="text-center">{{ $d->tgltiba }}</td>
-                <td><a class="btn btn-success" href="{!! action('ManifestController@detail',$d->id) !!}">Lihat Detail</a></td> 
+                <td><a class="btn btn-success" href="{!! action('ManifestController@detail',$d->id) !!}"><i class="fa fa-eye"></i></a></td> 
               </tr>
              @endforeach
                 </tbody>

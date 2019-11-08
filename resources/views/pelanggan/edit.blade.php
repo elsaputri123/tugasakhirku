@@ -40,21 +40,25 @@
               <div class="box-body">
 				        <div class="form-group">
                   <label>Nama Pelanggan</label>
-                  <input style="width: 30%;" type="text" name="nama" class="form-control" value="{{ $pelanggans->nama }}"/>
+                  <input type="text" name="nama" class="form-control" value="{{ $pelanggans->nama }}"/>
                 </div>
                  <div class="form-group">
                   <label>Alamat</label>
-                  <input style="width: 30%;" type="text" name="alamat" class="form-control" value="{{ $pelanggans->alamat }}"/>
+                  <input type="text" name="alamat" class="form-control" value="{{ $pelanggans->alamat }}"/>
                 </div>
                  <div class="form-group">
                   <label>No. Tlp</label>
-                  <input style="width: 30%;" type="number" name="notlp" class="form-control" value="{{ $pelanggans->no_tlp }}"/>
+                  <input type="number" name="notlp" class="form-control" value="{{ $pelanggans->no_tlp }}"/>
                 </div>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
+              <div class="row pull-right">
+                <div class="col-md-12">
+                  <div class="form-group">
+                   <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                 </div>
+               </div>
+             </div>
               </div>
             </form>
           </div>

@@ -168,9 +168,10 @@
                 </div>
               <!-- /.box-body -->
 
+              
                 <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="TAMBAH">
-                </div>
+                   <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                 </div>
               </div>
             </form>
           </div>

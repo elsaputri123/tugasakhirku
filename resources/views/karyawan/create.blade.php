@@ -38,19 +38,19 @@
               <div class="box-body">
                 <div class="form-group">
                   <label>Foto</label>
-                  <input style="width: 30%;" type="file" name="foto" class="form-control" required>
+                  <input type="file" name="foto" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>Nama Karyawan</label>
-                  <input style="width: 30%;" type="text" name="nama" class="form-control" required>
+                  <input type="text" name="nama" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>Jabatan</label>
-                  <select style="width: 30%;" name="jabatan" id="jabatan" class="form-control" required>
+                  <select name="jabatan" id="jabatan" class="form-control" required>
                     <option value="" selected="">Pilih Jabatan </option>
                     @foreach ($jabatans as $key => $j)
                     <option value="{{$j->id}}">{{$j->nama}}</option>
@@ -60,50 +60,54 @@
 
                 <div class="form-group">
                   <label>Alamat</label>
-                  <input style="width: 30%;" type="text" name="alamat" class="form-control" required>
+                  <input type="text" name="alamat" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>No. Telp</label>
-                  <input style="width: 30%;" type="text" name="notlp" class="form-control" required>
+                  <input type="text" name="notlp" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>Tempat Lahir</label>
-                  <input style="width: 30%;" type="text" name="tmptlahir" class="form-control" required>
+                  <input type="text" name="tmptlahir" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>Tanggal Lahir</label>
-                  <input style="width: 30%;" type="date" name="tgllahir" class="form-control" required>
+                  <input type="date" name="tgllahir" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>Username</label>
-                  <input style="width: 30%;" type="text" name="username" class="form-control" required>
+                  <input type="text" name="username" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                   <div class="form-group">
                   <label>Password</label>
-                  <input style="width: 30%;" type="password" name="password" class="form-control" required>
+                  <input type="password" name="password" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>Email</label>
-                  <input style="width: 30%;" type="text" name="email" class="form-control" required>
+                  <input type="text" name="email" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
+                 <div class="row pull-right">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                     <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                   </div>
+                 </div>
+               </div>
               </div>
             </form>
           </div>

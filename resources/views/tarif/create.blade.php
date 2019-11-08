@@ -38,19 +38,22 @@
               <div class="box-body">
                 <div class="form-group">
                   <label>Tujuan</label>
-                  <input style="width: 30%;" type="text" name="tujuan" class="form-control" required>
+                  <input type="text" name="tujuan" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
                 <div class="form-group">
                   <label>Harga (Rupiah)</label>
-                  <input style="width: 30%;" type="number" name="harga" class="form-control" required>
+                  <input type="number" name="harga" class="form-control" required>
                   <p class="help-block"></p>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
-              </div>
+                <div class="row pull-right">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                     <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                   </div>
+                 </div>
+               </div>
             </form>
           </div>
           <!-- /.box -->

@@ -67,7 +67,7 @@
                       Barang Diterima
                   @endif
                 </td>
-                <td><a class="btn btn-success" href="{!! action('NotakirimController@detail',$n->id) !!}">Lihat Detail</a></td> 
+                <td><a class="btn btn-success" href="{!! action('NotakirimController@detail',$n->id) !!}"><i class="fa fa-eye"></i></a></td> 
               </tr>
              @endforeach
                 </tbody>

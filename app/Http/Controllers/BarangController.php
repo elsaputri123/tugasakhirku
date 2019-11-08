@@ -45,12 +45,12 @@ class BarangController extends Controller
 
         $jenis = $request->get('jenis');
         $nama = $request->get('nama');
-        $berat = $request->get('berat');
+ 
         $satuan = $request->get('satuan');
     
         $barangs->jenis_id=$jenis;
         $barangs->nama=$nama;
-        $barangs->berat=$berat;
+      
         $barangs->satuan=$satuan;
         $barangs->save();
 
@@ -95,7 +95,7 @@ class BarangController extends Controller
 
         $barangs->jenis_id=$request->get('jenis');
         $barangs->nama=$request->get('nama');
-        $barangs->berat=$request->get('berat');
+       
         $barangs->satuan=$request->get('satuan');
 
         $barangs->save();

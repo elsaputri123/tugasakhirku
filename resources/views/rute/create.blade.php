@@ -69,7 +69,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                   <label>Kecamatan : </label>
+                   <label>Kecamatan </label>
                    <select class="form-control" name="kecamatan" id="kecamatan">
                     @foreach($kecamatan as $key => $value)
                     @if(isset($edit) and $value->id==$edit->id)
@@ -87,7 +87,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Nama Rute (Opotional) : </label>
+                  <label>Nama Rute (Opotional)  </label>
                   <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama Rute (Opotional)" 
                   value="@if(isset($edit)) {{ $edit->nama }}  @endif">
                 </div>
@@ -97,7 +97,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                 <label>Koordinat X (longitude) : </label>
+                 <label>Koordinat X (longitude) </label>
                  <input type="text" name="koordinat_x" id="koordinat_x" class="form-control" required="required" placeholder="Masukan Longitude" value="@if(isset($edit)) {{ $edit->koordinat_x }}  @endif" >
                </div>
              </div>
@@ -106,7 +106,7 @@
            <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-               <label>Koordinat Y (latitude) : </label>
+               <label>Koordinat Y (latitude) </label>
                <input type="text" name="koordinat_y" id="koordinat_y" class="form-control" required="required" placeholder="Masukan Latitude" value="@if(isset($edit)) {{ $edit->koordinat_y }}  @endif">
              </div>
            </div>

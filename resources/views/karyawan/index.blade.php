@@ -31,18 +31,17 @@
       <table id="example1" class="table table-bordered table-striped" style="overflow-x:auto;">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Foto</th>
-          <th>Nama Karyawan</th>
-          <th>Jabatan</th>
-          <th>Alamat</th>
-          <th>No. Telpon</th>
-          <th>Tempat Lahir</th>
-          <th>Tanggal Lahir</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Ubah</th>
-          <th>Hapus</th>
+          <th class="text-center" width="10px">No</th>
+          <th class="text-center">Foto</th>
+          <th class="text-center">Nama Karyawan</th>
+          <th class="text-center">Jabatan</th>
+          <th class="text-center" width="100px">Alamat</th>
+          <th class="text-center">No. Telpon</th>
+          <th class="text-center">Tempat Lahir</th>
+          <th class="text-center">Tanggal Lahir</th>
+          <th class="text-center">Username</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Aksi</th>
         </tr>
         </thead>
        <tbody>
@@ -61,10 +60,14 @@
           <td>{{ $k->users->username }}</td>
           <td>{{ $k->users->email }}</td>
           <td>
-            <a class="btn btn-success" href="{!! action('KaryawanController@edit',$k->id) !!}">Ubah</a>
-          </td>
-          <td>
-            <form action ="{{ route('karyawan.destroy',$k->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }} <input type="submit" value="hapus" name="submit" class="btn btn-success"> </form>
+            <a class="btn btn-sm btn-success" href="{!! action('KaryawanController@edit',$k->id) !!}"> 
+              <i class="fa fa-pencil"></i>
+            </a>
+            <form action ="{{ route('karyawan.destroy',$k->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }} 
+            <button class="btn btn-sm btn-danger">
+                 <i class="fa fa-times"></i>
+              </button>
+            </form>
           </td>  
         </tr>
        @endforeach

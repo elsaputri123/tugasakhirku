@@ -31,13 +31,11 @@
       <table id="example1" class="table table-bordered table-striped">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Jenis</th>
-          <th>Barang</th>
-          <th>Berat (kg)</th>
-          <th>Satuan</th>
-          <th>Ubah</th>
-          <th>Hapus</th>
+          <th class="text-center" width="10px">No</th>
+          <th class="text-center">Jenis</th>
+          <th class="text-center">Barang</th>
+          <th class="text-center">Satuan</th>
+          <th class="text-center">Aksi</th>
         </tr>
         </thead>
        <tbody>
@@ -46,16 +44,21 @@
           <td>{{ $key+1 }}</td>
           <td>{{ $b->jenis->nama }}</td>
           <td>{{ $b->nama }}</td>
-          <td>{{ $b->berat }}</td>
           <td>{{ $b->satuan }}</td>
           <td>
-            <a class="btn btn-success" href="{!! action('BarangController@edit',$b->id) !!}">Ubah</a>
-          </td>
-          <td>
-            <form action ="{{ route('barang.destroy',$b->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }} <input type="submit" value="hapus" name="submit" class="btn btn-success"> </form>
+            <a class="btn btn-sm btn-success" href="{!! action('BarangController@edit',$b->id) !!}">
+            <i class="fa fa-pencil"></i>
+            </a>
+            <form action ="{{ route('barang.destroy',$b->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }}  
+            <button class="btn btn-sm btn-danger">
+                <i class="fa fa-times"></i>
+            </button>
+            </form>
           </td>  
         </tr>
        @endforeach
+
+
                 </tbody>
               </table>
             </div>

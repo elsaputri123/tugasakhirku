@@ -38,26 +38,30 @@
               <div class="box-body">
                 <div class="form-group">
                   <label>Nama Pelanggan</label>
-                  <input style="width: 30%;" type="text" name="nama" class="form-control" required>
+                  <input  type="text" name="nama" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>Alamat</label>
-                  <input style="width: 30%;" type="text" name="alamat" class="form-control" required>
+                  <input type="text" name="alamat" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
 
                 <div class="form-group">
                   <label>No. Telpon</label>
-                  <input style="width: 30%;" type="text" name="notlp" class="form-control" required>
+                  <input  type="text" name="notlp" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
+                <div class="row pull-right">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                     <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                   </div>
+                 </div>
+               </div>
               </div>
             </form>
           </div>

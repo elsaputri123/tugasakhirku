@@ -38,15 +38,18 @@
               <div class="box-body">
                 <div class="form-group">
                   <label>Nama Jabatan</label>
-                  <input style="width: 30%;" type="text" name="nama" class="form-control" required>
+                  <input type="text" name="nama" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
-              </div>
+                <div class="row pull-right">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                     <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                   </div>
+                 </div>
+               </div>
             </form>
           </div>
           <!-- /.box -->

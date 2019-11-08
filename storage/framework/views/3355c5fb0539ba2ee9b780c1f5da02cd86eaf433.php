@@ -30,12 +30,11 @@
       <table id="example1" class="table table-bordered table-striped" style="overflow-x:auto;">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Nama Pelanggan</th>
-          <th>Alamat</th>
-          <th>No. Telpon</th>
-          <th>Ubah</th>
-          <th>Hapus</th>
+          <th class="text-center" width="10px">No</th>
+          <th class="text-center">Nama Pelanggan</th>
+          <th class="text-center">Alamat</th>
+          <th class="text-center">No. Telpon</th>
+          <th class="text-center">Aksi</th>
         </tr>
         </thead>
        <tbody>
@@ -46,12 +45,15 @@
           <td><?php echo e($p->alamat); ?></td>
           <td><?php echo e($p->no_tlp); ?></td>
            <td>
-            <a class="btn btn-success" href="<?php echo action('PelangganController@edit',$p->id); ?>">Ubah</a>
-          </td>
-          <td>
-            <form action ="<?php echo e(route('pelanggan.destroy',$p->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?> <input type="submit" value="hapus" name="submit" class="btn btn-success"> </form>
+            <a class="btn btn-sm btn-success" href="<?php echo action('PelangganController@edit',$p->id); ?>">
+              <i class="fa fa-pencil"></i>
+            </a> 
+            <form action ="<?php echo e(route('pelanggan.destroy',$p->id)); ?>" method="post"><?php echo e(method_field("DELETE")); ?> <?php echo e(csrf_field()); ?>  
+              <button class="btn btn-sm btn-danger">
+                 <i class="fa fa-times"></i>
+              </button>
+            </form>
           </td>  
-
         </tr>
        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

@@ -35,12 +35,13 @@ class NotakirimController extends Controller
             ->select('notakirims.*','k.nama as karyawan')
             ->firstOrFail();
 
-        $detailnota=DB::select(DB::raw("SELECT j.nama as jenis, b.nama as barang, nkb.jumlah as jumlah, b.satuan as satuan, b.berat as berat, nkb.dimensi as dimensi, nkb.totdimensi as totdimensi FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id='$id'"));
+        $detailnota=DB::select(DB::raw("SELECT j.nama as jenis, b.nama as barang, nkb.jumlah as jumlah, b.satuan as satuan, nkb.berat as berat, nkb.dimensi as dimensi, nkb.totdimensi as totdimensi FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id='$id'"));
 
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
             
+        $detailalamat = DB::select(DB::raw("SELECT t.tujuan as tujuan, k.nama as kecamatan, kl.nama as kelurahan FROM tarifkms as t inner join kecamatans as k on t.id=k.tarifkm_id inner join kelurahans as kl on kl.kecamatan_id=k.id where t.id=$id"));
       
-        return view('notakirim.detail',['notakirims' => $notakirim, 'detailnota' => $detailnota, 'totberat' => $totberat]);
+        return view('notakirim.detail',['notakirims' => $notakirim, 'detailnota' => $detailnota, 'totberat' => $totberat, 'detailalamat' => $detailalamat]);
     }
 
 
@@ -72,6 +73,7 @@ class NotakirimController extends Controller
         $barang = Barang::all();
         $kecamatan = Kecamatan::all();
         $tarifkm = Tarifkm::all();
+        $notakirimbarang = Notakirimbarang::all();
         
 
         $tujuans = DB::table('tarifkms')->select('id','tujuan','harga')->get();
@@ -80,7 +82,7 @@ class NotakirimController extends Controller
         $maxId = Notakirim::max('id');
         $auto_resi = 'KAEP'.str_pad($maxId+1, 2, "0", STR_PAD_LEFT);
 
-        return view('notakirim.create',['notakirim' => $notakirim, 'barang' => $barang,'resi'=>$auto_resi,'tujuans' => $tujuans, 'pelanggnas' => $pelanggans, 'kecamatan' => $kecamatan, 'tarifkm' => $tarifkm]);
+        return view('notakirim.create',['notakirim' => $notakirim, 'barang' => $barang,'resi'=>$auto_resi,'tujuans' => $tujuans, 'pelanggnas' => $pelanggans, 'kecamatan' => $kecamatan, 'tarifkm' => $tarifkm, 'notakirimbarang' => $notakirimbarang]);
     }
     public function tampilkelurahan(Request $request)
     {
@@ -144,6 +146,35 @@ class NotakirimController extends Controller
         $qty = $request->get('jumlah');
         $subtotberat = $request->get('subtotberat');
 
+        $id_barang_fix = array();//array buat nampung seluruh id barang yg baru dan lama)
+
+        //=====cek barang baru atau lama=================//
+        $satuan = $request->get('satuan');
+        $berat = $request->get('berat');
+        for ($i=0; $i < count($barang); $i++) { 
+            # code...
+            $temp = explode(" - ",$barang[$i]);
+            $check_ada = DB::table("barangs as b")->where('id','=',$temp[0])
+                    ->first();
+            if(!$check_ada)//kalo data yg diinputkan adalah barang baru
+            {
+                $barangInsert = new Barang();
+                $barangInsert->nama = $barang[$i];
+                $barangInsert->satuan = $satuan[$i];
+                
+                $barangInsert->jenis_id = '1';//SEMENTARA
+                $barangInsert->save();
+
+                $id_insert = $barangInsert->id;
+                array_push($id_barang_fix, $id_insert);
+            }
+            else // kalo barang baru
+            {
+                array_push($id_barang_fix, $temp[0]);
+            }
+        }
+        //===============================================//
+
         //==NGAMBIL ID KARYAWAN==//
         $user_id = Auth::user()->id;//ini buat ngambil id user yg login sekarang
         $karyawan = DB::table('users as u')->join('karyawans as k','u.id','=','k.user_id')
@@ -155,6 +186,7 @@ class NotakirimController extends Controller
         // return dd($user_id);
 
         $nk = new Notakirim();
+      
         $nk->karyawan_id = $karyawan->id; //fixed :)
         $nk->pelanggan_id = $id_pengirim;
         $nk->namapenerima = $penerima;
@@ -164,18 +196,19 @@ class NotakirimController extends Controller
         $nk->kelurahan_id = $kelurahan;
         $nk->no_resi = $no_resi;
         $nk->jenispembayaran = $pembayaran;
+     
         $nk->tanggal = $tgl;
         $nk->status = 1;
         $nk->biaya_kirim = $grandtotal;
         $nk->save();
         $last_id = $nk->id;
 
-        for ($i=0; $i < count($barang); $i++) { 
+        for ($i=0; $i < count($id_barang_fix); $i++) { 
 
             $p=0;
             $l=0;
             $t=0;
-            $dimensi=null;
+            $dimensi="0x0x0";
             
             $p = $request->get('panjang');
             $l = $request->get('lebar');
@@ -187,19 +220,17 @@ class NotakirimController extends Controller
                 $dimensi = $p[$i]."x".$l[$i]."x".$t[$i];
             }
 
-
             # code...
 
-            $temp = explode(" - ",$barang[$i]);
             $nkb = new Notakirimbarang();
             $nkb->notakirim_id = $last_id;
-            $nkb->barang_id = $temp[0];
+            $nkb->barang_id = $id_barang_fix[$i];
             $nkb->jumlah = $qty[$i];
             if ($dimensi != "0x0x0") {
                 $nkb->dimensi = $dimensi;
-            }
-            
+            }            
             $nkb->totdimensi = $subtotberat[$i];
+            $nkb->berat = $berat[$i];
             
             $nkb->save();
         }

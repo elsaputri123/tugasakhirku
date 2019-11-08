@@ -113,7 +113,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-file"></i>
                 <span>Nota Kirim</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -141,7 +141,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-bars"></i>
                 <span>Jadwal Pengiriman</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -155,7 +155,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa  fa-history"></i>
                 <span>History</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -163,13 +163,27 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ url('history') }}"><i class="fa fa-list"></i>Daftar History</a></li>
-                <li><a href="{{ url('history/create') }}"><i class="fa fa-list"></i>Tambah History</a></li>
+                <li><a href="{{ url('history/create') }}"><i class="fa fa-list"></i>Input History</a></li>
               </ul>
             </li>
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-truck"></i>
+                <span>Rute</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ url('rute') }}"><i class="fa fa-list"></i>Daftar Rute</a></li>
+                <li><a href="{{ url('rute/create') }}"><i class="fa fa-plus-square-o"></i>Input Rute</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa  fa-money"></i>
                 <span>Tarif</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -183,7 +197,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-list-alt"></i>
                 <span>Jenis</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -197,7 +211,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-cubes"></i>
                 <span>Barang</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -211,7 +225,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-sitemap"></i>
                 <span>Jabatan</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -225,7 +239,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-user"></i>
                 <span>Karyawan</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -239,7 +253,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-automobile"></i>
                 <span>Kendaraan</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -253,7 +267,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-users"></i>
                 <span>Pelanggan</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -265,20 +279,7 @@
               </ul>
             </li>
 
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-book"></i>
-                <span>Rute</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="{{ url('rute') }}"><i class="fa fa-list"></i>Daftar Rute</a></li>
-                <li><a href="{{ url('rute/create') }}"><i class="fa fa-plus-square-o"></i>Input Rute</a></li>
-              </ul>
-            </li>
-
+           
             @endif
           </ul>
         </section>

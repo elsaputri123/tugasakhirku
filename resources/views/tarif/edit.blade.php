@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Edit Data Tarifs
+        Edit Data Tarif
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('tarif.edit') }}" class="active"><i class="fa fa-dashboard"></i> Edit Data Tarif</a></li>
@@ -40,17 +40,21 @@
               <div class="box-body">
 				        <div class="form-group">
                   <label>Tujuan</label>
-                  <input style="width: 30%;" type="text" name="tujuan" class="form-control" value="{{ $tarifs->tujuan }}"/>
+                  <input type="text" name="tujuan" class="form-control" value="{{ $tarifs->tujuan }}"/>
                 </div>
                  <div class="form-group">
                   <label>Harga</label>
-                  <input style="width: 30%;" type="text" name="harga" class="form-control" value="{{ $tarifs->harga }}"/>
+                  <input type="text" name="harga" class="form-control" value="{{ $tarifs->harga }}"/>
                 </div>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
+              <div class="row pull-right">
+                <div class="col-md-12">
+                  <div class="form-group">
+                   <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                 </div>
+               </div>
+             </div>
               </div>
             </form>
           </div>

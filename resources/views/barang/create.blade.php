@@ -38,7 +38,7 @@
               <div class="box-body">
                  <div class="form-group">
                   <label>Jenis</label>
-                  <select style="width: 30%;" name="jenis" id="jenis" class="form-control" required>
+                  <select name="jenis" id="jenis" class="form-control" required>
                     <option value="" selected="">Pilih Jenis </option>
                     @foreach ($jenis as $key => $j)
                     <option value="{{$j->id}}">{{$j->nama}}</option>
@@ -47,24 +47,23 @@
                 </div>
                 <div class="form-group">
                   <label>Nama Barang</label>
-                  <input style="width: 30%;" type="text" name="nama" class="form-control" required>
-                  <p class="help-block"></p>
-                </div>
-                <div class="form-group">
-                  <label>Berat (kg)</label>
-                  <input style="width: 30%;" type="number" name="berat" class="form-control">
+                  <input type="text" name="nama" class="form-control" required>
                   <p class="help-block"></p>
                 </div>
                 <div class="form-group">
                   <label>Satuan</label>
-                  <input style="width: 30%;" type="text" name="satuan" class="form-control">
+                  <input type="text" name="satuan" class="form-control">
                   <p class="help-block"></p>
                 </div>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
+                <div class="row pull-right">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                     <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                   </div>
+                 </div>
+               </div>
               </div>
             </form>
           </div>

@@ -174,7 +174,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="<?php echo action('NotakirimController@print',$notakirims->id); ?>" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
+          <a href="<?php echo action('NotakirimController@print',$notakirims->id); ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print</a>
         </div>
       </div>
       <!-- /.row -->

@@ -40,21 +40,25 @@
               <div class="box-body">
 				        <div class="form-group">
                   <label>Nama Kendaraan</label>
-                  <input style="width: 30%;" type="text" name="nama" class="form-control" value="{{ $kendaraans->nama }}"/>
+                  <input type="text" name="nama" class="form-control" value="{{ $kendaraans->nama }}"/>
                 </div>
                  <div class="form-group">
                   <label>No. Polisi</label>
-                  <input style="width: 30%;" type="text" name="nopolisi" class="form-control" value="{{ $kendaraans->no_polisi }}"/>
+                  <input type="text" name="nopolisi" class="form-control" value="{{ $kendaraans->no_polisi }}"/>
                 </div>
                  <div class="form-group">
                   <label>Kapasitas</label>
-                  <input style="width: 30%;" type="number" name="kapasitas" class="form-control" value="{{ $kendaraans->kapasitas }}"/>
+                  <input type="number" name="kapasitas" class="form-control" value="{{ $kendaraans->kapasitas }}"/>
                 </div>
               <!-- /.box-body -->
 
-                <div class="form-group">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
-                </div>
+                <div class="row pull-right">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                     <button class="btn btn-success btn-md" type="submit">Simpan</button>
+                   </div>
+                 </div>
+               </div>
               </div>
             </form>
           </div>

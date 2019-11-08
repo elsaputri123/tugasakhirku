@@ -31,11 +31,10 @@
       <table id="example1" class="table table-bordered table-striped">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Tujuan</th>
-          <th>Harga</th>
-          <th>Ubah</th>
-          <th>Hapus</th>
+          <th class="text-center" width="10px">No</th>
+          <th class="text-center">Tujuan</th>
+          <th class="text-center">Harga</th>
+          <th class="text-center">Aksi</th>
         </tr>
         </thead>
        <tbody>
@@ -45,10 +44,14 @@
           <td>{{ $t->tujuan }}</td>
           <td>Rp. {{ number_format($t->harga, 2, ',', '.') }}</td>
           <td>
-            <a class="btn btn-success" href="{!! action('TarifkmController@edit',$t->id) !!}">Ubah</a>
-          </td>
-          <td>
-            <form action ="{{ route('tarif.destroy',$t->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }} <input type="submit" value="hapus" name="submit" class="btn btn-success"> </form>
+            <a class="btn btn-sm btn-success" href="{!! action('TarifkmController@edit',$t->id) !!}">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <form action ="{{ route('tarif.destroy',$t->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }} 
+            <button class="btn btn-sm btn-danger">
+                 <i class="fa fa-times"></i>
+              </button>
+               </form>
           </td>  
         </tr>
        @endforeach

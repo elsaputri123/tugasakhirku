@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
     Button btlogin, btbatal;
     EditText uname, pass;
 
-    String hosts = "http://192.168.43.148";
+    String hosts = "http://gabsijawatimur.com";
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 

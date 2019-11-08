@@ -64,7 +64,9 @@
                      <label>Titik Awal : </label>
                      <select class="form-control" name="awal" id="awal">
                       <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <?php if($value->nama=="Surabaya"): ?>
                       <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
+                      <?php endif; ?>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                   </div>

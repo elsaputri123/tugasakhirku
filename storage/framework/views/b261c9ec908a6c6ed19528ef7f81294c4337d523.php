@@ -36,6 +36,7 @@
                 <th class="text-center">Dari</th>
                 <th class="text-center">Tujuan</th>
                 <th class="text-center">Biaya Kirim</th>
+                <th class="text-center"> Status </th>
                 <th class="text-center">Detail</th>
               </tr>
               </thead>
@@ -48,7 +49,24 @@
                 <td><?php echo e($n->pelanggans->nama); ?></td>
                 <td><?php echo e($n->alamatpenerima); ?></td>
                 <td>Rp. <?php echo e(number_format($n->biaya_kirim, 2, ',', '.')); ?></td>
-                <td><a class="btn btn-success" href="<?php echo action('NotakirimController@detail',$n->id); ?>">Lihat Detail</a></td> 
+                <td>
+                  <?php if($n->status==1): ?>
+                      Barang Masuk
+                  <?php elseif($n->status==2): ?>
+                      Barang Dikemas
+                  <?php elseif($n->status==3): ?>
+                      Barang Dikirim Ke Kantor Bali
+                  <?php elseif($n->status==4): ?>
+                      Barang Sampai Di Kantor Bali
+                  <?php elseif($n->status==5): ?>
+                      Barang Dibawa Kurir
+                  <?php elseif($n->status==6): ?>
+                      Barang Menuju Ke Alamat Penerima
+                  <?php else: ?>
+                      Barang Diterima
+                  <?php endif; ?>
+                </td>
+                <td><a class="btn btn-success" href="<?php echo action('NotakirimController@detail',$n->id); ?>"><i class="fa fa-eye"></i></a></td> 
               </tr>
              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

@@ -37,7 +37,7 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th class="text-center">No</th>
+                  <th class="text-center" width="10px">No</th>
                   <th class="text-center">Kendaraan </th>
                   <th class="text-center">Sopir </th>
                   <th class="text-center">Hari </th>
@@ -61,7 +61,7 @@
                     {{ $hari[$value->hari] }}
                   </td>
                   <td class="text-center">
-                    <a href="{!! action('JadwalpengirimanController@edit',$value->id) !!}" class="btn btn-warning">
+                    <a href="{!! action('JadwalpengirimanController@edit',$value->id) !!}" class="btn btn-success">
                       <i class="fa fa-pencil"></i>
                     </a>
                     <form action ="{{ route('jadwalpengiriman.destroy', $value->id) }}" method="post">{{ method_field("DELETE") }} {{ csrf_field() }} 

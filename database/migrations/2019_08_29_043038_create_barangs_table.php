@@ -19,7 +19,7 @@ class CreateBarangsTable extends Migration
 
             $table->string('nama', 45);
             $table->integer('berat_satuan');
-            $table->string('jenis', 45);
+            $table->string('jenis', 45)->nullable();
 
             $table->foreign('jenis_id')->references('id')->on('jenis');
 
