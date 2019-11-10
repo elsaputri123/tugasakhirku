@@ -39,6 +39,12 @@ class NotakirimsController extends Controller
                 $a_data[$key]["tlppenerima"] = $value->tlppenerima;
                 $a_data[$key]["status"] = $value->status;
                 $a_data[$key]["tanggal"] = date("d-m-Y", strtotime($value->tanggal));
+
+                $tgl = date('Y-m-d', strtotime((String)$value->created_at));
+                $time = date("h:i:s", strtotime((String)$value->created_at));
+                $time1 = date('h:i:s', strtotime($time . "+1 hour"));
+                $tgl1 = date('Y-m-d', strtotime($tgl . "+1 day"));
+                $a_data[$key]["waktu"] = $tgl1." ".$time1;
             }
 
             $res['data'] = $a_data;
