@@ -49,6 +49,7 @@
                 <tr>
                   <td><?php echo e($key+1); ?></td>
                   <td><?php if(isset($value->kecamatan->nama)): ?> <?php echo e($value->kecamatan->nama); ?> <?php endif; ?></td>
+                  <td><?php echo e($value->nama); ?></td>
                   <td><?php echo e($value->koordinat_x); ?></td>
                   <td><?php echo e($value->koordinat_y); ?></td>
                   <td>

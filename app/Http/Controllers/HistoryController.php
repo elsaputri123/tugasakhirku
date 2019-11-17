@@ -69,7 +69,7 @@ class HistoryController extends Controller
 
         $data['karyawan']  = $domy->where('jabatans', '!=', null);
         $data["kecamatan"]      = Kecamatan::all();
-        //dd($data);
+        // dd($data);
         return view('history.create', $data);
     }
 

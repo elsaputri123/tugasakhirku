@@ -53,7 +53,7 @@
             <form role="form" action="{{ route('history.update', $edit->id) }}" method="POST" enctype="multipart/form-data">
               {{ method_field("PUT") }}
               @else
-              <form method="POST" action="{{ url("history") }}" method="POST" enctype="multipart/form-data">
+              <form method="POST" action="{{ url('history') }}" method="POST" enctype="multipart/form-data">
                 @endif
                 {!! csrf_field() !!}
                 <div class="row">
@@ -61,8 +61,8 @@
                     <div class="form-group">
                      <label>Titik Awal : </label>
                      <select class="form-control" name="awal" id="awal">
-                      @foreach($kecamatan as $key => $value)
-                      @if($value->nama=="Surabaya")
+                     @foreach($kecamatan as $key => $value)
+                     @if($value->nama=='Surabaya')
                       <option value="{{ $value->id }}">{{ $value->nama }}</option>
                       @endif
                       @endforeach
