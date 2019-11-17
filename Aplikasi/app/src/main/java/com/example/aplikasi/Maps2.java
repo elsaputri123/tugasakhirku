@@ -18,12 +18,6 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,13 +29,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -51,7 +40,7 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
     Double latitude, longitude;
     EditText maloc, tujuan;
     Double x_akhir, y_akhir;
-    String id_user,id_nota;
+    String id_user, id_nota;
     SharedPreferences pref;
     String hosts = "http://192.168.43.148";
 
@@ -66,17 +55,17 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
 
         pref = getApplicationContext().getSharedPreferences("mypref", 0);
 
-        if(getIntent().getExtras()!=null){
+        if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             x_akhir = Double.parseDouble(bundle.getString("x_akhir"));
             y_akhir = Double.parseDouble(bundle.getString("y_akhir"));
-            id_nota      = String.valueOf(bundle.getString("id_nota"));
+            id_nota = String.valueOf(bundle.getString("id_nota"));
 
-            Toast.makeText(Maps2.this, String.valueOf("Coba "+x_akhir+" "+x_akhir+" "+id_nota), Toast.LENGTH_LONG).show();
+            Toast.makeText(Maps2.this, String.valueOf("Coba " + x_akhir + " " + x_akhir + " " + id_nota), Toast.LENGTH_LONG).show();
         }
 
-        maloc = (EditText)findViewById(R.id.maloc);
-        tujuan = (EditText)findViewById(R.id.tujuan);
+        maloc = (EditText) findViewById(R.id.maloc);
+        tujuan = (EditText) findViewById(R.id.tujuan);
 
 
         //if(latitude!=null && longitude!=null){
@@ -84,16 +73,16 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void run() {
                 Log.e("Longitude", String.valueOf(getMyLocation().getLongitude()));
-                Log.e("Latitude",  String.valueOf(getMyLocation().getLatitude()));
+                Log.e("Latitude", String.valueOf(getMyLocation().getLatitude()));
 
                 latitude = getMyLocation().getLatitude();
-                longitude= getMyLocation().getLongitude();
+                longitude = getMyLocation().getLongitude();
 
                 maloc.setText(getCompleteAddressString(y_akhir, x_akhir).toString());
 
                 tujuan.setText(getCompleteAddressString(latitude, longitude).toString());
             }
-        }, 0, 1*5*1000);
+        }, 0, 1 * 5 * 1000);
         //}
     }
 
@@ -127,14 +116,12 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
     private Location getMyLocation() {
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
         if (myLocation == null) {
             Criteria criteria = new Criteria();
             criteria.setAccuracy(Criteria.ACCURACY_COARSE);
             String provider = lm.getBestProvider(criteria, true);
             myLocation = lm.getLastKnownLocation(provider);
         }
-
         return myLocation;
     }
 
