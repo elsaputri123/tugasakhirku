@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 // untuk hystori
 Route::get('hystori', 'Api\HystoriController@index');
 Route::post('hystori/store', 'Api\HystoriController@store');
