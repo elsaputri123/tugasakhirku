@@ -41,6 +41,7 @@
                   <th class="text-center">Kode Manifest </th>
                   <th class="text-center">Tanggal Manifest </th>
                   <th class="text-center">Daftar Resi  </th>
+                  <th class="text-center">Status </th>
                   <th class="text-center">Action </th>
                 </tr>
               </thead>
@@ -55,8 +56,27 @@
                     <?php echo e(" - ".$val->no_resi); ?> <br>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </td>
+                  <td>
+                    <?php $__currentLoopData = $value->manifest->notakirims; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key1 => $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <?php if($val->status==1): ?>
+                      Barang Masuk
+                      <?php elseif($val->status==2): ?>
+                      Barang Dikemas
+                      <?php elseif($val->status==3): ?>
+                      Barang Dikirim Ke Kantor Bali
+                      <?php elseif($val->status==4): ?>
+                      Barang Sampai Di Kantor Bali
+                      <?php elseif($val->status==5): ?>
+                      Barang Dibawa Kurir
+                      <?php elseif($val->status==6): ?>
+                      Barang Menuju Ke Alamat Penerima
+                      <?php else: ?>
+                      Barang Diterima
+                      <?php endif; ?> <br>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  </td>
                   <td class="text-center">
-                      
+                    
                   </td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -72,6 +92,7 @@
                     <input type="text" name="manifest" id="manifest" class="form-control" placeholder="Masukan Kode Manifest ..">
                     <input type="hidden" name="manifest_id" id="manifest_id">
                   </td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td>

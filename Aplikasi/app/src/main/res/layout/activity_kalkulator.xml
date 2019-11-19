@@ -32,6 +32,15 @@
             android:layout_width="match_parent"
             android:layout_height="39dp" />
 
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/berat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="Berat (Kg)" />
+
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -78,35 +87,27 @@
             android:inputType="numberDecimal"
             android:hint="Jumlah Barang" />
 
-        <EditText
-            android:layout_marginTop="10dp"
-            android:id="@+id/berat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:hint="Berat (Kg)" />
-
-        <EditText
-
-            android:layout_marginTop="10dp"
+        <TextView
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/hasil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="numberDecimal"
+            android:hint="Total Biaya"/>l"
             android:hint="Total Biaya" />
 
         <Button
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="#fff"
-            android:background="@color/colorPrimaryDark"
-            android:layout_margin="10dp"
             android:id="@+id/hitung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HITUNG" />
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="HITUNG"
+            android:textColor="#fff"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>

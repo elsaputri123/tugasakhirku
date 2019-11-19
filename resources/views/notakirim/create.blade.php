@@ -421,7 +421,7 @@
         $(this).val(trIndex); //ngeupdate kolom urutan sesuai index baris
       });
 }  
-
+  
     $(function(){
         var myOpt = [];
 
@@ -527,7 +527,6 @@
     $("#tujuan").change(function()
     {
       $.ajax({
-
             method: "POST",
             url: "{{ url('nk/tampilkecamatan') }}",
             data:

@@ -82,7 +82,11 @@
                             </tr>
                             <tr>
                               <th></th>
-                              <td>: <?php echo e($notakirims->alamatpenerima); ?></td>
+                              <td>: <?php echo e($notakirims->alamatpenerima); ?>
+
+                                <br><?php if(isset($detailalamat->kelurahans->nama)): ?> <?php echo e('Kelurahan '.$detailalamat->kelurahans->nama); ?> <?php endif; ?>
+                                <br><?php if(isset($detailalamat->kelurahans->kecamatans->nama)): ?><?php echo e('Kecamatan '.$detailalamat->kelurahans->kecamatans->nama); ?> <?php endif; ?>
+                                <br><?php if(isset($detailalamat->tujuan)): ?><?php echo e('Kota '.$detailalamat->tujuan); ?> <?php endif; ?></td>
                             </tr>
                             <tr>
                               <th></th>
@@ -174,7 +178,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="<?php echo action('NotakirimController@print',$notakirims->id); ?>" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
+          <a href="<?php echo action('NotakirimController@print',$notakirims->id); ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print</a>
         </div>
       </div>
       <!-- /.row -->

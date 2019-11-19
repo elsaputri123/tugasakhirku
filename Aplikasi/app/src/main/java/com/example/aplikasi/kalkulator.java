@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,14 +27,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class kalkulator extends AppCompatActivity {
-    EditText berat, panjang, lebar, tinggi, jumlah, hasil;
+    EditText berat, panjang, lebar, tinggi, jumlah; TextView hasil;
     Button btn;
     public int berat1, panjang1, lebar1, tinggi1, jumlah1, hitungan, harga;
     Spinner spinner;
     private ArrayList<String> lokasi;
     //JSON Array
     private JSONArray result;
-    String hosts = "http://192.168.43.148";
+    String hosts = "http://gabsijawatimur.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,10 @@ public class kalkulator extends AppCompatActivity {
         lebar = (EditText)findViewById(R.id.lebar);
         tinggi = (EditText)findViewById(R.id.tinggi);
         jumlah = (EditText)findViewById(R.id.jumlah);
-        hasil = (EditText)findViewById(R.id.hasil);
+        hasil = (TextView)findViewById(R.id.hasil);
         spinner = (Spinner)findViewById(R.id.spinner);
 
         btn = (Button) findViewById(R.id.hitung);
-        berat.setVisibility(View.INVISIBLE);
 
         lokasi = new ArrayList<String>();
         getData();
@@ -57,31 +57,54 @@ public class kalkulator extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                panjang1 = Integer.parseInt(panjang.getText().toString());
-                lebar1 = Integer.parseInt(lebar.getText().toString());
-                tinggi1 = Integer.parseInt(tinggi.getText().toString());
-                jumlah1 = Integer.parseInt(jumlah.getText().toString());
 
-                hitungan = panjang1*lebar1*tinggi1*jumlah1/4000;
+                if(jumlah.getText().toString().equals("")||
+                        berat.getText().toString().equals("")){
 
-                Log.e("hitung", String.valueOf(hitungan));
-
-                if (hitungan>50){
-                    Toast.makeText(kalkulator.this, "Berat Lebih dari 50 Kg",
+                    Toast.makeText(kalkulator.this, "Jangan Kosongi Kolom Berat, Jumlah",
                             Toast.LENGTH_LONG).show();
+                }else if(
+                        lebar.getText().toString().equals("") || tinggi.getText().toString().equals("") || jumlah.getText().toString().equals("")){
 
-                    if (berat.getVisibility() == View.VISIBLE) {
+                    panjang.setText("0");
+                    lebar.setText("0");
+                    tinggi.setText("0");
+
+                    berat1 = Integer.parseInt(berat.getText().toString());
+                    int total = berat1*harga;
+
+                    hasil.setText("Rp. "+String.valueOf(total));
+
+                } else{
+                    panjang1 = Integer.parseInt(panjang.getText().toString());
+                    lebar1 = Integer.parseInt(lebar.getText().toString());
+                    tinggi1 = Integer.parseInt(tinggi.getText().toString());
+                    jumlah1 = Integer.parseInt(jumlah.getText().toString());
+
+                    hitungan = panjang1*lebar1*tinggi1*jumlah1/4000;
+                    Log.e("hitung", String.valueOf(hitungan));
+
+                    if (hitungan>50){
+                        Toast.makeText(kalkulator.this, "Berat Lebih dari 50 Kg, Masukan Berat",
+                                Toast.LENGTH_LONG).show();
+
+                        panjang.setText("0");
+                        lebar.setText("0");
+                        tinggi.setText("0");
+
                         berat1 = Integer.parseInt(berat.getText().toString());
                         int total = berat1*harga;
 
-                        hasil.setText(String.valueOf(total));
-                    } else {
-                        berat.setVisibility(View.VISIBLE);
-                    }
+                        hasil.setText("Rp. "+String.valueOf(total));
+                    }else if(hitungan<50){
+                        berat1 = Integer.parseInt(berat.getText().toString());
+                        int total = berat1*harga;
 
-                }else{
-                    int total = hitungan*harga;
-                    hasil.setText(String.valueOf(total));
+                        hasil.setText("Rp. "+String.valueOf(total));
+                    }else{
+                        int total = hitungan*harga;
+                        hasil.setText("Rp. "+String.valueOf(total));
+                    }
                 }
             }
         });

@@ -12,6 +12,7 @@ use App\Tarifkm;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use App\Rute;
 
 class NotakirimController extends Controller
 {
@@ -29,20 +30,21 @@ class NotakirimController extends Controller
 
     public function detail($id)
     {
-        
+
         $notakirim = Notakirim::join('karyawans as k','notakirims.karyawan_id','=','k.id')
-            ->where('notakirims.id','=',$id)
-            ->select('notakirims.*','k.nama as karyawan')
-            ->firstOrFail();
+        ->where('notakirims.id','=',$id)
+        ->select('notakirims.*','k.nama as karyawan')
+        ->firstOrFail();
 
         $detailnota=DB::select(DB::raw("SELECT j.nama as jenis, b.nama as barang, nkb.jumlah as jumlah, b.satuan as satuan, nkb.berat as berat, nkb.dimensi as dimensi, nkb.totdimensi as totdimensi FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id='$id'"));
         
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
 
         $detailalamat = Notakirim::join('tarifkms as t', 'notakirims.tarifkm_id', '=', 't.id')
-                        ->where('notakirims.id', '=', $id)
-                        ->first();
+        ->where('notakirims.id', '=', $id)
+        ->first();
 
+        //dd($detailalamat);
         return view('notakirim.detail',['notakirims' => $notakirim, 'detailnota' => $detailnota, 'totberat' => $totberat, 'detailalamat' => $detailalamat]);
     }
 
@@ -50,9 +52,9 @@ class NotakirimController extends Controller
     public function print($id)
     {
         $notakirim = Notakirim::join('karyawans as k','notakirims.karyawan_id','=','k.id')
-            ->where('notakirims.id','=',$id)
-            ->select('notakirims.*','k.nama as karyawan')
-            ->firstOrFail();
+        ->where('notakirims.id','=',$id)
+        ->select('notakirims.*','k.nama as karyawan')
+        ->firstOrFail();
 
         $printnota = DB::select(DB::raw("SELECT n.no_resi as noresi, n.tanggal as tanggal, n.jenispembayaran as jenispembayaran, n.namapenerima as namapenerima, n.alamatpenerima as alamatpenerima, n.tlppenerima as tlppenerima, j.nama as jenis, b.nama as barang, nkb.jumlah as jumlah, b.satuan as satuan, b.berat as berat, nkb.dimensi as dimensi, nkb.totdimensi as totdimensi FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"));
 
@@ -60,7 +62,7 @@ class NotakirimController extends Controller
 
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
 
-      
+
         return view('notakirim.print',['notakirims' => $notakirim, 'printnota' => $printnota, 'detailnota' => $detailnota, 'totberat' => $totberat]);
     } 
 
@@ -107,14 +109,20 @@ class NotakirimController extends Controller
         $tarifkm_id= $request->get('tarifkm_id');
 
         $kecamatan = DB::select(DB::raw("SELECT * FROM kecamatans where tarifkm_id='$tarifkm_id'"));
+        $rute = Rute::select("kecamatan_id")->get();
 
         $tmpkecamatan="";
 
         foreach ($kecamatan as $key => $kc) 
         {
-            $tmpkecamatan.= '<option value="'. $kc->id .'">'. $kc->nama . ' </option>';
+            foreach ($rute as $key => $value) {
+                if($kc->id==$value->kecamatan_id){
+                    $tmpkecamatan.= '<option value="'. $kc->id .'">'. $kc->nama . ' </option>';
+                }
+            }
         }
 
+        //dd($tmpkecamatan);
         return $tmpkecamatan;
     }
 
@@ -133,7 +141,13 @@ class NotakirimController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //set posisi kantor utama
+        $rute_awal = Rute::select("kecamatans.id","rutes.koordinat_x", "rutes.koordinat_y")->
+                    join("kecamatans", "rutes.kecamatan_id", "=", "kecamatans.id")->
+                    where("kecamatans.nama", "Rungkut")->get()->first();
+
+        $jarak = $this->getJarak($rute_awal["id"], $request->kecamatan);
+
         $tgl = date('Y-m-d');
         $no_resi = $request->get('noresi');
         $id_pengirim = $request->get('pengirim');
@@ -141,7 +155,7 @@ class NotakirimController extends Controller
         $alamat = $request->get('alamat');
         $notlp = $request->get('notlp');
         $id_tarifkm = $request->get('tujuan');
-        $kelurahan = $request->get('kelurahan');
+        $kecamatan = $request->get('kecamatan');
         $pembayaran = $request->get('rd');
         $grandtotal = str_replace(",", "", $request->get('grandtotal'));
         $barang = $request->get('barang');
@@ -157,7 +171,7 @@ class NotakirimController extends Controller
             # code...
             $temp = explode(" - ",$barang[$i]);
             $check_ada = DB::table("barangs as b")->where('id','=',$temp[0])
-                    ->first();
+            ->first();
             if(!$check_ada)//kalo data yg diinputkan adalah barang baru
             {
                 $barangInsert = new Barang();
@@ -188,20 +202,22 @@ class NotakirimController extends Controller
         // return dd($user_id);
 
         $nk = new Notakirim();
-      
+
         $nk->karyawan_id = $karyawan->id; //fixed :)
         $nk->pelanggan_id = $id_pengirim;
         $nk->namapenerima = $penerima;
         $nk->alamatpenerima = $alamat;
         $nk->tlppenerima = $notlp;
         $nk->tarifkm_id = $id_tarifkm;
-        $nk->kelurahan_id = $kelurahan;
+        $nk->kecamatan_id = $kecamatan;
+        $nk->jarak = $jarak;
         $nk->no_resi = $no_resi;
         $nk->jenispembayaran = $pembayaran;
-     
+
         $nk->tanggal = $tgl;
         $nk->status = 1;
         $nk->biaya_kirim = $grandtotal;
+        //dd($nk);
         $nk->save();
         $last_id = $nk->id;
 
@@ -238,6 +254,47 @@ class NotakirimController extends Controller
         }
 
         return redirect('notakirim');
+    }
+
+    public function getJarak($awal, $akhir)
+    {   
+        // set koordinat titik awal
+        $awal       = Rute::where("kecamatan_id", $awal)->get()->first();
+        $akhir      = Rute::where("kecamatan_id", $akhir)->get()->first();
+        
+        if ($awal != null or $akhir != null) {
+            $data1[0]   = $awal->koordinat_y;
+            $data1[1]   = $awal->koordinat_x;
+
+             // set koordinat titik akhir
+            $data[0]    = $akhir->koordinat_y;
+            $data[1]    = $akhir->koordinat_x;
+
+            $jarak      = $this->HitungJarak($data1, $data);
+            return $jarak;
+        }else{
+
+            return 0;
+        }
+    }
+
+    // fungsi radius 
+    public function rad($x){ 
+        return $x * M_PI / 180; 
+    }
+
+    // fungsi untuk menghitung jarak
+    public function HitungJarak($coord_a, $coord_b){
+        
+        # jarak kilometer dimensi (mean radius) bumi
+        $R = 6371;
+        $dLat = $this->rad(($coord_b[0]) - ($coord_a[0]));
+        $dLong = $this->rad($coord_b[1] - $coord_a[1]);
+        $a = sin($dLat/2) * sin($dLat/2) + cos($this->rad($coord_a[0])) * cos($this->rad($coord_b[0])) * sin($dLong/2) * sin($dLong/2);
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $d = $R * $c;
+
+        return number_format($d, 0, '.', ',');
     }
 
     /**

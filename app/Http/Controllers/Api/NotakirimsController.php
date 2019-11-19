@@ -19,15 +19,14 @@ class NotakirimsController extends Controller
     public function index($id =null)
     {   
         $data = Notakirim::select("id", "no_resi", "namapenerima", "alamatpenerima", "tlppenerima", "status", "tanggal")
-        ->where("status", ">=", "3")->get();
+        ->where("status", ">=", "3")->orderBy("jarak", "desc")->get();
 
         if (isset($id)) {
             $data = [];
             $data = Notakirim::select("id", "no_resi", "namapenerima", "alamatpenerima", "tlppenerima", "status", "tanggal")
-            ->where("status", $id)->get();
+            ->where("status", $id)->orderBy("jarak", "desc")->get();
         }
-
-        //dd($data);
+        
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
             $a_data = [];

@@ -51,3 +51,7 @@ Route::get('m/print/{id}','ManifestController@print');
 Route::get('history/kirim/{id}', 'HistoryController@kirim');
 Route::get('history/sampai/{id}', 'HistoryController@sampai');
 
+// refisi manifest
+Route::get('manifest/kirim/{id}', 'ManifestController@kirim');
+Route::get('manifest/sampai/{id}', 'ManifestController@sampai');
+

@@ -41,6 +41,7 @@
                   <th class="text-center">Kode Manifest </th>
                   <th class="text-center">Tanggal Manifest </th>
                   <th class="text-center">Daftar Resi  </th>
+                  <th class="text-center">Status </th>
                   <th class="text-center">Action </th>
                 </tr>
               </thead>
@@ -55,8 +56,27 @@
                     {{ " - ".$val->no_resi }} <br>
                     @endforeach
                   </td>
+                  <td>
+                    @foreach($value->manifest->notakirims as $key1 => $val )
+                      @if($val->status==1)
+                      Barang Masuk
+                      @elseif($val->status==2)
+                      Barang Dikemas
+                      @elseif($val->status==3)
+                      Barang Dikirim Ke Kantor Bali
+                      @elseif($val->status==4)
+                      Barang Sampai Di Kantor Bali
+                      @elseif($val->status==5)
+                      Barang Dibawa Kurir
+                      @elseif($val->status==6)
+                      Barang Menuju Ke Alamat Penerima
+                      @else
+                      Barang Diterima
+                      @endif <br>
+                    @endforeach
+                  </td>
                   <td class="text-center">
-                      {{-- <a href="{{ url("history/destroydetail/".$value->id) }}" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i> </a> --}}
+                    {{-- <a href="{{ url("history/destroydetail/".$value->id) }}" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i> </a> --}}
                   </td>
                 </tr>
                 @endforeach
@@ -71,6 +91,7 @@
                     <input type="text" name="manifest" id="manifest" class="form-control" placeholder="Masukan Kode Manifest ..">
                     <input type="hidden" name="manifest_id" id="manifest_id">
                   </td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td>
