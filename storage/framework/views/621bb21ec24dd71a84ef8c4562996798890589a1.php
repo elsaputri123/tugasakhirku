@@ -54,7 +54,7 @@
               <?php echo e(method_field("PUT")); ?>
 
               <?php else: ?>
-              <form method="POST" action="<?php echo e(url("history")); ?>" method="POST" enctype="multipart/form-data">
+              <form method="POST" action="<?php echo e(url('history')); ?>" method="POST" enctype="multipart/form-data">
                 <?php endif; ?>
                 <?php echo csrf_field(); ?>
 
@@ -63,8 +63,8 @@
                     <div class="form-group">
                      <label>Titik Awal : </label>
                      <select class="form-control" name="awal" id="awal">
-                      <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                      <?php if($value->nama=="Surabaya"): ?>
+                     <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                     <?php if($value->nama=='Surabaya'): ?>
                       <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
                       <?php endif; ?>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

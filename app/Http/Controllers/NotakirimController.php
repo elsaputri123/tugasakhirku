@@ -253,7 +253,7 @@ class NotakirimController extends Controller
             $nkb->save();
         }
 
-        return redirect('notakirim');
+        return redirect('notakirim')->with('status', 'Data nota kirim berhasil ditambah!');
     }
 
     public function getJarak($awal, $akhir)

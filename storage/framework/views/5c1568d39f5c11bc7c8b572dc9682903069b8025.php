@@ -53,8 +53,8 @@
                 <tr>
                   <td><?php echo e($key+1); ?></td>
                   <td><?php echo e($value->tanggal); ?></td>
-                  <td><?php echo e($kecamatan[$value->lokasi_awal]); ?></td>
-                  <td><?php echo e($kecamatan[$value->lokasi_akhir]); ?></td>
+                  <td><?php if(isset($kecamatan[$value->lokasi_awal])): ?> <?php echo e($kecamatan[$value->lokasi_awal]); ?> <?php endif; ?></td>
+                  <td><?php if(isset($kecamatan[$value->lokasi_akhir])): ?> <?php echo e($kecamatan[$value->lokasi_akhir]); ?> <?php endif; ?></td>
                   <td><?php echo e($value->jarak); ?></td>
                   <td><?php echo e($value->karyawan); ?></td>
                   <td><?php echo e($value->kendaraan." - ".$value->no_polisi); ?></td>
