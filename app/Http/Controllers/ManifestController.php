@@ -107,6 +107,7 @@ class ManifestController extends Controller
      */
     public function store(Request $request)
     {
+        
         $manifests = new Manifest();
        
         $nomanifest = $request->get('nomanifest');

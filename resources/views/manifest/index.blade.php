@@ -60,13 +60,13 @@
                  <td>
                   <a class="btn btn-success" href="{!! action('ManifestController@detail',$d->id) !!}"><i class="fa fa-eye"></i></a>
                   @if($d->status==0)
-                  <a href="{!! action('ManifestController@kirim',$d->id) !!}" class="btn btn-sm btn-primary">
+                  <a href="{{ url('manifest/kirim/'.$d->id) }}" class="btn btn-sm btn-primary">
                     <i class="fa fa-check"></i>
                     Kirim
                   </a>
                   @endif
                   @if($d->status==1)
-                  <a href="{!! action('ManifestController@sampai',$d->id) !!}" class="btn btn-sm btn-primary">
+                  <a href="{{ url('manifest/sampai/'.$d->id) }}" class="btn btn-sm btn-primary">
                     <i class="fa fa-check"></i>
                     Sampai
                   </a> 
