@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Rute;
+use Validator;
+
 
 class NotakirimController extends Controller
 {
@@ -141,6 +143,36 @@ class NotakirimController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'pengirim'  => 'required|alpha',
+            'penerima' => 'required|alpha',
+            'alamat' => 'required|alphanumeric',
+            'notlp' => 'required|numeric',
+            'tujuan' => 'required|alpha',
+            'kecamatan' => 'required|alpha',
+            'barang' => 'required|alphanumeric',
+            'jumlah' => 'required|numeric',
+            'satuan' => 'required|alpha',
+            'berat' => 'required|numeric',
+        ],
+        [
+                'pengirim.alpha' => 'Pengirim harus diisi',
+                'penerima.alpha' => 'Penerima harus diisi', 
+                'alamat.required' =>'Alamat harus diisi',
+                'notlp.required' => 'No. Telpon harus diisi',
+                'notlp.numeric' => 'No. Telpon harus angka',
+                'tujuan.alpha' => 'Tujuan harus diisi',
+                'kecamatan.alpha' => 'Kecamatan harus diisi',
+                'barang.required' => 'Barang harus diisi',
+                'jumlah.required' => 'Jumlah harus diisi',
+                'jumlah.numeric' => 'Jumlah harus angka',
+                'satuan.alpha' => 'Satuan harus diisi',
+                'berat.required' => 'Berat harus diisi',
+                'berat.numeric' => 'Berat harus angka',
+              
+            ]
+        );
+
         //set posisi kantor utama
         $rute_awal = Rute::select("kecamatans.id","rutes.koordinat_x", "rutes.koordinat_y")->
                     join("kecamatans", "rutes.kecamatan_id", "=", "kecamatans.id")->
