@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Notiftracking;
+use Validator;
 
 class ManifestController extends Controller
 {
@@ -107,7 +108,6 @@ class ManifestController extends Controller
      */
     public function store(Request $request)
     {
-        
         $manifests = new Manifest();
        
         $nomanifest = $request->get('nomanifest');
