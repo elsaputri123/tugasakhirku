@@ -36,6 +36,7 @@
                 <th class="text-center">Dari</th>
                 <th class="text-center">Tujuan</th>
                 <th class="text-center">Biaya Kirim</th>
+                <th class="text-center">Jarak (KM)</th>
                 <th class="text-center"> Status </th>
                 <th class="text-center">Detail</th>
               </tr>
@@ -49,6 +50,7 @@
                 <td><?php echo e($n->pelanggans->nama); ?></td>
                 <td><?php echo e($n->alamatpenerima); ?></td>
                 <td>Rp. <?php echo e(number_format($n->biaya_kirim, 2, ',', '.')); ?></td>
+                <td class="text-center"><?php echo e($n->jarak); ?></td>
                 <td>
                   <?php if($n->status==1): ?>
                       Barang Masuk
