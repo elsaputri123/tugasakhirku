@@ -90,7 +90,7 @@ class NotifTrackingController extends Controller
         where n.id='".$id."'";
 
         $data = DB::select($sql);
-        dd($data);
+        
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
 

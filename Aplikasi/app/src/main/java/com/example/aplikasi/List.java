@@ -370,6 +370,7 @@ public class List extends AppCompatActivity {
     private void getMaps(String resi) {
         Log.e("resi", String.valueOf(resi));
         String url = hosts+"/tugasakhirku/public/api/getmapsdriver/"+resi;;
+        Log.e("resi", String.valueOf(url));
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -388,7 +389,7 @@ public class List extends AppCompatActivity {
                             bundle.putString("y_awal", jo.getString("y_awal"));
                             bundle.putString("x_akhir", jo.getString("x_akhir"));
                             bundle.putString("y_akhir", jo.getString("y_akhir"));
-
+                            
                             Intent intent = new Intent(List.this, MapsActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);

@@ -19,8 +19,8 @@ class HystoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data = HystoriPengirimans::all();
+    {   
+        $data = Manifest::all();
 
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";

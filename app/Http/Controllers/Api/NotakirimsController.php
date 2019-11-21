@@ -20,7 +20,7 @@ class NotakirimsController extends Controller
     {   
         $data = Notakirim::select("id", "no_resi", "namapenerima", "alamatpenerima", "tlppenerima", "status", "tanggal")
         ->where("status", ">=", "3")->orderBy("jarak", "desc")->get();
-
+        
         if (isset($id)) {
             $data = [];
             $data = Notakirim::select("id", "no_resi", "namapenerima", "alamatpenerima", "tlppenerima", "status", "tanggal")
