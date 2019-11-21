@@ -53,6 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String id_user,id_nota;
     SharedPreferences pref;
     String hosts = "http://192.168.43.148";
+    Location mlocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
         pref = getApplicationContext().getSharedPreferences("mypref", 0);
 
@@ -93,9 +95,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     tujuan.setText(getCompleteAddressString(y_akhir, x_akhir).toString());
 
                     updateData();
+
                 }
-            }, 0, 1*5*1000);
+            }, 0, 20*5*1000);
         //}
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        if(mMap != null){ //prevent crashing if the map doesn't exist yet (eg. on starting activity)
+            mMap.clear();
+
+            // add markers from database to the map
+        }
     }
 
     @Override
@@ -124,6 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(camUpdate);
         getMyLocation();
     }
+
 
     private Location getMyLocation() {
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);

@@ -39,10 +39,7 @@
                 <tr>
                   <th class="text-center" width="10px">No</th>
                   <th class="text-center">Tanggal </th>
-                  <th class="text-center">Lokasi Awal </th>
-                  <th class="text-center">Lokasi Akhir </th>
-                  <th class="text-center">Jarak </th>
-                  <th class="text-center">Kurir </th>
+                  <th class="text-center">Supir </th>
                   <th class="text-center">Kendaraan </th>
                   <th class="text-center">Status </th>
                   <th class="text-center">Aksi </th>
@@ -53,9 +50,6 @@
                 <tr>
                   <td>{{ $key+1 }}</td>
                   <td>{{ $value->tanggal }}</td>
-                  <td>@if(isset($kecamatan[$value->lokasi_awal])) {{ $kecamatan[$value->lokasi_awal] }} @endif</td>
-                  <td>@if(isset($kecamatan[$value->lokasi_akhir])) {{ $kecamatan[$value->lokasi_akhir] }} @endif</td>
-                  <td>{{ $value->jarak }}</td>
                   <td>{{ $value->karyawan }}</td>
                   <td>{{ $value->kendaraan." - ".$value->no_polisi }}</td>
                   <td>

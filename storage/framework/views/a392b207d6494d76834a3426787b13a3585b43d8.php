@@ -143,34 +143,6 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-bars"></i>
-                <span>Jadwal Pengiriman</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="<?php echo e(url('jadwalpengiriman')); ?>"><i class="fa fa-list"></i>Daftar Jadwal Pengiriman</a></li>
-                <li><a href="<?php echo e(url('jadwalpengiriman/create')); ?>"><i class="fa fa-plus-square-o"></i>Input Jadwal Pengiriman</a></li>
-              </ul>
-            </li>
-
-            <li class="treeview">
-              <a href="#">
-                <i class="fa  fa-history"></i>
-                <span>History</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="<?php echo e(url('history')); ?>"><i class="fa fa-list"></i>Daftar History</a></li>
-                <li><a href="<?php echo e(url('history/create')); ?>"><i class="fa fa-list"></i>Input History</a></li>
-              </ul>
-            </li>
-
-            <li class="treeview">
-              <a href="#">
                 <i class="fa fa-truck"></i>
                 <span>Rute</span>
                 <span class="pull-right-container">

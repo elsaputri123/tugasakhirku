@@ -84,9 +84,9 @@
                             <tr>
                               <th></th>
                               <td>: {{ $notakirims->alamatpenerima }}
-                                <br>{{'Kelurahan '.$detailalamat->kelurahans->nama }}
-                                <br>{{'Kecamatan '.$detailalamat->kelurahans->kecamatans->nama }}
-                                <br>{{'Kota '.$detailalamat->tujuan }}</td>
+                                <br>@if(isset($detailalamat->kelurahans->nama)) {{'Kelurahan '.$detailalamat->kelurahans->nama }} @endif
+                                <br>@if(isset($detailalamat->kelurahans->kecamatans->nama)){{'Kecamatan '.$detailalamat->kelurahans->kecamatans->nama }} @endif
+                                <br>@if(isset($detailalamat->tujuan)){{'Kota '.$detailalamat->tujuan }} @endif</td>
                             </tr>
                             <tr>
                               <th></th>

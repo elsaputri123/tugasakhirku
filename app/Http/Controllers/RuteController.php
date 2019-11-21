@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Rute;
 use Illuminate\Http\Request;
 use App\Kecamatan;
+use Validator;
 
 class RuteController extends Controller
 {

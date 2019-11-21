@@ -82,7 +82,7 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
 
                 tujuan.setText(getCompleteAddressString(latitude, longitude).toString());
             }
-        }, 0, 1 * 5 * 1000);
+        }, 0, 20 * 5 * 1000);
         //}
     }
 
@@ -94,7 +94,6 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
 
         LatLng lokasiku = new LatLng(y_akhir, x_akhir);
 
-        mMap.setMyLocationEnabled(true);
 
         mMap.addMarker(new MarkerOptions()
                 .position(sydney)

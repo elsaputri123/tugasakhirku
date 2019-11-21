@@ -34,13 +34,13 @@
 
             <TextView
                 android:textStyle="bold"
-                android:text="Lokasi Anda :"
+                android:text="Lokasi Kurir:"
                 android:textSize="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <EditText
-                android:hint="Titik Lokasi Anda"
+                android:hint="Posisi Kurir"
                 android:id="@+id/maloc"
                 android:textSize="10dp"
                 android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"/>
 
             <EditText
-                android:hint="Tujuan Anda"
+                android:hint="Tujuan Kurir"
                 android:id="@+id/tujuan"
                 android:textSize="10dp"
                 android:layout_width="match_parent"

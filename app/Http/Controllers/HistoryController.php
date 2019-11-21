@@ -390,7 +390,7 @@ class HistoryController extends Controller
 
     // fungsi untuk menghitung jarak
     public function HitungJarak($coord_a, $coord_b){
-        //die(print_r($coord_b));
+        
         # jarak kilometer dimensi (mean radius) bumi
         $R = 6371;
         $dLat = $this->rad(($coord_b[0]) - ($coord_a[0]));
