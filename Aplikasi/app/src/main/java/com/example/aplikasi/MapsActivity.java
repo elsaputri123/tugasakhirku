@@ -141,15 +141,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private Location getMyLocation() {
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (myLocation == null) {
+        try {
+            LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             criteria.setAccuracy(Criteria.ACCURACY_COARSE);
             String provider = lm.getBestProvider(criteria, true);
-            myLocation = lm.getLastKnownLocation(provider);
+            mlocation = lm.getLastKnownLocation(provider);
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
         }
-        return myLocation;
+
+        return mlocation;
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
