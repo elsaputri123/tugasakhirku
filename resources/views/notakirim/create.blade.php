@@ -67,12 +67,12 @@
                               </div>
                               <div class="form-group">
                                 <label>Alamat</label>
-                                <input type="text" name="alamat" id="alamat" value="" class="form-control" readonly="">
+                                <input type="text" name="alamat" id="alamat" value="" class="form-control" readonly="true">
                                 <p class="help-block"></p>
                               </div>
                               <div class="form-group">
                                 <label>No. Telpon</label>
-                                <input type="text" name="tlp" id="tlp" value="" class="form-control" readonly="">
+                                <input type="text" name="tlp" id="tlp" value="" class="form-control" readonly="true">
                                 <p class="help-block"></p>
                               </div>
                             </tr>

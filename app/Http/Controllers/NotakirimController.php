@@ -42,11 +42,12 @@ class NotakirimController extends Controller
         
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
 
-        $detailalamat = Notakirim::join('tarifkms as t', 'notakirims.tarifkm_id', '=', 't.id')
+        $detailalamat = Notakirim::select("notakirims.id", "notakirims.no_resi", "notakirims.namapenerima", "notakirims.tlppenerima", "notakirims.jenispembayaran", "notakirims.tanggal", "notakirims.biaya_kirim", "notakirims.tglbrgkt", "notakirims.tgltiba", "notakirims.nmpenerimabarang", "notakirims.status", "notakirims.karyawan_id", "notakirims.pelanggan_id", "notakirims.manifest_id", "notakirims.rute_id", "notakirims.tarifkm_id", "notakirims.jarak", "notakirims.kecamatan_id", "t.harga", "t.tujuan", "k.nama as kecamatan")
+        ->join('tarifkms as t', 'notakirims.tarifkm_id', '=', 't.id')
+        ->join("kecamatans as k", "notakirims.kecamatan_id", "=", "k.id")
         ->where('notakirims.id', '=', $id)
         ->first();
-
-        //dd($detailalamat);
+        
         return view('notakirim.detail',['notakirims' => $notakirim, 'detailnota' => $detailnota, 'totberat' => $totberat, 'detailalamat' => $detailalamat]);
     }
 
@@ -88,7 +89,7 @@ class NotakirimController extends Controller
         $maxId = Notakirim::max('id');
         $auto_resi = 'KAEP'.str_pad($maxId+1, 2, "0", STR_PAD_LEFT);
 
-        return view('notakirim.create',['notakirim' => $notakirim, 'barang' => $barang,'resi'=>$auto_resi,'tujuans' => $tujuans, 'pelanggnas' => $pelanggans, 'kecamatan' => $kecamatan, 'tarifkm' => $tarifkm, 'notakirimbarang' => $notakirimbarang]);
+    return view('notakirim.create',['notakirim' => $notakirim, 'barang' => $barang,'resi'=>$auto_resi,'tujuans' => $tujuans, 'pelanggnas' => $pelanggans, 'kecamatan' => $kecamatan, 'tarifkm' => $tarifkm, 'notakirimbarang' => $notakirimbarang]);
     }
     public function tampilkelurahan(Request $request)
     {
@@ -142,34 +143,24 @@ class NotakirimController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        //dd($request->toArray());
         $this->validate($request,[
-            'pengirim'  => 'required|alpha',
-            'penerima' => 'required|alpha',
-            'alamat' => 'required|alphanumeric',
+            'pengirim'  => 'required|numeric',
+            'penerima' => 'required',
+            'alamat' => 'required',
             'notlp' => 'required|numeric',
-            'tujuan' => 'required|alpha',
-            'kecamatan' => 'required|alpha',
-            'barang' => 'required|alphanumeric',
-            'jumlah' => 'required|numeric',
-            'satuan' => 'required|alpha',
-            'berat' => 'required|numeric',
+            'tujuan' => 'required',
+            'kecamatan' => 'required|numeric',
+            'barang' => 'required',
+            'jumlah' => 'required',
+            'satuan' => 'required',
+            'berat' => 'required',
         ],
         [
-                'pengirim.alpha' => 'Pengirim harus diisi',
-                'penerima.alpha' => 'Penerima harus diisi', 
-                'alamat.required' =>'Alamat harus diisi',
-                'notlp.required' => 'No. Telpon harus diisi',
-                'notlp.numeric' => 'No. Telpon harus angka',
-                'tujuan.alpha' => 'Tujuan harus diisi',
-                'kecamatan.alpha' => 'Kecamatan harus diisi',
-                'barang.required' => 'Barang harus diisi',
-                'jumlah.required' => 'Jumlah harus diisi',
-                'jumlah.numeric' => 'Jumlah harus angka',
-                'satuan.alpha' => 'Satuan harus diisi',
-                'berat.required' => 'Berat harus diisi',
-                'berat.numeric' => 'Berat harus angka',
-              
+                'required' => ':attribute Harus di isi',
+                'numeric' => ':attribute Harus valid number',
+                'alpha' => ':attribute Harus valid alphabet',
             ]
         );
 
@@ -179,7 +170,7 @@ class NotakirimController extends Controller
                     where("kecamatans.nama", "Rungkut")->get()->first();
 
         $jarak = $this->getJarak($rute_awal["id"], $request->kecamatan);
-
+        
         $tgl = date('Y-m-d');
         $no_resi = $request->get('noresi');
         $id_pengirim = $request->get('pengirim');

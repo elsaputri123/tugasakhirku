@@ -85,7 +85,7 @@
                               <td>: <?php echo e($notakirims->alamatpenerima); ?>
 
                                 <br><?php if(isset($detailalamat->kelurahans->nama)): ?> <?php echo e('Kelurahan '.$detailalamat->kelurahans->nama); ?> <?php endif; ?>
-                                <br><?php if(isset($detailalamat->kelurahans->kecamatans->nama)): ?><?php echo e('Kecamatan '.$detailalamat->kelurahans->kecamatans->nama); ?> <?php endif; ?>
+                                <br><?php if(isset($detailalamat->kecamatan)): ?><?php echo e('Kecamatan '.$detailalamat->kecamatan); ?> <?php endif; ?>
                                 <br><?php if(isset($detailalamat->tujuan)): ?><?php echo e('Kota '.$detailalamat->tujuan); ?> <?php endif; ?></td>
                             </tr>
                             <tr>

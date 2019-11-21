@@ -131,7 +131,7 @@ class ManifestController extends Controller
         $manifests->kendaraan_id = $nopolisi;
         $manifests->tanggal = $tgl;
         $manifests->karyawan_id = $karyawan->id;
-
+        $manifests->status = 0;
         $manifests->save();
         $last_id = $manifests->id;
 
