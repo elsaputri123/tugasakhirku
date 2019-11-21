@@ -35,7 +35,7 @@ public class Tarif extends AppCompatActivity {
     }
 
     private void load() {
-        String url = "http://192.168.43.148/tugasakhirku/public/api/tarif";
+        String url = "http://gabsijawatimur.com/tugasakhirku/public/api/tarif";
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

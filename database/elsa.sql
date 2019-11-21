@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 09:48 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Host: localhost
+-- Generation Time: Nov 21, 2019 at 06:47 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_tugasakhirku`
+-- Database: `elsa`
 --
 
 -- --------------------------------------------------------
@@ -83,8 +83,8 @@ CREATE TABLE `historykurir` (
   `id_kurir` int(11) NOT NULL,
   `id_nota` int(11) NOT NULL,
   `tanggal` date DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -92,7 +92,8 @@ CREATE TABLE `historykurir` (
 --
 
 INSERT INTO `historykurir` (`id`, `id_kurir`, `id_nota`, `tanggal`, `created_at`, `updated_at`) VALUES
-(18, 6, 1, '2019-11-04', '2019-11-03 21:16:15', '2019-11-03 21:16:15');
+(18, 6, 1, '2019-11-04', '2019-11-03 21:16:15', '2019-11-03 21:16:15'),
+(19, 6, 1, '2019-11-22', '2019-11-21 17:40:20', '2019-11-21 17:40:20');
 
 -- --------------------------------------------------------
 
@@ -423,6 +424,13 @@ CREATE TABLE `manifests` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `manifests`
+--
+
+INSERT INTO `manifests` (`id`, `no_manifest`, `tanggal`, `kendaraan_id`, `karyawan_id`, `karyawan_id_sopir`, `karyawan_id_penerima`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'MKAEP01', '2019-11-22', 4, 3, 5, NULL, 2, '2019-11-22 00:12:26', '2019-11-22 00:40:06');
+
 -- --------------------------------------------------------
 
 --
@@ -465,7 +473,8 @@ INSERT INTO `notakirimbarangs` (`id`, `jumlah`, `dimensi`, `totdimensi`, `berat`
 (5, 100, NULL, 500, 5, 1, 1, '2019-11-21 15:07:07', '2019-11-21 15:07:07'),
 (6, 1, '100x10x100', 25, NULL, 1, 5, '2019-11-21 15:07:07', '2019-11-21 15:07:07'),
 (7, 2, NULL, 50, 25, 1, 7, '2019-11-21 15:07:07', '2019-11-21 15:07:07'),
-(8, 2, NULL, 20, 10, 2, 2, '2019-11-21 15:19:56', '2019-11-21 15:19:56');
+(8, 2, NULL, 20, 10, 2, 2, '2019-11-21 15:19:56', '2019-11-21 15:19:56'),
+(9, 10, NULL, 100, 10, 3, 7, '2019-11-21 23:54:53', '2019-11-21 23:54:53');
 
 -- --------------------------------------------------------
 
@@ -503,8 +512,9 @@ CREATE TABLE `notakirims` (
 --
 
 INSERT INTO `notakirims` (`id`, `no_resi`, `namapenerima`, `alamatpenerima`, `tlppenerima`, `jenispembayaran`, `tanggal`, `biaya_kirim`, `tglbrgkt`, `tgltiba`, `nmpenerimabarang`, `status`, `karyawan_id`, `pelanggan_id`, `manifest_id`, `jadwalpengiriman_id`, `rute_id`, `tarifkm_id`, `kecamatan_id`, `jarak`, `created_at`, `updated_at`) VALUES
-(1, 'KAEP01', 'Tjia Teddy Irwantho', 'Jl. Raya Kali Rungkut blok M no 98', '08155006766', 1, '2019-11-21', 5750000, NULL, NULL, NULL, 1, 3, 1, NULL, NULL, NULL, 11, 9, 0, '2019-11-21 15:07:07', '2019-11-21 15:07:07'),
-(2, 'KAEP02', 'Arman Maulana', 'Jl. Konig Utara no 54', '0897262121621', 1, '2019-11-21', 200000, NULL, NULL, NULL, 1, 3, 3, NULL, NULL, NULL, 11, 11, 85, '2019-11-21 15:19:56', '2019-11-21 15:19:56');
+(1, 'KAEP01', 'Tjia Teddy Irwantho', 'Jl. Raya Kali Rungkut blok M no 98', '08155006766', 1, '2019-11-21', 5750000, NULL, NULL, NULL, 5, 3, 1, 1, NULL, NULL, 11, 9, 0, '2019-11-21 15:07:07', '2019-11-22 00:40:25'),
+(2, 'KAEP02', 'Arman Maulana', 'Jl. Konig Utara no 54', '0897262121621', 1, '2019-11-21', 200000, NULL, NULL, NULL, 3, 3, 3, 1, NULL, NULL, 11, 11, 85, '2019-11-21 15:19:56', '2019-11-22 00:40:06'),
+(3, 'KAEP03', 'Benar saja benar iya', 'Jl. Madean nomor 40', '23423', 1, '2019-11-21', 600000, NULL, NULL, NULL, 3, 3, 3, 1, NULL, NULL, 2, 6, 5, '2019-11-21 23:54:53', '2019-11-22 00:40:06');
 
 -- --------------------------------------------------------
 
@@ -537,7 +547,15 @@ INSERT INTO `notiftracking` (`id`, `id_nota`, `status`, `created_at`, `updated_a
 (60, 4, 2, '2019-11-19 15:49:38', '2019-11-19 15:49:38'),
 (61, 2, 3, '2019-11-19 15:52:39', '2019-11-19 15:52:39'),
 (62, 3, 3, '2019-11-19 15:52:39', '2019-11-19 15:52:39'),
-(63, 4, 3, '2019-11-19 15:52:39', '2019-11-19 15:52:39');
+(63, 4, 3, '2019-11-19 15:52:39', '2019-11-19 15:52:39'),
+(64, 1, 2, '2019-11-22 00:12:35', '2019-11-22 00:12:35'),
+(65, 2, 2, '2019-11-22 00:12:35', '2019-11-22 00:12:35'),
+(66, 3, 2, '2019-11-22 00:12:35', '2019-11-22 00:12:35'),
+(67, 1, 3, '2019-11-22 00:40:06', '2019-11-22 00:40:06'),
+(68, 2, 3, '2019-11-22 00:40:06', '2019-11-22 00:40:06'),
+(69, 3, 3, '2019-11-22 00:40:06', '2019-11-22 00:40:06'),
+(70, 1, 4, '2019-11-22 00:40:20', '2019-11-22 00:40:20'),
+(71, 1, 5, '2019-11-22 00:40:25', '2019-11-22 00:40:25');
 
 -- --------------------------------------------------------
 
@@ -876,7 +894,7 @@ ALTER TABLE `detailhistorys`
 -- AUTO_INCREMENT for table `historykurir`
 --
 ALTER TABLE `historykurir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `historypengirimans`
@@ -930,7 +948,7 @@ ALTER TABLE `kendaraans`
 -- AUTO_INCREMENT for table `manifests`
 --
 ALTER TABLE `manifests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -942,19 +960,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notakirimbarangs`
 --
 ALTER TABLE `notakirimbarangs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `notakirims`
 --
 ALTER TABLE `notakirims`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `notiftracking`
 --
 ALTER TABLE `notiftracking`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `pelanggans`
@@ -991,78 +1009,10 @@ ALTER TABLE `barangs`
   ADD CONSTRAINT `fk_barangs_jenis1` FOREIGN KEY (`jenis_id`) REFERENCES `jenis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `detailhistorys`
---
-ALTER TABLE `detailhistorys`
-  ADD CONSTRAINT `fk_detailhistorys_historypengirimans1` FOREIGN KEY (`historypengiriman_id`) REFERENCES `historypengirimans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_detailhistorys_manifests1` FOREIGN KEY (`manifest_id`) REFERENCES `manifests` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `historypengirimans`
 --
 ALTER TABLE `historypengirimans`
   ADD CONSTRAINT `fk_historypengirimans_jadwalpengirimans1` FOREIGN KEY (`jadwalpengiriman_id`) REFERENCES `jadwalpengirimans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `jadwalpengirimans`
---
-ALTER TABLE `jadwalpengirimans`
-  ADD CONSTRAINT `fk_jadwal_pengirimans_karyawans1` FOREIGN KEY (`karyawan_id_kurir`) REFERENCES `karyawans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_jadwal_pengirimans_kendaraans1` FOREIGN KEY (`kendaraan_id`) REFERENCES `kendaraans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `karyawans`
---
-ALTER TABLE `karyawans`
-  ADD CONSTRAINT `fk_karyawans_jabatans1` FOREIGN KEY (`jabatan_id`) REFERENCES `jabatans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_karyawans_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `kecamatans`
---
-ALTER TABLE `kecamatans`
-  ADD CONSTRAINT `fk_kecamatans_tarifkms1` FOREIGN KEY (`tarifkm_id`) REFERENCES `tarifkms` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `kelurahans`
---
-ALTER TABLE `kelurahans`
-  ADD CONSTRAINT `fk_kelurahans_kecamatans1` FOREIGN KEY (`kecamatan_id`) REFERENCES `kecamatans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `manifests`
---
-ALTER TABLE `manifests`
-  ADD CONSTRAINT `fk_manifests_karyawans1` FOREIGN KEY (`karyawan_id`) REFERENCES `karyawans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_manifests_karyawans2` FOREIGN KEY (`karyawan_id_sopir`) REFERENCES `karyawans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_manifests_karyawans3` FOREIGN KEY (`karyawan_id_penerima`) REFERENCES `karyawans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_manifests_kendaraans1` FOREIGN KEY (`kendaraan_id`) REFERENCES `kendaraans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `notakirimbarangs`
---
-ALTER TABLE `notakirimbarangs`
-  ADD CONSTRAINT `fk_notakirimbarangs_barangs1` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_notakirimbarangs_nota_kirims1` FOREIGN KEY (`notakirim_id`) REFERENCES `notakirims` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `notakirims`
---
-ALTER TABLE `notakirims`
-  ADD CONSTRAINT `fk_nota_kirims_jadwal_pengirimans1` FOREIGN KEY (`jadwalpengiriman_id`) REFERENCES `jadwalpengirimans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nota_kirims_manifests1` FOREIGN KEY (`manifest_id`) REFERENCES `manifests` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nota_kirims_pengirims1` FOREIGN KEY (`pelanggan_id`) REFERENCES `pelanggans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nota_kirims_rutes1` FOREIGN KEY (`rute_id`) REFERENCES `rutes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nota_kirims_tarifkms1` FOREIGN KEY (`tarifkm_id`) REFERENCES `tarifkms` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nota_kirims_wilayahs1` FOREIGN KEY (`kecamatan_id`) REFERENCES `kelurahans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_notakirims_karyawans1` FOREIGN KEY (`karyawan_id`) REFERENCES `karyawans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `rute_jadwals`
---
-ALTER TABLE `rute_jadwals`
-  ADD CONSTRAINT `fk_rute_has_jadwal_pengiriman_jadwal_pengiriman1` FOREIGN KEY (`jadwalpengiriman_id`) REFERENCES `jadwalpengirimans` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_rute_has_jadwal_pengiriman_rute1` FOREIGN KEY (`rute_id`) REFERENCES `rutes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

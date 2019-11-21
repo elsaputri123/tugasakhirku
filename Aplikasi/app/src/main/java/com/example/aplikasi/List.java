@@ -41,7 +41,7 @@ public class List extends AppCompatActivity {
     private Spinner spNamen;
     private String[] germanFeminine = { "-- Pilih Filter --", "Sampai Kantor Cabang", "Di Bawa", "Di Kirim", "Sampai Penerima", "Diterima"};
     String url;
-    String hosts = "http://192.168.43.148";
+    String hosts = "http://gabsijawatimur.com";
     SharedPreferences pref;
 
     @Override
@@ -389,7 +389,7 @@ public class List extends AppCompatActivity {
                             bundle.putString("y_awal", jo.getString("y_awal"));
                             bundle.putString("x_akhir", jo.getString("x_akhir"));
                             bundle.putString("y_akhir", jo.getString("y_akhir"));
-                            
+
                             Intent intent = new Intent(List.this, MapsActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
