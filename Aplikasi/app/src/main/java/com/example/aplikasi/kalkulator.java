@@ -34,7 +34,7 @@ public class kalkulator extends AppCompatActivity {
     private ArrayList<String> lokasi;
     //JSON Array
     private JSONArray result;
-    String hosts = "http://gabsijawatimur.com";
+    String hosts = "http://192.168.1.10";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

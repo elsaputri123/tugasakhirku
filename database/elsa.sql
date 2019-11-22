@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 22, 2019 at 03:54 AM
+-- Generation Time: Nov 22, 2019 at 04:05 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -93,7 +93,10 @@ CREATE TABLE `historykurir` (
 
 INSERT INTO `historykurir` (`id`, `id_kurir`, `id_nota`, `tanggal`, `created_at`, `updated_at`) VALUES
 (18, 6, 1, '2019-11-04', '2019-11-03 21:16:15', '2019-11-03 21:16:15'),
-(19, 6, 1, '2019-11-22', '2019-11-21 17:40:20', '2019-11-21 17:40:20');
+(19, 6, 1, '2019-11-22', '2019-11-21 17:40:20', '2019-11-21 17:40:20'),
+(20, 6, 3, '2019-11-22', '2019-11-22 03:03:22', '2019-11-22 03:03:22'),
+(21, 6, 2, '2019-11-22', '2019-11-22 03:03:40', '2019-11-22 03:03:40'),
+(22, 6, 2, '2019-11-22', '2019-11-22 03:03:44', '2019-11-22 03:03:44');
 
 -- --------------------------------------------------------
 
@@ -516,10 +519,10 @@ CREATE TABLE `notakirims` (
 --
 
 INSERT INTO `notakirims` (`id`, `no_resi`, `namapenerima`, `alamatpenerima`, `tlppenerima`, `jenispembayaran`, `tanggal`, `biaya_kirim`, `tglbrgkt`, `tgltiba`, `nmpenerimabarang`, `status`, `karyawan_id`, `pelanggan_id`, `manifest_id`, `jadwalpengiriman_id`, `tarifkm_id`, `kecamatan_id`, `awal`, `akhir`, `jarak`, `created_at`, `updated_at`) VALUES
-(1, 'KAEP01', 'Tjia Teddy Irwantho', 'Jl. Raya Kali Rungkut blok M no 98', '08155006766', 1, '2019-11-21', 5750000, NULL, NULL, NULL, 5, 3, 1, 1, NULL, 11, 9, 0, 0, 0, '2019-11-21 15:07:07', '2019-11-22 08:38:39'),
-(2, 'KAEP02', 'Arman Maulana', 'Jl. Konig Utara no 54', '0897262121621', 1, '2019-11-21', 200000, NULL, NULL, NULL, 3, 3, 3, 1, NULL, 11, 11, 0, 0, 85, '2019-11-21 15:19:56', '2019-11-22 00:40:06'),
-(3, 'KAEP03', 'Benar saja benar iya', 'Jl. Madean nomor 40', '23423', 1, '2019-11-21', 600000, NULL, NULL, NULL, 3, 3, 3, 1, NULL, 2, 6, 0, 0, 5, '2019-11-21 23:54:53', '2019-11-22 00:40:06'),
-(4, 'KAEP04', 'Partidan', 'Jl. Arif Rahman Hakim No 40', '243242', 1, '2019-11-22', 4500000, NULL, NULL, NULL, 3, 3, 4, 2, NULL, 11, 11, 6, 8, 85, '2019-11-22 09:39:41', '2019-11-22 09:44:26');
+(1, 'KAEP01', 'Tjia Teddy Irwantho', 'Jl. Raya Kali Rungkut blok M no 98', '08155006766', 1, '2019-11-21', 5750000, NULL, NULL, NULL, 5, 3, 1, 1, NULL, 11, 9, 6, 8, 0, '2019-11-21 15:07:07', '2019-11-22 08:38:39'),
+(2, 'KAEP02', 'Arman Maulana', 'Jl. Konig Utara no 54', '0897262121621', 1, '2019-11-21', 200000, NULL, NULL, NULL, 5, 3, 3, 1, NULL, 11, 11, 6, 9, 85, '2019-11-21 15:19:56', '2019-11-22 10:03:51'),
+(3, 'KAEP03', 'Benar saja benar iya', 'Jl. Madean nomor 40', '23423', 1, '2019-11-21', 600000, NULL, NULL, NULL, 5, 3, 3, 1, NULL, 2, 6, 6, 8, 5, '2019-11-21 23:54:53', '2019-11-22 10:03:27'),
+(4, 'KAEP04', 'Partidan', 'Jl. Arif Rahman Hakim No 40', '243242', 1, '2019-11-22', 4500000, NULL, NULL, NULL, 3, 3, 4, 2, NULL, 11, 11, 6, 9, 85, '2019-11-22 09:39:41', '2019-11-22 09:44:26');
 
 -- --------------------------------------------------------
 
@@ -563,7 +566,12 @@ INSERT INTO `notiftracking` (`id`, `id_nota`, `status`, `created_at`, `updated_a
 (71, 1, 5, '2019-11-22 00:40:25', '2019-11-22 00:40:25'),
 (72, 1, 5, '2019-11-22 08:38:39', '2019-11-22 08:38:39'),
 (73, 4, 2, '2019-11-22 09:44:22', '2019-11-22 09:44:22'),
-(74, 4, 3, '2019-11-22 09:44:26', '2019-11-22 09:44:26');
+(74, 4, 3, '2019-11-22 09:44:26', '2019-11-22 09:44:26'),
+(75, 3, 4, '2019-11-22 10:03:22', '2019-11-22 10:03:22'),
+(76, 3, 5, '2019-11-22 10:03:27', '2019-11-22 10:03:27'),
+(77, 2, 4, '2019-11-22 10:03:40', '2019-11-22 10:03:40'),
+(78, 2, 4, '2019-11-22 10:03:44', '2019-11-22 10:03:44'),
+(79, 2, 5, '2019-11-22 10:03:51', '2019-11-22 10:03:51');
 
 -- --------------------------------------------------------
 
@@ -620,7 +628,8 @@ INSERT INTO `rutes` (`id`, `kecamatan_id`, `jenis`, `nama`, `koordinat_x`, `koor
 (5, 9, '', 'Rungkut', 112.74347, -7.274, 1, '2019-10-30 02:30:21', '2019-10-30 02:30:21'),
 (6, 10, '', 'Surabaya', 112.73134, -7.23904, 1, '2019-10-30 02:34:47', '2019-10-30 02:34:47'),
 (7, 11, '1', 'Sukolilo', 112.06553, -6.90497, 1, '2019-11-21 14:40:27', '2019-11-22 09:26:43'),
-(8, 11, '2', 'Jl. Arif Rahman Hakim', 112.77526, -7.2897, 1, '2019-11-22 06:37:51', '2019-11-22 09:26:33');
+(8, 11, '2', 'Jl. Arif Rahman Hakim', 112.77526, -7.2897, 1, '2019-11-22 06:37:51', '2019-11-22 09:26:33'),
+(9, 9, '2', 'Jl. Rungkut Industri No. 90 Surabaya', 112.75946, -7.33049, 1, '2019-11-22 10:02:06', '2019-11-22 10:02:21');
 
 -- --------------------------------------------------------
 
@@ -689,7 +698,9 @@ CREATE TABLE `tracking` (
 --
 
 INSERT INTO `tracking` (`id`, `id_kurir`, `id_nota`, `y_awal`, `x_awal`, `y_akhir`, `x_akhir`, `created_at`, `updated_at`) VALUES
-(6, 6, 5, '112.75377151', '-7.35047494', '-7.274', '112.74347', '2019-11-04 04:21:45', '2019-11-22 08:45:48');
+(6, 6, 5, '112.75377151', '-7.35047494', '-7.274', '112.74347', '2019-11-04 04:21:45', '2019-11-22 08:45:48'),
+(51, 6, 8, '112.75375352', '-7.35038851', '-7.2897', '112.77526', '2019-11-22 09:59:50', '2019-11-22 10:04:19'),
+(53, 6, 9, '112.75381743907928', '-7.350229024887085', '-7.33049', '112.75946', '2019-11-22 10:03:56', '2019-11-22 10:03:56');
 
 -- --------------------------------------------------------
 
@@ -903,7 +914,7 @@ ALTER TABLE `detailhistorys`
 -- AUTO_INCREMENT for table `historykurir`
 --
 ALTER TABLE `historykurir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `historypengirimans`
@@ -981,7 +992,7 @@ ALTER TABLE `notakirims`
 -- AUTO_INCREMENT for table `notiftracking`
 --
 ALTER TABLE `notiftracking`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `pelanggans`
@@ -993,13 +1004,13 @@ ALTER TABLE `pelanggans`
 -- AUTO_INCREMENT for table `rutes`
 --
 ALTER TABLE `rutes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tracking`
 --
 ALTER TABLE `tracking`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `users`

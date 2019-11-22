@@ -49,7 +49,7 @@ class NotifTrackingController extends Controller
         $sql = "SELECT n.no_resi,n.id,n.namapenerima,n.alamatpenerima, n.awal, n.akhir
         FROM notakirims n left join manifests m on n.manifest_id=m.id 
         where n.no_resi='".$id."'";
-        
+
         $data = DB::select($sql);
         //dd($data);
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
@@ -86,7 +86,7 @@ class NotifTrackingController extends Controller
         where n.id='".$id."'";
 
         $data = DB::select($sql);
-
+        
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
 
