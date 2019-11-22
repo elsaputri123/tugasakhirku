@@ -36,7 +36,7 @@ public class History extends AppCompatActivity {
     SimpleAdapter adapter;
     HashMap<String, String> map;
     ArrayList<HashMap<String, String>> mylist;
-    String hosts = "http://192.168.1.10";
+    String hosts = "http://gabsijawatimur.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -42,7 +42,7 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
     Double x_akhir, y_akhir;
     String id_user, id_nota;
     SharedPreferences pref;
-    String hosts = "http://192.168.1.10";
+    String hosts = "http://gabsijawatimur.com";
     Location mlocation;
 
     @Override

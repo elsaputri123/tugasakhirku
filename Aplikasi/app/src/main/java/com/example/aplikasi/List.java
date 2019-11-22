@@ -41,7 +41,7 @@ public class List extends AppCompatActivity {
     private Spinner spNamen;
     private String[] germanFeminine = { "-- Pilih Filter --", "Sampai Kantor Cabang", "Di Bawa", "Di Kirim", "Sampai Penerima", "Diterima"};
     String url;
-    String hosts = "http://192.168.1.10";
+    String hosts = "http://gabsijawatimur.com";
     SharedPreferences pref;
 
     @Override
