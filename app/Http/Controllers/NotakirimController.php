@@ -42,7 +42,7 @@ class NotakirimController extends Controller
         
         $totberat = collect(\DB::select("SELECT SUM(nkb.totdimensi) as subtotberat FROM notakirims as n inner join notakirimbarangs as nkb on n.id=nkb.notakirim_id inner join barangs as b on nkb.barang_id=b.id inner join jenis as j on b.jenis_id=j.id where n.id=$id"))->first();
 
-        $detailalamat = Notakirim::select("notakirims.id", "notakirims.no_resi", "notakirims.namapenerima", "notakirims.tlppenerima", "notakirims.jenispembayaran", "notakirims.tanggal", "notakirims.biaya_kirim", "notakirims.tglbrgkt", "notakirims.tgltiba", "notakirims.nmpenerimabarang", "notakirims.status", "notakirims.karyawan_id", "notakirims.pelanggan_id", "notakirims.manifest_id", "notakirims.rute_id", "notakirims.tarifkm_id", "notakirims.jarak", "notakirims.kecamatan_id", "t.harga", "t.tujuan", "k.nama as kecamatan")
+        $detailalamat = Notakirim::select("notakirims.id", "notakirims.no_resi", "notakirims.namapenerima", "notakirims.tlppenerima", "notakirims.jenispembayaran", "notakirims.tanggal", "notakirims.biaya_kirim", "notakirims.tglbrgkt", "notakirims.tgltiba", "notakirims.nmpenerimabarang", "notakirims.status", "notakirims.karyawan_id", "notakirims.pelanggan_id", "notakirims.manifest_id", "notakirims.tarifkm_id", "notakirims.jarak", "notakirims.kecamatan_id", "t.harga", "t.tujuan", "k.nama as kecamatan")
         ->join('tarifkms as t', 'notakirims.tarifkm_id', '=', 't.id')
         ->join("kecamatans as k", "notakirims.kecamatan_id", "=", "k.id")
         ->where('notakirims.id', '=', $id)
@@ -81,15 +81,15 @@ class NotakirimController extends Controller
         $kecamatan = Kecamatan::all();
         $tarifkm = Tarifkm::all();
         $notakirimbarang = Notakirimbarang::all();
+        $rute = Rute::select("nama", "id", "jenis")->get();
         
-
         $tujuans = DB::table('tarifkms')->select('id','tujuan','harga')->get();
         $pelanggans = DB::table('pelanggans')->get();
 
         $maxId = Notakirim::max('id');
         $auto_resi = 'KAEP'.str_pad($maxId+1, 2, "0", STR_PAD_LEFT);
 
-    return view('notakirim.create',['notakirim' => $notakirim, 'barang' => $barang,'resi'=>$auto_resi,'tujuans' => $tujuans, 'pelanggnas' => $pelanggans, 'kecamatan' => $kecamatan, 'tarifkm' => $tarifkm, 'notakirimbarang' => $notakirimbarang]);
+    return view('notakirim.create',['notakirim' => $notakirim, 'barang' => $barang,'resi'=>$auto_resi,'tujuans' => $tujuans, 'pelanggnas' => $pelanggans, 'kecamatan' => $kecamatan, 'tarifkm' => $tarifkm, 'notakirimbarang' => $notakirimbarang, 'rute' => $rute]);
     }
     public function tampilkelurahan(Request $request)
     {
@@ -112,7 +112,7 @@ class NotakirimController extends Controller
         $tarifkm_id= $request->get('tarifkm_id');
 
         $kecamatan = DB::select(DB::raw("SELECT * FROM kecamatans where tarifkm_id='$tarifkm_id'"));
-        $rute = Rute::select("kecamatan_id")->get();
+        $rute = Rute::select("kecamatan_id")->where("jenis", "1")->get();
 
         $tmpkecamatan="";
 
@@ -236,6 +236,8 @@ class NotakirimController extends Controller
         $nk->jarak = $jarak;
         $nk->no_resi = $no_resi;
         $nk->jenispembayaran = $pembayaran;
+        $nk->awal = $request->awal;
+        $nk->akhir = $request->akhir;
 
         $nk->tanggal = $tgl;
         $nk->status = 1;

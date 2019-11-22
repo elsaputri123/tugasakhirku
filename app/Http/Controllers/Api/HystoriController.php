@@ -68,44 +68,6 @@ class HystoriController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
-    {    
-        $jadwal = $this->getIdJadwal($request->id_user);
-
-        if ($jadwal > 0) {
-         try {
-            $histori                        = new HystoriPengirimans();
-            $histori->tanggal               = date("Y-m-d");
-            $histori->lokasi_awal           = $request->awal;
-            $histori->lokasi_akhir          = $request->akhir;
-            $histori->jarak                 = $this->getJarak($request->awal, $request->akhir);
-            $histori->jadwalpengiriman_id   = $this->getIdJadwal($request->id_user);
-            $histori->save();
-
-        } catch (Exception $e) {
-         $data = [
-            'error' => 'Gagal Simpan Rute Pengiriman',
-            'data'  => []
-        ];
-
-        return response($data);
-    }
-    $data = [
-        'success'   => 'Rute Pengiriman Berhasil Disimpan',
-        'data'      => $histori
-    ];
-
-    return response($data);
-}else{
-    $data = [
-        'error' => 'Jadwal Kurir Belum ada, silahkan buat jadwal dulu ',
-        'data'  => []
-    ];
-
-    return response($data);
-}
-}
-
     /**
      * Display the specified resource.
      *

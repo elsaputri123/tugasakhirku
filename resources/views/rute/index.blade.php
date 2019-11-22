@@ -38,6 +38,7 @@
                 <tr>
                   <th class="text-center" width="10px">No</th>
                   <th class="text-center">Kecamatan</th>
+                  <th class="text-center">Jenis Rute</th>
                   <th class="text-center">Nama Rute</th>
                   <td class="text-center">X (longitude)</td>
                   <td class="text-center">Y (latitude)</td>
@@ -49,6 +50,15 @@
                 <tr>
                   <td>{{ $key+1 }}</td>
                   <td>@if(isset($value->kecamatan->nama)) {{ $value->kecamatan->nama }} @endif</td>
+                  <td>
+                    @if($value->jenis==1)
+                        Kecamatan
+                    @elseif($value->jenis==2)
+                        Jalan
+                    @else
+                        -
+                    @endif
+                  </td>
                   <td>{{ $value->nama }}</td>
                   <td>{{ $value->koordinat_x }}</td>
                   <td>{{ $value->koordinat_y }}</td>

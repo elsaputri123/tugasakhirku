@@ -120,9 +120,9 @@
                     @elseif($d->status==2)
                     Barang Dikemas
                     @elseif($d->status==3)
-                    Barang Dikirim Ke Kantor Bali
+                    Barang Dikirim Ke Kantor Cabang
                     @elseif($d->status==4)
-                    Barang Sampai Di Kantor Bali
+                    Barang Sampai Di Kantor Cabang
                     @elseif($d->status==5)
                     Barang Dibawa Kurir
                     @elseif($d->status==6)

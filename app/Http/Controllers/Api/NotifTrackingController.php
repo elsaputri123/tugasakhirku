@@ -46,19 +46,17 @@ class NotifTrackingController extends Controller
 
     public function getMaps($id)
     {	
-        $sql = "SELECT n.no_resi,n.id,n.namapenerima,n.alamatpenerima, p.lokasi_awal, p.lokasi_akhir
+        $sql = "SELECT n.no_resi,n.id,n.namapenerima,n.alamatpenerima, n.awal, n.akhir
         FROM notakirims n left join manifests m on n.manifest_id=m.id 
-        left join detailhistorys d on d.manifest_id=m.id 
-        left join historypengirimans p on d.historypengiriman_id=p.id 
         where n.no_resi='".$id."'";
-
+        
         $data = DB::select($sql);
         //dd($data);
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
         	$res['message'] = "success";
 
-        	$lokasi_awal = Rute::where("kecamatan_id", $data[0]->lokasi_awal)->get()->first();
-        	$lokasi_akhir = Rute::where("kecamatan_id", $data[0]->lokasi_akhir)->get()->first();
+        	$lokasi_awal = Rute::where("id", $data[0]->awal)->get()->first();
+        	$lokasi_akhir = Rute::where("id", $data[0]->akhir)->get()->first();
 
         	$a_data = [];
             $a_data["id_nota"] = $lokasi_akhir->id;
@@ -83,19 +81,17 @@ class NotifTrackingController extends Controller
 
     public function getMapsDriver($id)
     {   
-        $sql = "SELECT n.no_resi,n.id,n.namapenerima,n.alamatpenerima, p.lokasi_awal, p.lokasi_akhir
+        $sql = "SELECT n.no_resi,n.id,n.namapenerima,n.alamatpenerima, n.awal, n.akhir
         FROM notakirims n left join manifests m on n.manifest_id=m.id 
-        left join detailhistorys d on d.manifest_id=m.id 
-        left join historypengirimans p on d.historypengiriman_id=p.id 
         where n.id='".$id."'";
 
         $data = DB::select($sql);
-        //dd($data);
+
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
 
-            $lokasi_awal = Rute::where("kecamatan_id", $data[0]->lokasi_awal)->get()->first();
-            $lokasi_akhir = Rute::where("kecamatan_id", $data[0]->lokasi_akhir)->get()->first();
+            $lokasi_awal = Rute::where("id", $data[0]->awal)->get()->first();
+            $lokasi_akhir = Rute::where("id", $data[0]->akhir)->get()->first();
             
             $a_data = [];
             $a_data["id_nota"] = $lokasi_akhir->id;

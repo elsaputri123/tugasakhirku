@@ -17,7 +17,7 @@ class HistoryKurirController extends Controller
     {
 
         $data = HistoryKurir::with("nota")->get();
-
+        
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
             $res['message'] = "success";
             $res['data'] = $data;

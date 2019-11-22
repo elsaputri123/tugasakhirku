@@ -42,7 +42,7 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
     Double x_akhir, y_akhir;
     String id_user, id_nota;
     SharedPreferences pref;
-    String hosts = "http://192.168.43.148";
+    String hosts = "http://gabsijawatimur.com";
     Location mlocation;
 
     @Override
@@ -83,7 +83,7 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
 
                 tujuan.setText(getCompleteAddressString(latitude, longitude).toString());
             }
-        }, 0, 20 * 5 * 1000);
+        }, 0, 50 * 5 * 1000);
         //}
     }
 

@@ -38,6 +38,7 @@
                 <tr>
                   <th class="text-center" width="10px">No</th>
                   <th class="text-center">Kecamatan</th>
+                  <th class="text-center">Jenis Rute</th>
                   <th class="text-center">Nama Rute</th>
                   <td class="text-center">X (longitude)</td>
                   <td class="text-center">Y (latitude)</td>
@@ -49,6 +50,15 @@
                 <tr>
                   <td><?php echo e($key+1); ?></td>
                   <td><?php if(isset($value->kecamatan->nama)): ?> <?php echo e($value->kecamatan->nama); ?> <?php endif; ?></td>
+                  <td>
+                    <?php if($value->jenis==1): ?>
+                        Kecamatan
+                    <?php elseif($value->jenis==2): ?>
+                        Jalan
+                    <?php else: ?>
+                        -
+                    <?php endif; ?>
+                  </td>
                   <td><?php echo e($value->nama); ?></td>
                   <td><?php echo e($value->koordinat_x); ?></td>
                   <td><?php echo e($value->koordinat_y); ?></td>

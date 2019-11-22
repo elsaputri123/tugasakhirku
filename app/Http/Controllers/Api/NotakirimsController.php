@@ -45,9 +45,9 @@ class NotakirimsController extends Controller
                 $tgl1 = date('Y-m-d', strtotime($tgl . "+1 day"));
                 $a_data[$key]["waktu"] = $tgl1." ".$time1;
             }
-
+            
             $res['data'] = $a_data;
-
+            
             return response($res);
         }
         else{
@@ -127,7 +127,7 @@ class NotakirimsController extends Controller
 
         return response($data);
     }
-
+    
     public function sampai($id)
     {   
         $histori = [];
@@ -161,7 +161,7 @@ class NotakirimsController extends Controller
 
         return response($data);
     }
-
+    
     public function konfirmasi($id)
     {   
         $histori = [];

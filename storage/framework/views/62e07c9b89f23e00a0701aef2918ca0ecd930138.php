@@ -74,12 +74,7 @@
                    <label>Kecamatan </label>
                    <select class="form-control" name="kecamatan" id="kecamatan">
                     <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php if(isset($edit) and $value->id==$edit->id): ?>
-                    
-                    <option value="<?php echo e($value->id); ?>"><?php echo e($edit->kecamatan->nama); ?></option>
-                    <?php else: ?>
                     <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
-                    <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </select>
                 </div>
@@ -89,7 +84,20 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Nama Rute (Opotional)  </label>
+                  <label>Jenis Rute : </label>
+                  <select name="jenis" id="jenis" class="form-control">
+                    <option> -- Pilih Jenis --</option>
+                    <option value="1">Kecamatan</option>
+                    <option value="2">Jalan</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Nama Rute  </label>
                   <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama Rute (Opotional)" 
                   value="<?php if(isset($edit)): ?> <?php echo e($edit->nama); ?>  <?php endif; ?>">
                 </div>
@@ -135,5 +143,17 @@
   reserved.
 </footer>
 </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection("script"); ?>
+<script type="text/javascript">
+  <?php if(isset($edit->jenis)): ?>
+    $("#jenis").val('<?php echo e($edit->jenis); ?>');
+  <?php endif; ?>
+
+  <?php if(isset($edit->kecamatan_id)): ?>
+    $("#kecamatan").val('<?php echo e($edit->kecamatan_id); ?>');
+  <?php endif; ?>
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app-admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

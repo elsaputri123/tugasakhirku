@@ -42,12 +42,14 @@ class RuteController extends Controller
     public function store(Request $request)
     {   
         $this->validate($request,[
-            'nama'  => 'max:10','alpha',
+            'nama'  => 'max:45','alpha',
             'koordinat_x' => 'required|numeric',
             'koordinat_y' => 'required|numeric',
             'kecamatan' => 'required|numeric',
+            'jenis' => 'required|numeric',
         ],
-        [
+        [       'jenis.required' => 'Jenis Harus diisi',
+                'jenis.numeric' => 'Jenis Harus angka',
                 'nama.alpha' => 'Nama Harus Huruf',
                 'koordinat_y.required' => 'Longitude harus diisi',
                 'koordinat_y.numeric' => 'Longitude harus angka',
@@ -62,6 +64,7 @@ class RuteController extends Controller
 
             $rute = new Rute();
             $rute->kecamatan_id = $request->kecamatan;
+            $rute->jenis         = $request->jenis;
             $rute->nama         = $request->nama;
             $rute->koordinat_x  = $request->koordinat_x;
             $rute->koordinat_y  = $request->koordinat_y;
@@ -104,7 +107,7 @@ class RuteController extends Controller
     {
         $data["kecamatan"] = Kecamatan::select("id", "nama")->get();
         $data["edit"] = Rute::where("id", $rute->id)->get()->first();
-
+        
         return view("rute.create", $data);
     }
 
@@ -118,12 +121,14 @@ class RuteController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'nama'  => 'max:10','alpha',
+            'nama'  => 'max:45','alpha',
             'koordinat_x' => 'required|numeric',
             'koordinat_y' => 'required|numeric',
             'kecamatan' => 'required|numeric',
+            'jenis' => 'required|numeric',
         ],
-        [
+        [       'jenis.required' => 'Jenis Harus diisi',
+                'jenis.numeric' => 'Jenis Harus angka',
                 'nama.alpha' => 'Nama Harus Huruf',
                 'koordinat_y.required' => 'Longitude harus diisi',
                 'koordinat_y.numeric' => 'Longitude harus angka',
@@ -138,6 +143,7 @@ class RuteController extends Controller
 
             $rute               = Rute::find($id);
             $rute->kecamatan_id = $request->kecamatan;
+            $rute->jenis        = $request->jenis;
             $rute->nama         = $request->nama;
             $rute->koordinat_x  = $request->koordinat_x;
             $rute->koordinat_y  = $request->koordinat_y;

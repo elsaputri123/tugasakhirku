@@ -72,12 +72,7 @@
                    <label>Kecamatan </label>
                    <select class="form-control" name="kecamatan" id="kecamatan">
                     @foreach($kecamatan as $key => $value)
-                    @if(isset($edit) and $value->id==$edit->id)
-                    
-                    <option value="{{ $value->id }}">{{ $edit->kecamatan->nama }}</option>
-                    @else
                     <option value="{{ $value->id }}">{{ $value->nama }}</option>
-                    @endif
                     @endforeach
                   </select>
                 </div>
@@ -87,7 +82,20 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Nama Rute (Opotional)  </label>
+                  <label>Jenis Rute : </label>
+                  <select name="jenis" id="jenis" class="form-control">
+                    <option> -- Pilih Jenis --</option>
+                    <option value="1">Kecamatan</option>
+                    <option value="2">Jalan</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Nama Rute  </label>
                   <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama Rute (Opotional)" 
                   value="@if(isset($edit)) {{ $edit->nama }}  @endif">
                 </div>
@@ -133,4 +141,16 @@
   reserved.
 </footer>
 </div>
+@endsection
+
+@section("script")
+<script type="text/javascript">
+  @if(isset($edit->jenis))
+    $("#jenis").val('{{ $edit->jenis }}');
+  @endif
+
+  @if(isset($edit->kecamatan_id))
+    $("#kecamatan").val('{{ $edit->kecamatan_id }}');
+  @endif
+</script>
 @endsection
