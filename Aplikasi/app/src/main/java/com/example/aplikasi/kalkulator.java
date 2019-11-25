@@ -34,12 +34,14 @@ public class kalkulator extends AppCompatActivity {
     private ArrayList<String> lokasi;
     //JSON Array
     private JSONArray result;
-    String hosts = "http://gabsijawatimur.com";
+    String hosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kalkulator);
+
+        hosts = new Server().getUrl();
 
         berat = (EditText)findViewById(R.id.berat);
         panjang = (EditText)findViewById(R.id.panjang);

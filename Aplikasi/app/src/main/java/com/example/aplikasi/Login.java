@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
     Button btlogin, btbatal;
     EditText uname, pass;
 
-    String hosts = "http://gabsijawatimur.com";
+    String hosts;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -33,6 +33,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        hosts = new Server().getUrl();
 
         pref = getApplicationContext().getSharedPreferences("mypref", 0);
         editor =  editor = pref.edit();

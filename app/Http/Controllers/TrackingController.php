@@ -17,7 +17,7 @@ class TrackingController extends Controller
     	$tracking->y_akhir = $request->y_akhir;
     	$tracking->x_akhir = $request->x_akhir;
     	$tracking->save();
-
+        
     	$res['message'] = "success";
         $res['data'] = $tracking;
         

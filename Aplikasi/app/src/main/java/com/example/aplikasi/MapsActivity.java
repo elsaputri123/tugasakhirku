@@ -52,8 +52,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Double x_akhir, y_akhir;
     String id_user,id_nota;
     SharedPreferences pref;
-    String hosts = "http://gabsijawatimur.com";
+    String hosts;
     Location mlocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        hosts = new Server().getUrl();
 
         pref = getApplicationContext().getSharedPreferences("mypref", 0);
 
@@ -97,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     updateData();
 
                 }
-            }, 0, 50*5*1000);
+            }, 0, 1*5*1000);
         //}
     }
 

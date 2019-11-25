@@ -41,13 +41,16 @@ public class List extends AppCompatActivity {
     private Spinner spNamen;
     private String[] germanFeminine = { "-- Pilih Filter --", "Sampai Kantor Cabang", "Di Bawa", "Di Kirim", "Sampai Penerima", "Diterima"};
     String url;
-    String hosts = "http://gabsijawatimur.com";
+    String hosts;
     SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        hosts = new Server().getUrl();
+
         listView = (ListView)findViewById(R.id.list_view);
         spNamen = (Spinner) findViewById(R.id.spinner2);
 

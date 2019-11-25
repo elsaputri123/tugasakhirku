@@ -36,12 +36,14 @@ public class History extends AppCompatActivity {
     SimpleAdapter adapter;
     HashMap<String, String> map;
     ArrayList<HashMap<String, String>> mylist;
-    String hosts = "http://gabsijawatimur.com";
+    String hosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        hosts = new Server().getUrl();
 
         cari = (Button)findViewById(R.id.cari);
         btnmaps = (Button)findViewById(R.id.btnmaps);

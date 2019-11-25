@@ -2,8 +2,6 @@ package com.example.aplikasi;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Criteria;
@@ -11,9 +9,10 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -23,88 +22,74 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
+public class Test extends FragmentActivity implements OnMapReadyCallback {
     private Timer timer = new Timer();
     private GoogleMap mMap;
-    Double latitude, longitude;
-    EditText maloc, tujuan;
-    Double x_akhir, y_akhir;
-    String id_user, id_nota;
+    String id_user,id_nota;
+    Double latitude, longitude, x_akhir, y_akhir;
     SharedPreferences pref;
-    String hosts;
     Location mlocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_test);
 
-        getMyLocation();
+        if(getIntent().getExtras()!=null){
+            Bundle bundle = getIntent().getExtras();
+            x_akhir = Double.parseDouble(bundle.getString("x_akhir"));
+            y_akhir = Double.parseDouble(bundle.getString("y_akhir"));
+            id_nota      = String.valueOf(bundle.getString("id_nota"));
+            id_user = String.valueOf("Eren");
+        }
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        pref = getApplicationContext().getSharedPreferences("mypref", 0);
-
-        if (getIntent().getExtras() != null) {
-            Bundle bundle = getIntent().getExtras();
-            x_akhir = Double.parseDouble(bundle.getString("x_akhir"));
-            y_akhir = Double.parseDouble(bundle.getString("y_akhir"));
-            id_nota = String.valueOf(bundle.getString("id_nota"));
-
-            Toast.makeText(Maps2.this, String.valueOf("Posisi Anda : " + x_akhir + " " + x_akhir + " " + id_nota), Toast.LENGTH_LONG).show();
-        }
-
-        maloc = (EditText) findViewById(R.id.maloc);
-        tujuan = (EditText) findViewById(R.id.tujuan);
-
-        latitude = getMyLocation().getLatitude();
         longitude = getMyLocation().getLongitude();
+        latitude = getMyLocation().getLatitude();
 
-        if(latitude!=null && longitude!=null){
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 Log.e("Longitude", String.valueOf(getMyLocation().getLongitude()));
-                Log.e("Latitude", String.valueOf(getMyLocation().getLatitude()));
+                Log.e("Latitude",  String.valueOf(getMyLocation().getLatitude()));
 
                 latitude = getMyLocation().getLatitude();
-                longitude = getMyLocation().getLongitude();
+                longitude= getMyLocation().getLongitude();
 
-                maloc.setText(getCompleteAddressString(y_akhir, x_akhir).toString());
-
-                tujuan.setText(getCompleteAddressString(latitude, longitude).toString());
             }
-        }, 0, 1 * 5 * 1000);
-        }
+        }, 0, 1*5*1000);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng sydney = new LatLng(latitude, longitude);
+        LatLng sydney = new LatLng(y_akhir, x_akhir);
 
-        LatLng lokasiku = new LatLng(y_akhir, x_akhir);
+        LatLng lokasiku = new LatLng(latitude, longitude);
 
+        mMap.setMyLocationEnabled(true);
 
         mMap.addMarker(new MarkerOptions()
-                .position(sydney)
-                .icon(bitmapDescriptorFromVector(Maps2.this, R.drawable.ic_local_shipping_black_24dp))
-                .title("Kurir Berjalan"));
+                .position(lokasiku)
+                .icon(bitmapDescriptorFromVector(Test.this, R.drawable.ic_local_shipping_black_24dp))
+                .title("Lokasi Saya"));
 
-        mMap.addMarker(new MarkerOptions().position(lokasiku).title("Tujuan"));
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Tujuan"));
 
         CameraPosition camPos = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
@@ -113,7 +98,6 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
 
         CameraUpdate camUpdate = CameraUpdateFactory.newCameraPosition(camPos);
         mMap.moveCamera(camUpdate);
-        getMyLocation();
     }
 
     private Location getMyLocation() {
