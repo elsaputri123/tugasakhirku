@@ -72,7 +72,6 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
         latitude = getMyLocation().getLatitude();
         longitude = getMyLocation().getLongitude();
 
-        if(latitude!=null && longitude!=null){
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -87,7 +86,6 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
                 tujuan.setText(getCompleteAddressString(latitude, longitude).toString());
             }
         }, 0, 1 * 5 * 1000);
-        }
     }
 
     @Override
