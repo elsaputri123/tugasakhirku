@@ -97,7 +97,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     tujuan.setText(getCompleteAddressString(y_akhir, x_akhir).toString());
 
                     updateData();
-
                 }
             }, 0, 1*5*1000);
         //}
@@ -110,6 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(mMap != null){ //prevent crashing if the map doesn't exist yet (eg. on starting activity)
             mMap.clear();
 
+            onMapReady(mMap);
             // add markers from database to the map
         }
     }
@@ -124,10 +124,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setMyLocationEnabled(true);
 
-        mMap.addMarker(new MarkerOptions()
-                .position(lokasiku)
-                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_local_shipping_black_24dp))
-                .title("Lokasi Saya"));
+//        mMap.addMarker(new MarkerOptions()
+//                .position(lokasiku)
+//                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_local_shipping_black_24dp))
+//                .title("Lokasi Saya"));
 
         mMap.addMarker(new MarkerOptions().position(sydney).title("Tujuan"));
 
@@ -138,7 +138,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         CameraUpdate camUpdate = CameraUpdateFactory.newCameraPosition(camPos);
         mMap.moveCamera(camUpdate);
-        getMyLocation();
     }
 
 
