@@ -162,14 +162,14 @@ class NotakirimsController extends Controller
         return response($data);
     }
     
-    public function konfirmasi($id)
+    public function konfirmasi($id, $nama)
     {   
         $histori = [];
         try {
             
             DB::beginTransaction();
 
-            $update = array("status" => "7");
+            $update = array("status" => "7", "namapenerima"=> $nama);
             Notakirim::where("id", $id)->update($update);
             
             $tracking               = new Notiftracking();

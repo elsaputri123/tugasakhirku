@@ -30,7 +30,7 @@ Route::get('notakirim/{id?}', 'Api\NotakirimsController@index');
 Route::get('bawa/{id}/{ide}', 'Api\NotakirimsController@bawa');
 Route::get('kirim/{id}', 'Api\NotakirimsController@kirim');
 Route::get('sampai/{id}', 'Api\NotakirimsController@sampai');
-Route::get('konfirmasi/{id}', 'Api\NotakirimsController@konfirmasi');
+Route::get('konfirmasi/{id}/{nama}', 'Api\NotakirimsController@konfirmasi');
 
 // tracking client
 Route::get('tracking/{id}', 'Api\NotifTrackingController@getTracking');

@@ -4,7 +4,7 @@ public class Server {
     public String url;
 
     public Server(){
-        this.url = "http://gabsijawatimur.com";
+        this.url = "http://192.168.43.148";
     }
 
     public String getUrl() {

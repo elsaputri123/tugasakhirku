@@ -1,5 +1,6 @@
 package com.example.aplikasi;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -82,7 +84,7 @@ public class List extends AppCompatActivity {
                 }else if(status.equals("4")){
                     Options = new String[]{"Kirim Ke Alamat"};
                 }else if(status.equals("5")){
-                    Options = new String[]{"Track Lokasi","Sampai"};
+                    Options = new String[]{"Track Lokasi", "Sampai"};
                 }else if(status.equals("6")){
                     Options = new String[]{"Konfirmasi Terima"};
                 }
@@ -252,8 +254,31 @@ public class List extends AppCompatActivity {
         requestQueue.add(postRequest);
     }
 
-    private void Konfirmasi(int which){
-        String url = hosts+"/tugasakhirku/public/api/konfirmasi/"+which;
+    private void Konfirmasi(final int which){
+        final Dialog dialog = new Dialog(List.this);
+        dialog.setContentView(R.layout.custome);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.button5);
+        final EditText ed = (EditText)dialog.findViewById(R.id.textconfirm);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nama = String.valueOf(ed.getText());
+                String url = hosts+"/tugasakhirku/public/api/konfirmasi/"+which+"/"+nama;
+
+                if(nama.equals("") || nama.equals(null)){
+                    Toast.makeText(List.this, "Nama Penerima Harus Di isi ", Toast.LENGTH_SHORT).show();
+                }else{
+                    confirm(url, nama);
+                    Toast.makeText(List.this, "Paket Telah Diterima ", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void confirm(String url, String nama){
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
