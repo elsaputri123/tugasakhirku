@@ -322,6 +322,7 @@ public class List extends AppCompatActivity {
                             for (int i = 0; i < events.length(); i++) {
                                 JSONObject c = events.getJSONObject(i);
 
+                                String no = c.getString("no");
                                 String id = c.getString("id");
                                 String no_resi = c.getString("no_resi");
                                 String namapenerima = c.getString("namapenerima");
@@ -334,7 +335,7 @@ public class List extends AppCompatActivity {
                                 HashMap<String, String> event = new HashMap<>();
                                 // add map
                                 event.put("id", id);
-                                event.put("no_resi", id+". No Resi : "+no_resi);
+                                event.put("no_resi", no+". No Resi : "+no_resi);
                                 event.put("tanggal", "Tanggal Kirim : "+tanggal);
                                 event.put("namapenerima", "Penerima : "+namapenerima);
                                 event.put("tlppenerima", "Telp : "+tlppenerima);

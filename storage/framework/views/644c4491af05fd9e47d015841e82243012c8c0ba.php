@@ -187,16 +187,19 @@
                 <!--     $b->id.' - --> 
                 <!--      .' ['.$b->jenis->nama.']' -->
                 <td width="150px">
-                  <input  type="text" list="barang" class="form-control barang" name="barang[]" autocomplete="on" required>
+                  <input  type="text" list="barang" class="form-control barang" name="barang[]" autocomplete="off" required>
                   <datalist id="barang">
                     <?php $__currentLoopData = $barang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($b->id .' - '.$b->nama); ?>" satuan="<?php echo e($b->satuan); ?>" berat="<?php echo e($b->berat); ?>"><?php echo e($b->nama); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </datalist>
+                  <datalist id="custom">
+                    
+                  </datalist>
                 </td>
 
                 <td>
-                  <input type="number" min="0" name="jumlah[]" value="0" class="form-control jumlah" required>
+                  <input type="number" min="1" name="jumlah[]" value="1" class="form-control jumlah" required>
                 </td>
 
                 <td width="80px">
@@ -212,12 +215,12 @@
 
                 <td>
                   <div class="divBerat" style="display: inline;">
-                    Berat : <input type="number" name="berat[]" value="0" class="form-control berat">
+                    Berat : <input type="number" min="1" name="berat[]" value="1" class="form-control berat">
                   </div>
                   <div class="divDimensi" style="display: none;">
-                    Panjang : <input type="number" min="0" name="panjang[]" value="0" class="form-control panjang">
-                    Lebar : <input type="number" min="0" name="lebar[]" value="0" class="form-control lebar">
-                    Tinggi : <input type="number" min="0" name="tinggi[]" value="0" class="form-control tinggi">
+                    Panjang : <input type="number" min="1" name="panjang[]" value="0" class="form-control panjang">
+                    Lebar : <input type="number" min="1" name="lebar[]" value="0" class="form-control lebar">
+                    Tinggi : <input type="number" min="1" name="tinggi[]" value="0" class="form-control tinggi">
                   </div>
                 </td>
 
@@ -350,10 +353,41 @@
     }
 
     var selected = [];
+
+
+    //=============BARU=============================//
+    function updateDatalist(array)
+    {
+        //alert(selected); for debug purpose
+        var arrPilihan = array;
+        $.ajax({ 
+          type: 'POST',
+          url: "<?php echo e(url('notakirim/updateDatalist')); ?>",
+          data:{
+            '_token': $('#token').val(),
+            'pilihan': arrPilihan,
+          }, 
+          success: function (data){
+            console.log(data);
+
+            $('#custom').empty();
+
+            for (var i = 0; i < data.length; i++) {
+              $('#custom').append(
+                 "<option value='"+data[i]['id']+" - "+data[i]['nama']+"' satuan='"+data[i]['satuan']+"' berat='"+data[i]['berat']+"'>"+data[i]['nama']+"</option>"
+                );
+            }
+          }
+      });      
+    }
+    //===============================================//
+
     $(document).on('change','.barang',function(){
       var inputval= $(this).val();
       var satuan= $("datalist option[value='"+inputval+"']").attr('satuan');
       var berat= parseFloat($("datalist option[value='"+inputval+"']").attr('berat'));
+
+      var namabarang = inputval.split(" - "); //BARU
 
       if(selected.includes(inputval) == true)
       {
@@ -362,7 +396,8 @@
       }
       else
       {
-        selected.push(inputval);
+        selected.push(namabarang[1]); //BARU
+        updateDatalist(selected); //BARU
         $(this).closest('tr').find('td:nth-child(4)').find('input').val(satuan);
         $(this).closest('tr').find('td:nth-child(6)').find('.divBerat').find('.berat').val(berat);
         kalkulasiSubtotal($(this));
@@ -455,11 +490,11 @@ $(function(){
     data.find("input").val('');
 
                   updateNomor(); // manggil method buat ngupdate nomor 
-                  
+                  data.find('.barang').attr('list','custom');//BARU
                 });
   $(document).on('click', '.remove', function() {
    var trIndex = $(this).closest("tr").index();
-   var barang = $(this).closest('tr').find('td:nth-child(2)').find('input').val();
+   var barang = $(this).closest('tr').find('td:nth-child(2)').find('input').val().split(" - ");//BARU
    if(trIndex>0) {
      $(this).closest("tr").remove();
 
@@ -467,9 +502,10 @@ $(function(){
      alert('Tidak Dapat Menghapus Baris Ini !');
      $(this).closest('tr').find('td:nth-child(2)').find('input').val('');
    }
-   var item = selected.indexOf(barang);
+   var item = selected.indexOf(barang[1]);//BARU
    selected.splice(item,1);
    updateNomor();
+   updateDatalist(selected);//BARU
  });
 });
      //============================================//
