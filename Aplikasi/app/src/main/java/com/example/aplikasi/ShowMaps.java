@@ -13,10 +13,17 @@ import android.os.Bundle;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
+import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,30 +35,41 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Test extends FragmentActivity implements OnMapReadyCallback {
+public class ShowMaps extends FragmentActivity implements OnMapReadyCallback {
     private Timer timer = new Timer();
     private GoogleMap mMap;
     String id_user,id_nota;
     Double latitude, longitude, x_akhir, y_akhir;
     SharedPreferences pref;
     Location mlocation;
+    EditText maloc, tujuan;
+    String hosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        hosts = new Server().getUrl();
+
+        pref = getApplicationContext().getSharedPreferences("mypref", 0);
+
         if(getIntent().getExtras()!=null){
             Bundle bundle = getIntent().getExtras();
             x_akhir = Double.parseDouble(bundle.getString("x_akhir"));
             y_akhir = Double.parseDouble(bundle.getString("y_akhir"));
             id_nota      = String.valueOf(bundle.getString("id_nota"));
-            id_user = String.valueOf("Eren");
+            id_user = String.valueOf(pref.getString("id", null));
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -60,7 +78,12 @@ public class Test extends FragmentActivity implements OnMapReadyCallback {
 
         longitude = getMyLocation().getLongitude();
         latitude = getMyLocation().getLatitude();
+        maloc = (EditText)findViewById(R.id.maloc);
+        tujuan = (EditText)findViewById(R.id.tujuan);
+        maloc.setText(getCompleteAddressString(latitude, longitude).toString());
+        tujuan.setText(getCompleteAddressString(y_akhir, x_akhir).toString());
 
+        InsertData();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -69,7 +92,7 @@ public class Test extends FragmentActivity implements OnMapReadyCallback {
 
                 latitude = getMyLocation().getLatitude();
                 longitude= getMyLocation().getLongitude();
-
+                updateData();
             }
         }, 0, 1*5*1000);
     }
@@ -80,14 +103,14 @@ public class Test extends FragmentActivity implements OnMapReadyCallback {
 
         LatLng sydney = new LatLng(y_akhir, x_akhir);
 
-        LatLng lokasiku = new LatLng(latitude, longitude);
+        //LatLng lokasiku = new LatLng(latitude, longitude);
 
         mMap.setMyLocationEnabled(true);
 
-        mMap.addMarker(new MarkerOptions()
-                .position(lokasiku)
-                .icon(bitmapDescriptorFromVector(Test.this, R.drawable.ic_local_shipping_black_24dp))
-                .title("Lokasi Saya"));
+//        mMap.addMarker(new MarkerOptions()
+//                .position(lokasiku)
+//                .icon(bitmapDescriptorFromVector(Test.this, R.drawable.ic_local_shipping_black_24dp))
+//                .title("Lokasi Saya"));
 
         mMap.addMarker(new MarkerOptions().position(sydney).title("Tujuan"));
 
@@ -124,7 +147,6 @@ public class Test extends FragmentActivity implements OnMapReadyCallback {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
-
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -143,5 +165,91 @@ public class Test extends FragmentActivity implements OnMapReadyCallback {
         }
 
         return strAdd;
+    }
+
+
+    public void InsertData() {
+        Log.e("cek insert", String.valueOf(id_nota));
+
+        String url = hosts+"/tugasakhirku/public/api/setposition";;
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObj = new JSONObject(response);
+                            JSONObject jo = jsonObj.getJSONObject("data");
+                            Log.e("response insert ", String.valueOf(jo));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("error", String.valueOf(e.getMessage()));
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams()  {
+                Map<String,String>parms=new HashMap<String, String>();
+
+                parms.put("x_akhir", String.valueOf(x_akhir));
+                parms.put("y_akhir", String.valueOf(y_akhir));
+                parms.put("x_awal", String.valueOf(latitude));
+                parms.put("y_awal", String.valueOf(longitude));
+                parms.put("id_nota", String.valueOf(id_nota));
+                parms.put("id_kurir", String.valueOf(id_user));
+
+                return parms;
+            }
+        };
+
+        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(postRequest);
+    }
+
+    public void updateData(){
+        Log.e("cek update", String.valueOf(id_nota));
+
+        String url = hosts+"/tugasakhirku/public/api/updateposition";;
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObj = new JSONObject(response);
+                            JSONObject jo = jsonObj.getJSONObject("data");
+                            Log.e("response update ", String.valueOf(jo));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("error", String.valueOf(e.getMessage()));
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams()  {
+                Map<String,String>parms=new HashMap<String, String>();
+
+                parms.put("x_awal", String.valueOf(latitude));
+                parms.put("y_awal", String.valueOf(longitude));
+                parms.put("id_nota", String.valueOf(id_nota));
+
+                return parms;
+            }
+        };
+
+        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(postRequest);
     }
 }

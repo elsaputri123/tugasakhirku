@@ -169,7 +169,7 @@ class NotakirimsController extends Controller
             
             DB::beginTransaction();
 
-            $update = array("status" => "7", "namapenerima"=> $nama);
+            $update = array("status" => "7", "nmpenerimabarang"=> $nama);
             Notakirim::where("id", $id)->update($update);
             
             $tracking               = new Notiftracking();

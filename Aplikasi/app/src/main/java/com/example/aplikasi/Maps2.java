@@ -49,8 +49,7 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        getMyLocation();
+        
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -85,7 +84,7 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
 
                 tujuan.setText(getCompleteAddressString(latitude, longitude).toString());
             }
-        }, 0, 1 * 5 * 1000);
+        }, 0, 50 * 50 * 1000);
     }
 
     @Override
@@ -137,7 +136,6 @@ public class Maps2 extends FragmentActivity implements OnMapReadyCallback {
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
-
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";

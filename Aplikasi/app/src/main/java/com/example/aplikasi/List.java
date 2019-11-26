@@ -339,23 +339,23 @@ public class List extends AppCompatActivity {
                                 event.put("namapenerima", "Penerima : "+namapenerima);
                                 event.put("tlppenerima", "Telp : "+tlppenerima);
                                 event.put("status", String.valueOf(status));
-                                event.put("waktu", String.valueOf(waktu));
+                                event.put("waktu", "Estimasi :"+String.valueOf(waktu));
                                 event.put("alamatpenerima", "Alamat Penerima : "+alamatpenerima);
 
                                 if (status==1){
-                                    event.put("statusku", "Paket Masuk");
+                                    event.put("statusku", "Status : Paket Masuk");
                                 }else if(status==2){
-                                    event.put("statusku", "Dikirim Ke Kantor Cabang");
+                                    event.put("statusku", "Status :  Dikirim Ke Kantor Cabang");
                                 }else if(status==3){
-                                    event.put("statusku", "Sampai Ke Kantor Cabang");
+                                    event.put("statusku", "Status : Sampai Ke Kantor Cabang");
                                 }else if(status==4){
-                                    event.put("statusku", "Dibawa Kurir");
+                                    event.put("statusku", "Status : Dibawa Kurir");
                                 }else if(status==5){
-                                    event.put("statusku", "Menuju Ke Alamat Penerima");
+                                    event.put("statusku", "Status : Menuju Ke Alamat Penerima");
                                 }else if(status==6){
-                                    event.put("statusku", "Paket Sampai");
+                                    event.put("statusku", "Status :  Paket Sampai");
                                 }else{
-                                    event.put("statusku", "Konfirmasi Paket");
+                                    event.put("statusku", "Status : Konfirmasi Paket");
                                 }
 
                                 mylist.add(event);
@@ -418,7 +418,7 @@ public class List extends AppCompatActivity {
                             bundle.putString("x_akhir", jo.getString("x_akhir"));
                             bundle.putString("y_akhir", jo.getString("y_akhir"));
 
-                            Intent intent = new Intent(List.this, MapsActivity.class);
+                            Intent intent = new Intent(List.this, ShowMaps.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
 
