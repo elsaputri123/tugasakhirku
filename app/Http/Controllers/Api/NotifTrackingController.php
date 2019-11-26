@@ -14,7 +14,7 @@ class NotifTrackingController extends Controller
 	public function getTracking($id)
 	{	
 		$nota = Notakirim::where("no_resi", $id)->get()->first();
-		$data = Notiftracking::where("id_nota", $nota->id)->groupBy("status")->get();
+		$data = Notiftracking::where("id_nota", $nota->id)->get();
         
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
         	$res['message'] = "success";

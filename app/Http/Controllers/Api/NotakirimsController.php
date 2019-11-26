@@ -98,7 +98,7 @@ class NotakirimsController extends Controller
                 'error'   => 'Barang Gagal Dikirim',
                 'data'    => []
             ];
-
+            
             return response($data);
         }
 
