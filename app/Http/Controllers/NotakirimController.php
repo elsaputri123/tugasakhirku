@@ -30,6 +30,26 @@ class NotakirimController extends Controller
         return view('notakirim.index',['notakirim' => $notakirim]);
     }
 
+    //===================BARU==========================//
+    public function updateDatalist(Request $request)
+    {
+        $pilihan = array();
+        $pilihan = $request->get('pilihan');
+
+        if(count($pilihan) <= 0)
+        {
+            $barang = Barang::all();
+            return response($barang);
+        }
+        else
+        {
+
+            $barang = Barang::whereNotIn('nama',$pilihan)->get();
+            return response($barang);
+        }
+    }
+    //==============================================//
+
     public function detail($id)
     {
 

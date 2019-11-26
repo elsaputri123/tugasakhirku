@@ -37,6 +37,7 @@ Route::get('history/destroydetail/{id}', 'HistoryController@destroydetail');
 // NOTA KIRIM
 Route::get('nk/detail/{id}','NotakirimController@detail');
 Route::get('notakirim/getpengirim/{id}','NotakirimController@pengirim');
+Route::post('notakirim/updateDatalist','NotakirimController@updateDatalist');//BARU
 Route::get('nk/print/{id}','NotakirimController@print');
 Route::post('nk/tampilkelurahan','NotakirimController@tampilkelurahan');
 Route::post('nk/tampilkecamatan','NotakirimController@tampilkecamatan');

@@ -1,6 +1,4 @@
-@extends('layouts.app-admin')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -9,7 +7,7 @@
       Input Nota Kirim
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{ url('notakirim/create') }}" class="active"><i class="fa fa-dashboard"></i> Input Nota Kirim</a></li>
+      <li><a href="<?php echo e(url('notakirim/create')); ?>" class="active"><i class="fa fa-dashboard"></i> Input Nota Kirim</a></li>
     </ol>
   </section>
 
@@ -26,24 +24,26 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          @if(session('status'))
+          <?php if(session('status')): ?>
           <div style="background-color:green; color:white;font-weight: bold">
-            {{session('status')}}
+            <?php echo e(session('status')); ?>
+
           </div>
-          @endif
-          @foreach ($errors ->all() as $error)
-          <h4 style="color: red">{{ $error }}</h4>
-          @endforeach
-          <form role="form" action="{{ url('notakirim') }}" method="POST" enctype="multipart/form-data">
-            {!! csrf_field() !!}
-            <input type="hidden" name="token" id="token" value="{{ csrf_token() }}"/>
+          <?php endif; ?>
+          <?php $__currentLoopData = $errors ->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <h4 style="color: red"><?php echo e($error); ?></h4>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+          <form role="form" action="<?php echo e(url('notakirim')); ?>" method="POST" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
+
+            <input type="hidden" name="token" id="token" value="<?php echo e(csrf_token()); ?>"/>
             <div class="box-body">
               <div class="form-group">
                 <div class="col-md-12">
                   <div class="table-responsive">
                     <div class="col-md-6">
                       <label>No. Resi</label>
-                      <input style="width: 30%;" type="text" name="noresi" value="{{$resi}}" class="form-control" readonly="" required>
+                      <input style="width: 30%;" type="text" name="noresi" value="<?php echo e($resi); ?>" class="form-control" readonly="" required>
                       <p class="help-block"></p>
                     </div>
                   </div>
@@ -59,9 +59,9 @@
                               <label>Pengirim</label>
                               <select class="form-control" name="pengirim" id="pengirim" required="">
                                 <option value="">--Pilih Pengirim--</option>
-                                @foreach($pelanggnas as $key => $p)
-                                <option value="{{$p->id}}">{{$p->nama}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $pelanggnas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($p->id); ?>"><?php echo e($p->nama); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                               </select>
                               <p class="help-block"></p>
                             </div>
@@ -79,11 +79,11 @@
                             <div class="form-group">
                               <label>Kantor Cabang</label>
                               <select class="form-control" name="awal" id="awal">
-                               @foreach($rute as $key => $value)
-                               @if($value->nama=='Surabaya')
-                               <option value="{{ $value->id }}">{{ $value->nama }}</option>
-                               @endif
-                               @endforeach
+                               <?php $__currentLoopData = $rute; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                               <?php if($value->nama=='Surabaya'): ?>
+                               <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
+                               <?php endif; ?>
+                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                              </select>
                            </div>
 
@@ -102,11 +102,11 @@
                           <div class="form-group">
                             <label>Alamat Jalan : (Rute)</label>
                             <select class="form-control" name="akhir" id="akhir">
-                             @foreach($rute as $key => $value)
-                                @if($value->jenis==2)
-                                  <option value="{{ $value->id }}">{{ $value->nama }}</option>
-                                @endif
-                             @endforeach
+                             <?php $__currentLoopData = $rute; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($value->jenis==2): ?>
+                                  <option value="<?php echo e($value->id); ?>"><?php echo e($value->nama); ?></option>
+                                <?php endif; ?>
+                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                            </select>
                          </div>
 
@@ -125,9 +125,9 @@
                             <label>Kota</label>
                             <select class="form-control tujuan" name="tujuan" id="tujuan" required="">
                               <option value="">--Pilih Kota Tujuan--</option>
-                              @foreach($tarifkm as $key => $t)
-                              <option value="{{$t->id}}" harga="{{$t->harga}}">{{$t->tujuan}}</option>
-                              @endforeach
+                              <?php $__currentLoopData = $tarifkm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              <option value="<?php echo e($t->id); ?>" harga="<?php echo e($t->harga); ?>"><?php echo e($t->tujuan); ?></option>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <p class="help-block"></p>
                           </div>
@@ -136,9 +136,9 @@
                             <label>Kecamatan</label>
                             <select class="form-control" name="kecamatan" id="kecamatan" required="">
                               <option value="">--Pilih Kecamatan--</option>
-                              @foreach($kecamatan as $key => $k)
-                              <option value="{{$k->id}}">{{$k->nama}}</option>
-                              @endforeach
+                              <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              <option value="<?php echo e($k->id); ?>"><?php echo e($k->nama); ?></option>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <p class="help-block"></p>
                           </div>
@@ -189,9 +189,9 @@
                 <td width="150px">
                   <input  type="text" list="barang" class="form-control barang" name="barang[]" autocomplete="off" required>
                   <datalist id="barang">
-                    @foreach($barang as $key => $b)
-                    <option value="{{ $b->id .' - '.$b->nama }}" satuan="{{ $b->satuan }}" berat="{{ $b->berat }}">{{ $b->nama }}</option>
-                    @endforeach
+                    <?php $__currentLoopData = $barang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($b->id .' - '.$b->nama); ?>" satuan="<?php echo e($b->satuan); ?>" berat="<?php echo e($b->berat); ?>"><?php echo e($b->nama); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </datalist>
                   <datalist id="custom">
                     
@@ -265,12 +265,12 @@
 </div>
 <!-- /.content-wrapper -->
 <footer class="main-footer">
-  <strong>Copyright &copy; 2019 <a href="{{ url('/') }}">CV. Karya Anugerah Ekspedisi</a>.</strong> All rights
+  <strong>Copyright &copy; 2019 <a href="<?php echo e(url('/')); ?>">CV. Karya Anugerah Ekspedisi</a>.</strong> All rights
   reserved.
 </footer>
 </div>
 <!-- ./wrapper -->
-@section('script')
+<?php $__env->startSection('script'); ?>
 <script type="text/javascript">
   $('#hapus').click(function(){
     return confirm("Anda yakin untuk menghapus data ini?");
@@ -332,7 +332,7 @@
        $('#kapasitas').val("");
 
        $.ajax({ type: 'GET',
-        url: "{{ url('manifest/getnopolisi') }}"+"/"+nopolisi, 
+        url: "<?php echo e(url('manifest/getnopolisi')); ?>"+"/"+nopolisi, 
         success: function (data){
           console.log(data);
 
@@ -354,15 +354,13 @@
 
     var selected = [];
 
-
-    //=============BARU=============================//
     function updateDatalist(array)
     {
         //alert(selected); for debug purpose
         var arrPilihan = array;
         $.ajax({ 
           type: 'POST',
-          url: "{{ url('notakirim/updateDatalist') }}",
+          url: "<?php echo e(url('notakirim/updateDatalist')); ?>",
           data:{
             '_token': $('#token').val(),
             'pilihan': arrPilihan,
@@ -380,14 +378,13 @@
           }
       });      
     }
-    //===============================================//
 
     $(document).on('change','.barang',function(){
       var inputval= $(this).val();
       var satuan= $("datalist option[value='"+inputval+"']").attr('satuan');
       var berat= parseFloat($("datalist option[value='"+inputval+"']").attr('berat'));
 
-      var namabarang = inputval.split(" - "); //BARU
+      var namabarang = inputval.split(" - ");
 
       if(selected.includes(inputval) == true)
       {
@@ -396,8 +393,8 @@
       }
       else
       {
-        selected.push(namabarang[1]); //BARU
-        updateDatalist(selected); //BARU
+        selected.push(namabarang[1]);
+        updateDatalist(selected);
         $(this).closest('tr').find('td:nth-child(4)').find('input').val(satuan);
         $(this).closest('tr').find('td:nth-child(6)').find('.divBerat').find('.berat').val(berat);
         kalkulasiSubtotal($(this));
@@ -490,11 +487,11 @@ $(function(){
     data.find("input").val('');
 
                   updateNomor(); // manggil method buat ngupdate nomor 
-                  data.find('.barang').attr('list','custom');//BARU
+                  data.find('.barang').attr('list','custom');
                 });
   $(document).on('click', '.remove', function() {
    var trIndex = $(this).closest("tr").index();
-   var barang = $(this).closest('tr').find('td:nth-child(2)').find('input').val().split(" - ");//BARU
+   var barang = $(this).closest('tr').find('td:nth-child(2)').find('input').val().split(" - ");
    if(trIndex>0) {
      $(this).closest("tr").remove();
 
@@ -502,10 +499,10 @@ $(function(){
      alert('Tidak Dapat Menghapus Baris Ini !');
      $(this).closest('tr').find('td:nth-child(2)').find('input').val('');
    }
-   var item = selected.indexOf(barang[1]);//BARU
+   var item = selected.indexOf(barang[1]);
    selected.splice(item,1);
    updateNomor();
-   updateDatalist(selected);//BARU
+   updateDatalist(selected);
  });
 });
      //============================================//
@@ -520,7 +517,7 @@ $(function(){
        $('#tlp').val("");
 
        $.ajax({ type: 'GET',
-        url: "{{ url('notakirim/getpengirim') }}"+"/"+pengirim, 
+        url: "<?php echo e(url('notakirim/getpengirim')); ?>"+"/"+pengirim, 
         success: function (data){
           console.log(data);
 
@@ -538,7 +535,7 @@ $(function(){
       $.ajax({
 
         method: "POST",
-        url: "{{ url('nk/tampilkelurahan') }}",
+        url: "<?php echo e(url('nk/tampilkelurahan')); ?>",
         data:
         {
           '_token': $('#token').val(),
@@ -563,7 +560,7 @@ $(function(){
      $.ajax({
 
       method: "POST",
-      url: "{{ url('nk/tampilkelurahan') }}",
+      url: "<?php echo e(url('nk/tampilkelurahan')); ?>",
       data:
       {
         '_token': $('#token').val(),
@@ -589,7 +586,7 @@ $(function(){
     {
       $.ajax({
         method: "POST",
-        url: "{{ url('nk/tampilkecamatan') }}",
+        url: "<?php echo e(url('nk/tampilkecamatan')); ?>",
         data:
         {
           '_token': $('#token').val(),
@@ -612,5 +609,6 @@ $(function(){
     });
   </script>
 
-  @endsection
-  @endsection
+  <?php $__env->stopSection(); ?>
+  <?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app-admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
