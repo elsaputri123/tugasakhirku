@@ -45,6 +45,7 @@ public class List extends AppCompatActivity {
     String url;
     String hosts;
     SharedPreferences pref;
+    String MyUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,9 @@ public class List extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item, germanFeminine);
         spNamen.setAdapter(adapter);
         url = hosts+"/tugasakhirku/public/api/notakirim";
+        MyUrl = hosts+"/tugasakhirku/public/api/notakirim";
 
-        load();
+        load(MyUrl);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,6 +89,8 @@ public class List extends AppCompatActivity {
                     Options = new String[]{"Track Lokasi", "Sampai"};
                 }else if(status.equals("6")){
                     Options = new String[]{"Konfirmasi Terima"};
+                }else{
+                    Options = new String[]{"Barang Sudah Diterima :D"};
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(List.this);
@@ -108,12 +112,14 @@ public class List extends AppCompatActivity {
                             }
                         }else if (status.equals("6")){
                             Konfirmasi(Integer.valueOf(code));
+                        }else{
+                            load(MyUrl);
                         }
                     }
                 });
 
                 builder.show();
-                load();
+                load(MyUrl);
 
             }
         });
@@ -159,7 +165,7 @@ public class List extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("title", String.valueOf(url));
-                load();
+                load(MyUrl);
             }
         });
     }
@@ -307,8 +313,8 @@ public class List extends AppCompatActivity {
         requestQueue.add(postRequest);
     }
 
-    private void load() {
-        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+    private void load(String Myurl) {
+        StringRequest postRequest = new StringRequest(Request.Method.GET, Myurl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

@@ -193,7 +193,7 @@ class NotakirimsController extends Controller
             $update = array("status" => "7", "nmpenerimabarang"=> $nama, "tgltiba" => date("Y-m-d"));
             Notakirim::where("id", $id)->update($update);
             
-            $count = Notiftracking::where("id_nota", $id)->where("status", 5)->count();
+            $count = Notiftracking::where("id_nota", $id)->where("status", 7)->count();
             if($count==0){
                 $tracking               = new Notiftracking();
                 $tracking->id_nota      = $id;
