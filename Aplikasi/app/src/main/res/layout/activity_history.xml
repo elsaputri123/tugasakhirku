@@ -152,13 +152,13 @@
         </LinearLayout>
 
         <TextView
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
             android:id="@+id/detail"
             android:layout_width="match_parent"
-            android:textColor="@android:color/black"
             android:layout_height="wrap_content"
-            android:text="Detail Tracking " />
+            android:layout_marginTop="25dp"
+            android:text="Detail Tracking "
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/listku"

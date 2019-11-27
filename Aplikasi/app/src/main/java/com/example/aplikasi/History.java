@@ -105,6 +105,7 @@ public class History extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("error", String.valueOf(e.getMessage()));
+                            Toast.makeText(History.this, "Data Tidak Ditemukan", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -137,9 +138,9 @@ public class History extends AppCompatActivity {
                             Log.e("error", String.valueOf(jo));
 
                             tvresi.setText(String.valueOf(jo.getString("no_resi")));
-                            tvnama.setText(String.valueOf(jo.getString("namapenerima")));
-                            tvalamat.setText(String.valueOf(jo.getString("alamatpenerima")));
-                            tvtelp.setText(String.valueOf(jo.getString("tlppenerima")));
+                            tvnama.setText(String.valueOf("Nama Tujuan : "+jo.getString("namapenerima")));
+                            tvalamat.setText(String.valueOf("Alamat : "+jo.getString("alamatpenerima")));
+                            tvtelp.setText(String.valueOf("Telp"+jo.getString("tlppenerima")));
                             tvtanggal.setText(String.valueOf("Tanggal Kirim : "+jo.getString("tanggal")));
                             estimasi.setText(String.valueOf("Estimasi sampai : "+jo.getString("waktu")));
                             int stts = Integer.parseInt(jo.getString("status"));
@@ -187,6 +188,7 @@ public class History extends AppCompatActivity {
                             setList();
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(History.this, "Data Tidak Ditemukan", Toast.LENGTH_SHORT).show();
                             Log.e("error", String.valueOf(e.getMessage()));
 
                             listView.setAdapter(null);

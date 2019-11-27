@@ -8,14 +8,16 @@ use App\Notiftracking;
 use App\Notakirim;
 use DB;
 use App\Rute;
+use App\Kecamatan;
 
 class NotifTrackingController extends Controller
 {
 	public function getTracking($id)
 	{	
 		$nota = Notakirim::where("no_resi", $id)->get()->first();
+        $kec = Kecamatan::where("id", $nota->kecamatan_id)->get()->first();
 		$data = Notiftracking::where("id_nota", $nota->id)->get();
-        
+
         if(count($data) > 0){ //mengecek apakah data kosong atau tidak
         	$res['message'] = "success";
 
@@ -32,6 +34,7 @@ class NotifTrackingController extends Controller
             $tgl1 = date('Y-m-d', strtotime($tgl . "+1 day"));
             $nota->waktu = $tgl1." ".$time1;
             
+            $nota->alamatpenerima = $kec->nama.", ".$nota->alamatpenerima;
             $res['data'] = $a_data;
             $res['detail'] = $nota;
 
