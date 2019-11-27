@@ -145,9 +145,9 @@ public class History extends AppCompatActivity {
                             estimasi.setText(String.valueOf("Estimasi sampai : "+jo.getString("waktu")));
                             int stts = Integer.parseInt(jo.getString("status"));
 
-                            if (stts>3){
+                            if (stts==5){
                                 btnmaps.setVisibility(View.VISIBLE);
-                            }else if(stts<=3){
+                            }else if(stts!=5){
                                 btnmaps.setVisibility(View.INVISIBLE);
                             }
 

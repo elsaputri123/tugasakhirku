@@ -165,7 +165,7 @@ public class List extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("title", String.valueOf(url));
-                load(MyUrl);
+                load(url);
             }
         });
     }
